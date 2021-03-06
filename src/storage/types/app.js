@@ -1,0 +1,7 @@
+const BASENAME = "APP/"
+export default {
+    INIT: BASENAME + "INIT",
+    LOGIN: BASENAME + "LOGIN",
+    REGISTER: BASENAME + "REGISTER",
+    SET_USER: BASENAME + "SET_USER",
+}

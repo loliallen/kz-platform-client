@@ -1,0 +1,44 @@
+.homemap{
+    height: 100vh;
+    background-color: black;
+}
+.map_circle_wrapper{
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    height: 100vh;
+
+    --border--width: 0.7px;
+    --border--color: gray;
+}
+.map_circle_1{
+    transform: translateX(+35%) translateY(-30%);
+
+    width: 1200px;
+    height: 1200px;
+}
+.map_circle_2{
+
+    width: 900px;
+    height: 900px;
+}
+.map_circle_3{
+    width: 600px;
+    height: 600px;
+}
+
+.map_circle_4{
+    width: 300px;
+    height: 300px;
+}
+.map_circle {
+    padding-left: 150px;
+    padding-top: 150px;
+
+    border: var(--border--width) solid var(--border--color);
+    border-radius: 50%;
+}

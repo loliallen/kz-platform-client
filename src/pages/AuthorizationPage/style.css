@@ -1,0 +1,10 @@
+.login_container {
+    margin-bottom: 1rem;
+}
+
+.login_action{
+    display: flex;
+}
+.login_action div {
+    flex: 1;
+}
