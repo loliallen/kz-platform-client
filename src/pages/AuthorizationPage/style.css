@@ -5,6 +5,11 @@
 .login_action{
     display: flex;
 }
-.login_action div {
-    flex: 1;
+.login_action__a {
+    margin-right: 41px;
+    text-align: center;
+    padding-top: 10px;
+}
+.login_action__button {
+    flex: 1
 }

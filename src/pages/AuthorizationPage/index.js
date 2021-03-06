@@ -69,12 +69,17 @@ const LoginPanel = () => {
             />
         </div>
         <div className="login_container login_action">
-            <div style={{textAlign: "center", paddingTop: "10px"}}>
-                <Link to="/forgot">
+            <div className="login_action__a">
+                <Link
+                    style={{textDecoration: "none", color: "2F80ED"}}
+                    to="/forgot"
+                >
                     Забыли пароль?
                 </Link>
             </div>
-            <div>
+            <div
+                className="login_action__button"
+            >
                 <Button
                     fullWidth
                     variant="contained"
@@ -156,7 +161,7 @@ export const AuthorizationPage = () => {
     return (
         <Dialog
             open={true}
-            maxWidth="sm"
+            maxWidth="xs"
             fullWidth
             onClose={()=>history.goBack()}
         >
