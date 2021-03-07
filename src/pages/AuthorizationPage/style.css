@@ -7,8 +7,8 @@
 }
 .login_action__a {
     margin-right: 41px;
-    text-align: center;
-    padding-top: 10px;
+    display: flex;
+    align-items: center;
 }
 .login_action__button {
     flex: 1

@@ -1,10 +1,12 @@
-import { Button, Dialog, DialogContent, DialogTitle, Tab, Tabs, TextField, withStyles } from '@material-ui/core'
+import { Dialog, DialogContent, DialogTitle, Tab, Tabs, TextField, withStyles } from '@material-ui/core'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import { LockIcon } from '../../containers/Icons/Lock'
 import { MessageIcon } from '../../containers/Icons/Message'
+import { StyledButton } from '../../containers/StyledButton'
 import actions from '../../storage/actions'
+
 
 import "./style.css"
 
@@ -80,14 +82,14 @@ const LoginPanel = () => {
             <div
                 className="login_action__button"
             >
-                <Button
+                <StyledButton
                     fullWidth
                     variant="contained"
                     color="primary"
                     type="submit"
                 >
                     Войти
-                </Button>
+                </StyledButton>
             </div>
         </div>
     </form>
@@ -137,14 +139,14 @@ const RegisterPanel = () => {
         </div>
         <div className="login_container login_action">
             <div>
-                <Button
+                <StyledButton
                     fullWidth
                     variant="contained"
                     color="primary"
                     type="submit"
                 >
                     Зарегистрироваться
-                </Button>
+                </StyledButton>
             </div>
         </div>
     </form>
