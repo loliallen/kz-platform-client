@@ -1,0 +1,6 @@
+const BASENAME = "NEWS/"
+export default {
+    REQUEST: BASENAME + "REQUEST",
+    SET_CURRENT: BASENAME + "SET_CURRENT",
+    SET: BASENAME + "SET",
+}

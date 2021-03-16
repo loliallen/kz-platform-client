@@ -10,7 +10,8 @@ function *LoginWatcher({ payload }){
         console.log(payload)
         const _payload = yield call(Service.login, payload)
         console.log(_payload)
-        yield put({ type: BaseTypes.SET_USER, payload: _payload })
+        if(_payload.code === 200)
+            yield put({ type: BaseTypes.SET_USER, payload: _payload })
     } catch (error) {
         console.error(error)
     }

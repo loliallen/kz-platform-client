@@ -1,0 +1,7 @@
+.news_container{
+    display: flex;
+}
+
+.news_container > * {
+    flex: 1;
+}

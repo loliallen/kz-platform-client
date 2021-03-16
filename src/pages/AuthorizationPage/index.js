@@ -5,6 +5,9 @@ import { Link, useHistory } from 'react-router-dom'
 import { LockIcon } from '../../containers/Icons/Lock'
 import { MessageIcon } from '../../containers/Icons/Message'
 import { StyledButton } from '../../containers/StyledButton'
+import { StyledDialog } from '../../containers/StyledDialog'
+import { StyledDialogTitle } from '../../containers/StyledHeader'
+import { StyledDialogContent } from '../../containers/StyledDialogContent'
 import actions from '../../storage/actions'
 
 
@@ -17,12 +20,18 @@ const StyledTabs = withStyles({
 })(Tabs)
 
 const StyledTab = withStyles({
+    root: {
+        minWidth: "0px"
+    },
     wrapper: {
         fontWeight: "900",
         textTransform: "none",
-        fontSize: "22px"
+        fontSize: "22px",
+        flexDirection: "row",
+        justifyContent: "start"
     }
 })(Tab)
+
 
 const TabPanel = ({ index, page, children = null }) => children && index === page ? children : null
 
@@ -54,7 +63,7 @@ const LoginPanel = () => {
                 value={login}
                 onChange={handleChangeLogin}
                 InputProps={{
-                    startAdornment: <MessageIcon style={{ fill: "white" }} />
+                    startAdornment: <MessageIcon style={{ fill: "white", paddingRight: "14px" }} />
                 }}
             />
         </div>
@@ -64,16 +73,17 @@ const LoginPanel = () => {
                 label="Пароль"
                 fullWidth
                 value={password}
+                type="password"
                 onChange={handleChangePassword}
                 InputProps={{
-                    startAdornment: <LockIcon style={{ fill: "white" }} />
+                    startAdornment: <LockIcon style={{ fill: "white", paddingRight: "14px" }} />
                 }}
             />
         </div>
         <div className="login_container login_action">
             <div className="login_action__a">
                 <Link
-                    style={{textDecoration: "none", color: "2F80ED"}}
+                    style={{textDecoration: "none", color: "#2F80ED"}}
                     to="/forgot"
                 >
                     Забыли пароль?
@@ -131,6 +141,7 @@ const RegisterPanel = () => {
                 label="Пароль"
                 fullWidth
                 value={password}
+                type="password"
                 onChange={handleChangePassword}
                 InputProps={{
                     startAdornment: <LockIcon style={{ fill: "white" }} />
@@ -138,7 +149,6 @@ const RegisterPanel = () => {
             />
         </div>
         <div className="login_container login_action">
-            <div>
                 <StyledButton
                     fullWidth
                     variant="contained"
@@ -147,7 +157,6 @@ const RegisterPanel = () => {
                 >
                     Зарегистрироваться
                 </StyledButton>
-            </div>
         </div>
     </form>
 }
@@ -160,14 +169,16 @@ export const AuthorizationPage = () => {
     const history = useHistory()
 
     const handleChangeTab = (e, nv) => setPage(nv)
+    const handleClose = () => history.goBack()
     return (
-        <Dialog
+        <StyledDialog
             open={true}
             maxWidth="xs"
             fullWidth
-            onClose={()=>history.goBack()}
+            onClose={handleClose}
         >
-            <DialogContent>
+            <StyledDialogTitle onClose={handleClose}/>
+            <StyledDialogContent>
                 <StyledTabs
                     value={page}
                     onChange={handleChangeTab}
@@ -187,7 +198,7 @@ export const AuthorizationPage = () => {
                 >
                     <RegisterPanel />
                 </TabPanel>
-            </DialogContent>
-        </Dialog>
+            </StyledDialogContent>
+        </StyledDialog>
     )
 }

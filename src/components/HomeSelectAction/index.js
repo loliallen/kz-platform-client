@@ -1,12 +1,12 @@
 import React from 'react'
-import { withStyles, Tab, Tabs, AppBar, Toolbar, Icon } from "@material-ui/core"
+import { withStyles, Tabs, AppBar, Toolbar } from "@material-ui/core"
 import StyledColoredTab from '../../containers/StyledColoredTab'
 import { MessageSendIcon } from '../../containers/Icons/MessageSend'
-import {EmailOutlined, SmsOutlined, ReportProblemOutlined, LocalAtmOutlined, EmojiObjectsOutlined} from "@material-ui/icons"
 import { ChatIcon } from '../../containers/Icons/Chat'
 import { LightIcon } from '../../containers/Icons/Light'
 import { BillNoteIcon } from '../../containers/Icons/BillNote'
 import { WarnFileIcon } from '../../containers/Icons/WarnFile'
+import { useHistory } from "react-router-dom"
 
 
 const StyledAppBar = withStyles({
@@ -59,11 +59,11 @@ export const HomeSelectAction = ({
                     onChange={handleChange}
                     value={value}
                 >
-                    <StyledColoredTab icon={<MessageSendIcon style={{width: "30px", height: "30px"}}  />} hoverColor="blue" label="Подать обращение" />
-                    <StyledColoredTab icon={<WarnFileIcon style={{width: "30px", height: "30px"}} />} hoverColor="red" label="Сообщайте о проблемах" />
-                    <StyledColoredTab icon={<ChatIcon style={{width: "30px", height: "30px"}}  />} hoverColor="blue2" label="Местные новости" />
-                    <StyledColoredTab icon={<BillNoteIcon style={{width: "30px", height: "30px"}} />} hoverColor="purple" label="Обсуждение тендеров" />
-                    <StyledColoredTab icon={<LightIcon style={{width: "30px", height: "30px"}} />}hoverColor="green" label="Идеи и предложения" />
+                        <StyledColoredTab icon={<MessageSendIcon style={{width: "30px", height: "30px"}}  />} hoverColor="blue" label="Подать обращение" />
+                        <StyledColoredTab icon={<WarnFileIcon style={{width: "30px", height: "30px"}} />} hoverColor="red" label="Сообщайте о проблемах" />
+                        <StyledColoredTab icon={<ChatIcon style={{width: "30px", height: "30px"}}  />} hoverColor="blue2" label="Местные новости" />
+                        <StyledColoredTab icon={<BillNoteIcon style={{width: "30px", height: "30px"}} />} hoverColor="purple" label="Обсуждение тендеров" />
+                        <StyledColoredTab icon={<LightIcon style={{width: "30px", height: "30px"}} />}hoverColor="green" label="Идеи и предложения" />
                 </StyledTabs>
             </StyledToolbar>
         </StyledAppBar>

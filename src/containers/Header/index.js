@@ -6,6 +6,7 @@ import { UserAvatar } from './UserAvatarContainer'
 import { UsersNotifications } from './UsersNotifications'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { StyledButton } from '../StyledButton'
 
 const StyledAppBar = withStyles({
     root: {
@@ -73,14 +74,14 @@ export const Header = () => {
                         </> 
                         :
                         <Link
-                            to='/register'
+                            to='/home/auth'
                         >
-                            <Button
+                            <StyledButton
                                 color="primary"
                                 variant="contained"
                             >
                                 Авторизоваться
-                            </Button>
+                            </StyledButton>
                         </Link>
                     }
                 </div>

@@ -1,11 +1,5 @@
 import React, { Component } from 'react'
 import "./style.css"
-// import {
-//     withScriptjs,
-//     withGoogleMap,
-//     GoogleMap,
-//     Marker,
-// } from "react-google-maps";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import { Typography } from '@material-ui/core';
 
@@ -80,27 +74,3 @@ export default GoogleApiWrapper({
     apiKey: "AIzaSyDWEKKmejfg92St2a1RJoo4gQeBseUjD3Q",
     language: "ru"
 })(MapContainer)
-
-
-// const MapWithAMarker = withScriptjs(withGoogleMap(props =>
-//     <GoogleMap
-//         defaultZoom={8}
-//         defaultCenter={{ lat: -34.397, lng: 150.644 }}
-//     >
-//         <Marker
-//             position={{ lat: -34.397, lng: 150.644 }}
-//         />
-//     </GoogleMap>
-// ));
-
-// export const HomeMap = () => {
-//     return (
-//         <MapWithAMarker
-//             googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${APIKEY}&v=3.exp&libraries=geometry,drawing,places`}
-//             loadingElement={<div style={{ height: `100%` }} />}
-//             containerElement={<div style={{ height: `700px` }} />}
-//             mapElement={<div style={{ height: `100%` }} />}
-//             setToolbarEnabled={false}
-//         />
-//     )
-// }

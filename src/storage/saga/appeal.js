@@ -14,6 +14,17 @@ function *GetWatcher() {
         yield put({ type: BaseTypes.SET, payload: [] })
     }
 }
+
+function *CreateWatcher({ payload: data }) {
+    try {
+        // const payload = yield call(Service.Create, data)
+        yield put({ type: BaseTypes.SET_LATEST, payload: data })
+    } catch {
+        yield put({ type: BaseTypes.SET, payload: [] })
+    }
+}
+
+
 export default {
     GetWatcher
 }

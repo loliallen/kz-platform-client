@@ -1,13 +1,22 @@
-import { GoogleApiWrapper, Map } from "google-maps-react";
-import React from "react"
+import { GoogleApiWrapper, Map, Marker } from 'google-maps-react'
+import React, { Component } from 'react'
+import UserPointSVG from './UserPoint.svg'
 
 
-export class MapContainer extends Component {
+
+class MapContainer extends Component {
     state = {
-        center: { lat: 55.73, lng: 49.2 },
-        zoom: 15
+        center: this.props.center || { lat: 55.73, lng: 49.2 },
+        zoom: 14
+    }
+    componentDidMount() {
+        console.log(this.props.center)
+    }
+    componentDidUpdate() {
+        console.log("upd", this.props.center)
     }
     render() {
+        const containerStyle = this.props.styles
         return (
             <Map
                 google={this.props.google}
@@ -18,11 +27,26 @@ export class MapContainer extends Component {
                 zoomControl={false}
                 panControl={false}
                 streetViewControl={false}
-                center={this.state.center}
-                initialCenter={{ lat: 55.73, lng: 49.2 }}
+                center={this.props.center}
+                initialCenter={{ lat: 55.738367999999994, lng: 49.2077056 }}
             >
+                {this.props.center && <Marker
+                    position={this.props.center}
+                    onDragend={(props, marker, e) => {
+                        this.props.setLoc({
+                            lat: marker.position.lat(),
+                            lng: marker.position.lng()
+                        })
+                    }}
+                    icon={{
+                        url: UserPointSVG,
+                        anchor: new window.google.maps.Point(30, 42),
+                        scaledSize: new window.google.maps.Size(60, 65)
+                    }}
+                    draggable={true}
+                />}
             </Map>
-        );
+        )
     }
 }
 

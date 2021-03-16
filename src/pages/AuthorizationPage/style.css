@@ -1,9 +1,10 @@
 .login_container {
-    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 .login_action{
     display: flex;
+    margin-bottom: 52px;
 }
 .login_action__a {
     margin-right: 41px;
