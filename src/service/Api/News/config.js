@@ -1,3 +1,5 @@
+import {BASENAME} from "../config"
+
 export default {
-    path: "/news."
+    path: BASENAME+"/news."
 }
