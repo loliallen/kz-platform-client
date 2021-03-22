@@ -4,7 +4,7 @@ import { StyledIcon } from '../../StyledIcon'
 export const ChatIcon = (props) => {
     return (
         <StyledIcon
-            viewBox="0 0 40 40" 
+            viewBox="0 0 40 40"
             {...props}
         >
             <path d="M5 33.3333L7.16667 26.8333C5.29407 24.0638
@@ -16,10 +16,10 @@ export const ChatIcon = (props) => {
                     34.2716 25.2387 32.1231 27.8452C29.9746 30.4517
                     26.8344 32.276 23.2863 32.9789C19.7382 33.6818
                     16.0237 33.2155 12.8333 31.6667L5 33.3333"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M20 20V20.0125" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M13.3333 20V20.0125" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M26.6667 20V20.0125" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M20 20V20.0125" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M13.3333 20V20.0125" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M26.6667 20V20.0125" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </StyledIcon>
     )
 }

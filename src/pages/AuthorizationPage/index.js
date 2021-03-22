@@ -8,6 +8,7 @@ import { StyledButton } from '../../containers/StyledButton'
 import { StyledDialog } from '../../containers/StyledDialog'
 import { StyledDialogTitle } from '../../containers/StyledHeader'
 import { StyledDialogContent } from '../../containers/StyledDialogContent'
+import { StyledTab } from '../../containers/StyledTab'
 import actions from '../../storage/actions'
 
 
@@ -19,18 +20,6 @@ const StyledTabs = withStyles({
     }
 })(Tabs)
 
-const StyledTab = withStyles({
-    root: {
-        minWidth: "0px"
-    },
-    wrapper: {
-        fontWeight: "900",
-        textTransform: "none",
-        fontSize: "22px",
-        flexDirection: "row",
-        justifyContent: "start"
-    }
-})(Tab)
 
 
 const TabPanel = ({ index, page, children = null }) => children && index === page ? children : null
@@ -131,7 +120,7 @@ const RegisterPanel = () => {
                 value={login}
                 onChange={handleChangeLogin}
                 InputProps={{
-                    startAdornment: <MessageIcon style={{ fill: "white" }} />
+                    startAdornment: <MessageIcon style={{ fill: "white", paddingRight: "14px" }} />
                 }}
             />
         </div>
@@ -144,7 +133,7 @@ const RegisterPanel = () => {
                 type="password"
                 onChange={handleChangePassword}
                 InputProps={{
-                    startAdornment: <LockIcon style={{ fill: "white" }} />
+                    startAdornment: <LockIcon style={{ fill: "white", paddingRight: "14px" }} />
                 }}
             />
         </div>

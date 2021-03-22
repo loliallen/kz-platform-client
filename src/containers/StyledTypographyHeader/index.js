@@ -19,14 +19,14 @@ export const StyledTypographyHeader = ({ title, linkLabel, link }) => {
             >
                 {title}
             </Typography>
-            <Link
-                style={{ 
+            {link && <Link
+                style={{
                     color: "#2F80ED",
                     alignItems: "center",
-                    display: "flex" 
+                    display: "flex"
                 }}
                 to={link}
-            >{linkLabel}</Link>
+            >{linkLabel}</Link>}
         </div>
     )
 }

@@ -43,17 +43,18 @@ export const CurrentNew = ({
             {isNewItemIsArray ?
                 new_content.map(p => {
                     const { type } = p
-                    if (p === "text")
-                        return <Typography>
+                    if (type === "text")
+                    return <Typography>
                             {p.text}
                         </Typography>
-                    return <img src={p.photo} alt="photo"/>
+                    return <img src={p.text} alt="photo"/>
                 })
                 :
                 <Typography>
                     -----
                 </Typography>
             }
+            { }
         </StyledPaper>
     )
 }

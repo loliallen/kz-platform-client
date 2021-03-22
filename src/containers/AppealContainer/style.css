@@ -1,0 +1,13 @@
+.appeal__content__info, .appeal__content__comment{
+    margin-bottom: 20px;
+}
+
+.appeal__content__info__inner{
+    display: flex;
+    align-items: center;
+    line-height: 28px;
+
+}
+.appeal__content__info__inner svg{
+    margin-right: 10px;
+}

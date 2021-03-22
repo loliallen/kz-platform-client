@@ -10,10 +10,10 @@ import "./style.css"
 
 const PATHS = [
     '/home/appeal/create',
-    '/TEST',
-    '/TEST',
-    '/TEST',
-    '/TEST',
+    '#',
+    '/news',
+    '/tenders',
+    '/ideas',
 ]
 export const HomePage = () => {
     const history = useHistory()

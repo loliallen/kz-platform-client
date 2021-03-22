@@ -4,7 +4,7 @@ import { AppBar, Button, Toolbar, Typography, withStyles } from "@material-ui/co
 import "./style.css"
 import { UserAvatar } from './UserAvatarContainer'
 import { UsersNotifications } from './UsersNotifications'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { StyledButton } from '../StyledButton'
 
@@ -22,11 +22,13 @@ const StyledToolbar = withStyles({
     }
 })(Toolbar)
 
-export const Header = () => {
+export const Header = ({color, textColor}) => {
     const app = useSelector(state => state.app)
+    const history = useHistory()
     return (
         <StyledAppBar
-            color="transparent"
+            color={!color ? "transparent" : color}
+            style={ textColor && { color: textColor }}
         >
             <StyledToolbar>
                 <div className="header__align_left">
@@ -52,7 +54,7 @@ export const Header = () => {
                             Тендеры
                         </div>
                     </Link>
-                    <Link to="/ideas">
+                    <Link to="/ideas&tenders">
                         <div>
                             Идеи и предложения
                         </div>
@@ -65,24 +67,24 @@ export const Header = () => {
                 </div>
                 <div className="header__align_rigth">
                     {
-                    app.isAuthed ? 
-                        <>
-                            <div style={{padding: "16px 20px 16px 16px"}}>
-                                <UsersNotifications notificationsCount={3}/>
-                            </div>
-                            <UserAvatar />
-                        </> 
-                        :
-                        <Link
-                            to='/home/auth'
-                        >
-                            <StyledButton
-                                color="primary"
-                                variant="contained"
+                        app.isAuthed ?
+                            <>
+                                <div style={{ padding: "16px 20px 16px 16px" }}>
+                                    <UsersNotifications notificationsCount={3} />
+                                </div>
+                                <UserAvatar onClick={() => history.push('/personal')} />
+                            </>
+                            :
+                            <Link
+                                to='/home/auth'
                             >
-                                Авторизоваться
+                                <StyledButton
+                                    color="primary"
+                                    variant="contained"
+                                >
+                                    Авторизоваться
                             </StyledButton>
-                        </Link>
+                            </Link>
                     }
                 </div>
             </StyledToolbar>

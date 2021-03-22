@@ -26,5 +26,6 @@ function *CreateWatcher({ payload: data }) {
 
 
 export default {
-    GetWatcher
+    GetWatcher,
+    CreateWatcher
 }

@@ -10,8 +10,8 @@ function *GetWatcher() {
     try {
         const payload = yield call(Service.get)
         yield put({ type: BaseTypes.SET, payload: payload.news })
-    } catch {
-        yield put({ type: BaseTypes.SET, payload: [] })
+    } catch (error){
+        console.log(error)
     }
 }
 export default {

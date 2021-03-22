@@ -274,7 +274,10 @@ const Step4 = ({
     index,
     setFullName,
     setCity,
-    setAddress
+    setAddress,
+    fullName,
+    city,
+    address
 }) => {
     if (index !== step)
         return null
@@ -289,6 +292,7 @@ const Step4 = ({
                     variant="outlined"
                     fullWidth
                     onChange={e => setFullName(e.target.value)}
+                    value={fullName}
                 />
             </div>
             <div className="login_container">
@@ -297,6 +301,7 @@ const Step4 = ({
                     variant="outlined"
                     fullWidth
                     onChange={e => setCity(e.target.value)}
+                    value={city}
                 />
             </div>
             <div className="login_container">
@@ -305,6 +310,7 @@ const Step4 = ({
                     variant="outlined"
                     fullWidth
                     onChange={e => setAddress(e.target.value)}
+                    value={address}
                 />
             </div>
         </StepContainer>
@@ -312,6 +318,7 @@ const Step4 = ({
 }
 
 const Step5 = ({
+    setComment,
     step,
     index,
 }) => {
@@ -326,6 +333,7 @@ const Step5 = ({
         }}
     >
         <TextField
+            onChange={e => setComment(e.target.value)}
             multiline
             placeholder="..."
             fullWidth
@@ -336,6 +344,8 @@ const Step5 = ({
 
 export const CreateAppealPage = () => {
     const history = useHistory()
+    const dispatch = useCallback(useDispatch(), [])
+    const user = useSelector(s => s.app.user)
     const steps = 5
 
     const [loc, setLoc] = useState()
@@ -343,6 +353,7 @@ export const CreateAppealPage = () => {
     const [fullName, setFullName] = useState("")
     const [city, setCity] = useState("")
     const [address, setAddress] = useState("")
+    const [comment, setComment] = useState("")
 
     const [imgs, setImgs] = useState([])
 
@@ -358,6 +369,14 @@ export const CreateAppealPage = () => {
             })
         }
     }, [])
+
+    useEffect(() => {
+        if (user) {
+            setFullName(user.name)
+            setCity(user.address.city)
+            setAddress(user.address.full)
+        }
+    }, [user])
 
     const [step, setStep] = useState(0)
 
@@ -382,9 +401,14 @@ export const CreateAppealPage = () => {
     const handleSubmit = () => {
         const data = {
             category,
-
+            fullName,
+            city,
+            address,
+            loc,
+            imgs,
+            comment
         }
-        appealAction.create(data)
+        dispatch(appealAction.create(data))
         history.push('/appeals')
     }
 
@@ -419,8 +443,17 @@ export const CreateAppealPage = () => {
                         <Step1 step={step} index={0} loc={loc} setLoc={setLoc} />
                         <Step2 step={step} index={1} imgs={imgs} setImgs={setImgs} />
                         <Step3 step={step} index={2} category={category} setCategory={setCategory} />
-                        <Step4 step={step} index={3} setFullName={setFullName} setCity={setCity} setAddress={setAddress} />
-                        <Step5 step={step} index={4} />
+                        <Step4
+                            step={step}
+                            index={3}
+                            setFullName={setFullName}
+                            fullName={fullName}
+                            setCity={setCity}
+                            city={city}
+                            setAddress={setAddress}
+                            address={address}
+                        />
+                        <Step5 step={step} index={4} setComment={setComment} />
                     </SwipeableViews>
                 </div>
             </StyledDialogContent>

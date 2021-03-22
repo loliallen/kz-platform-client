@@ -3,7 +3,7 @@ import config from "./config"
 export default async () => {
     let response = await fetch(config.path+"get", {
         headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
         },
         method: "POST",
     })
