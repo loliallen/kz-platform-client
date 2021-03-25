@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import "./style.css"
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import { Typography } from '@material-ui/core';
+import { StyledButton } from '../../containers/StyledButton';
+import { MessageSendIcon } from '../../containers/Icons/MessageSend';
+import { Link } from 'react-router-dom';
 
 export class MapContainer extends Component {
     state = {
@@ -12,8 +15,9 @@ export class MapContainer extends Component {
         const containerStyle = {
             height: "100vh",
         }
+        const width = window.innerWidth
         return (
-            <div style={{position: 'relative'}}>
+            <div style={{ position: 'relative' }}>
                 <div
                     style={{
                         position: 'absolute',
@@ -28,26 +32,41 @@ export class MapContainer extends Component {
                         opacity: 0.75
                     }}
                 />
-                <Typography
+                <div
                     style={{
                         position: "absolute",
                         zIndex: 11,
                         top: "185px",
-                        left: "120px",
-                        width: "600px",
+                        left: "20px",
+                        right: "20px",
                         height: "120px",
                         color: "white",
                         fontWeight: "700"
                     }}
-                    variant="h2"
                 >
-                    {`Сообщайте\nо проблемах`}
-                </Typography>
+                    <Typography
+
+                        variant="h2"
+                    >
+                        {`Сообщайте\nо проблемах`}
+                    </Typography>
+                    {width < 800 &&
+                        <Link to="/home/appeal/create">
+                            <StyledButton
+                            style={{marginTop: "30px"}}
+                            color="primary"
+                            variant="contained"
+                            fullWidth
+                            startIcon={<MessageSendIcon style={{width: "30px", height: "30px", stroke: "white", fill: "transparent" }} />}
+                            >Подать обращение</StyledButton>
+                        </Link>
+                    }
+                </div>
                 <div className="map_circle_wrapper">
                     <div className="map_circle map_circle_1">
                         <div className="map_circle map_circle_2">
                             <div className="map_circle map_circle_3">
-                                <div className="map_circle map_circle_4"/>
+                                <div className="map_circle map_circle_4" />
                             </div>
                         </div>
                     </div>

@@ -5,3 +5,12 @@
 .news_container > * {
     flex: 1;
 }
+
+@media screen and (max-width: 800px) {
+    .news_container{
+        flex-direction: column;
+    }
+    .news_container > * {
+        word-break: break-all;
+    }
+}

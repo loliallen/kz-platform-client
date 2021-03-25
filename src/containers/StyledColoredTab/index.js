@@ -24,6 +24,12 @@ const StyledTab = withStyles((theme) => ({
         },
         paddingLeft: "40px",
         paddingBottom: "28px",
+        '@media (max-width: 1000px)' : {
+            paddingLeft: "8px",
+            borderBottomLeftRadius: "0px",
+            borderBottomRightRadius: "0px",
+            height: 100
+        }
     },
     wrapper: {
         alignItems: "start",
@@ -31,6 +37,10 @@ const StyledTab = withStyles((theme) => ({
         fontSize: "22px",
         textAlign: "left",
         lineHeight: "26.4px",
+        '@media (max-width: 800px)' : {
+            alignItems: "center",
+            fontSize: "16px"
+        }
     }
 }))(Tab)
 
@@ -51,15 +61,15 @@ export const StyledColoredTab = ({
     const styles = useStyles()
 
     const colors = { blue: "#2B7AE5", red: "#EC2F2F", blue2: "#2D9CDB", purple: "#9B51E0", green: "#219653", }
-    
+
     const currentColor = colors[hoverColor]
     if (!currentColor)
         currentColor = "lightgray"
-    
-        return (<StyledTab 
+
+        return (<StyledTab
         style={{ "--hover-color": currentColor }}
         icon={rest.icon}
-        {...rest} 
+        {...rest}
     />)
 }
 export default StyledColoredTab

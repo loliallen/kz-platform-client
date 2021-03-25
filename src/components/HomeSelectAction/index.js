@@ -14,7 +14,11 @@ const StyledAppBar = withStyles({
         position: "absolute",
         height: "160px",
         bottom: "24px",
-        boxShadow: "none"
+        boxShadow: "none",
+        '@media (max-width: 1000px)' : {
+            bottom: "0px",
+            height: 100
+        }
     }
 })(AppBar)
 
@@ -27,7 +31,13 @@ const StyledTabs = withStyles({
         width: "100%",
         alignItems: "center",
         backgroundColor: "white",
-        borderRadius: "20px"
+        borderRadius: "20px",
+        '@media (max-width: 1000px)' : {
+            borderBottomLeftRadius: "0px",
+            borderBottomRightRadius: "0px",
+            height: 100
+
+        }
     },
     indicator: {
         display: "none",
@@ -38,8 +48,16 @@ const StyledTabs = withStyles({
 const StyledToolbar = withStyles({
     gutters: {
         marginLeft: "11%",
-        marginRight: "11%"
-    }
+        marginRight: "11%",
+        '@media (max-width: 1000px)' : {
+            marginLeft: "0px",
+            marginRight: "0px",
+            paddingLeft: "0px",
+            paddingRight: "0px",
+            height: 100
+        }
+    },
+
 })(Toolbar)
 
 
@@ -47,7 +65,13 @@ export const HomeSelectAction = ({
     value,
     setValue
 }) => {
-    const handleChange = (e, newValue) => setValue(newValue)
+    const handleChange = (e, newValue) => setValue(newValue + (width > 800 ? 0 : 1))
+
+    const width = window.innerWidth
+
+    const isMobile = width > 800
+
+
     return (
         <StyledAppBar
             position="relative"
@@ -59,11 +83,11 @@ export const HomeSelectAction = ({
                     onChange={handleChange}
                     value={value}
                 >
-                        <StyledColoredTab icon={<MessageSendIcon style={{width: "30px", height: "30px"}}  />} hoverColor="blue" label="Подать обращение" />
-                        <StyledColoredTab icon={<WarnFileIcon style={{width: "30px", height: "30px"}} />} hoverColor="red" label="Сообщайте о проблемах" />
-                        <StyledColoredTab icon={<ChatIcon style={{width: "30px", height: "30px"}}  />} hoverColor="blue2" label="Местные новости" />
-                        <StyledColoredTab icon={<BillNoteIcon style={{width: "30px", height: "30px"}} />} hoverColor="purple" label="Обсуждение тендеров" />
-                        <StyledColoredTab icon={<LightIcon style={{width: "30px", height: "30px"}} />}hoverColor="green" label="Идеи и предложения" />
+                        { isMobile && <StyledColoredTab icon={<MessageSendIcon style={{width: "30px", height: "30px"}}  />} hoverColor="blue" label="Подать обращение" />}
+                        <StyledColoredTab icon={<WarnFileIcon style={{width: "30px", height: "30px"}} />} hoverColor="red" label={ !isMobile ? "Сообщить" :"Сообщайте о проблемах"} />
+                        <StyledColoredTab icon={<ChatIcon style={{width: "30px", height: "30px"}}  />} hoverColor="blue2" label={ !isMobile ? "Новости" :"Местные новости"} />
+                        <StyledColoredTab icon={<BillNoteIcon style={{width: "30px", height: "30px"}} />} hoverColor="purple" label={ !isMobile ? "Тендеры" :"Обсуждение тендеров"} />
+                        <StyledColoredTab icon={<LightIcon style={{width: "30px", height: "30px"}} />}hoverColor="green" label={ !isMobile ? "Идеи" :"Идеи и предложения"} />
                 </StyledTabs>
             </StyledToolbar>
         </StyledAppBar>

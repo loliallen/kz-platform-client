@@ -6,7 +6,10 @@ const StyledPaper = withStyles({
         borderRadius: "20px",
         backgroundColor: "#F1FAF8",
         marginRight: "40px",
-        padding: "30px"
+        padding: "30px",
+        '@media (max-width: 1000px)' : {
+            marginRight: "0px"
+        }
     }
 })(Paper)
 

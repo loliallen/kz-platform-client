@@ -24,17 +24,17 @@ function* SetTokenWatcher({ payload }) {
     const token = payload
     console.log(token)
     try {
+        const data = {
+            name: "Ivan Ivanov Ivanovich",
+            address: {
+                city: "Земля",
+                full: "Млечный путь, Солнечная система, Планета Земля"
+            },
+            phone: "+7 (999) 999 99 99",
+            email: "fakemail@fake.fff",
+            image: "https://images.unsplash.com/photo-1589155629431-f2fe9a9efc08?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjF8fGNvdmlkfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+        }
         if (token === "offline") {
-            const data = {
-                name: "Ivan Ivanov Ivanovich",
-                address: {
-                    city: "Земля",
-                    full: "Млечный путь, Солнечная система, Планета Земля"
-                },
-                phone: "+7 (999) 999 99 99",
-                email: "fakemail@fake.fff",
-                image: "https://images.unsplash.com/photo-1589155629431-f2fe9a9efc08?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjF8fGNvdmlkfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-            }
             const news_list = [
                 {
                     time: new Date(),
@@ -96,6 +96,7 @@ function* SetTokenWatcher({ payload }) {
         } else {
             const res = yield call(Service.me, token)
             console.log(res)
+            // yield put({ type: BaseTypes.SET_USER, payload: data })
         }
     } catch (error) {
         console.error(error)

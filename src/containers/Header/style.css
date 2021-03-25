@@ -1,6 +1,6 @@
 .header__align_left{
     flex: 1;
-    /* justify-items: start; */
+    display: flex;
     text-align: center;
 }
 

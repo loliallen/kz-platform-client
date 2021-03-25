@@ -240,6 +240,7 @@ const Step3 = ({
         >
             <FormControl
                 className={classes.formControl}
+                style={{ width: "90%" }}
             >
                 <StyledLabel
                     variant="outlined"
@@ -248,9 +249,6 @@ const Step3 = ({
                 <Select
                     id="grouped-select"
                     variant="outlined"
-                    style={{
-                        width: "500px"
-                    }}
                     value={category}
                     onChange={e => setCategory(e.target.value)}
                 >
@@ -322,6 +320,7 @@ const Step5 = ({
     step,
     index,
 }) => {
+    const width = window.innerWidth
 
     if (index !== step)
         return null
@@ -329,7 +328,7 @@ const Step5 = ({
         title="Напишите ваш комментарий"
         subtitle="Тут стоит уточнить зачем нужно писать его и выбрать другое название"
         actionLabels={{
-            next: "Подать обращение"
+            next: width < 800 ? "Отправить" : "Подать обращение"
         }}
     >
         <TextField
@@ -412,11 +411,14 @@ export const CreateAppealPage = () => {
         history.push('/appeals')
     }
 
+    const width = window.innerWidth
+
     return (
         <StyledDialog
             open={true}
             maxWidth="sm"
             fullWidth
+            fullScreen={width < 800}
             onClose={handleClose}
         >
             <StyledDialogTitle

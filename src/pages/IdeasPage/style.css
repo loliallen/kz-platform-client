@@ -3,3 +3,10 @@
     grid-template-columns: 1fr 1fr;
     gap: 40px;
 }
+
+@media screen and (max-width: 800px){
+    .tender__container{
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}

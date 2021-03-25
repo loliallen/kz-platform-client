@@ -7,6 +7,8 @@ import { UsersNotifications } from './UsersNotifications'
 import { Link, useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { StyledButton } from '../StyledButton'
+import { MobileHeader } from "./MobileHeader"
+
 
 const StyledAppBar = withStyles({
     root: {
@@ -25,6 +27,12 @@ const StyledToolbar = withStyles({
 export const Header = ({color, textColor}) => {
     const app = useSelector(state => state.app)
     const history = useHistory()
+
+    const width = window.innerWidth
+
+    if (width < 800)
+        return <MobileHeader color="white" textColor="black"/>
+
     return (
         <StyledAppBar
             color={!color ? "transparent" : color}
