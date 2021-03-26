@@ -13,7 +13,7 @@
     font-size: 14px;
 }
 
-.header__align_center a {
+.header__align_center a, .mobile_list a {
     color: inherit;
     text-decoration: none;
 }

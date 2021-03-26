@@ -12,7 +12,8 @@ export default (state = initalState, action) => {
         case types.APP.SET_TOKEN:
             return { ...state, isAuthed: true, token: action.payload.token}
         case types.APP.SET_USER:
-            return { ...state, user: action.payload}
+            console.log("payload", action.payload)
+            return { ...state, user: action.payload?.userinfo}
         default:
             return state
     }

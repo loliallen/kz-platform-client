@@ -20,7 +20,11 @@ const StyledAppBar = withStyles({
 const StyledToolbar = withStyles({
     gutters: {
         paddingLeft: "128px",
-        paddingRight: "128px"
+        paddingRight: "128px",
+        '@media (max-width: 1200px)' : {
+            paddingLeft: "32px",
+            paddingRight: "32px",
+        }
     }
 })(Toolbar)
 

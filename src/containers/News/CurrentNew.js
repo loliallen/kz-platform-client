@@ -1,5 +1,6 @@
 import { Paper, Typography, withStyles } from '@material-ui/core'
 import React from 'react'
+import "./style.css"
 
 const StyledPaper = withStyles({
     root: {
@@ -14,13 +15,12 @@ const StyledPaper = withStyles({
 })(Paper)
 
 export const CurrentNew = ({
+    title,
     time,
     new_item,
     address,
     ...rest
 }) => {
-    const isNewItemIsArray = Array.isArray(new_item)
-    const title = isNewItemIsArray ? new_item.find(p => p.type === "text" ) : new_item
 
     const new_content = new_item
 
@@ -33,7 +33,7 @@ export const CurrentNew = ({
             <Typography
                 variant="h6"
             >
-                { title.text }
+                { title }
             </Typography>
             <Typography
                 style={{
@@ -43,21 +43,14 @@ export const CurrentNew = ({
             >
                 { new Date(time).toLocaleDateString() }
             </Typography>
-            {isNewItemIsArray ?
-                new_content.map(p => {
-                    const { type } = p
-                    if (type === "text")
-                    return <Typography>
-                            {p.text}
-                        </Typography>
-                    return <img src={p.text} alt="photo"/>
-                })
-                :
-                <Typography>
-                    -----
-                </Typography>
-            }
-            { }
+            {new_content.map(p => {
+                const { type } = p
+                if (type === "text")
+                return <Typography>
+                        {p.text}
+                    </Typography>
+                return <div className="new_photo"><img src={p.url_photo} alt="photo"/></div>
+            })}
         </StyledPaper>
     )
 }

@@ -47,9 +47,18 @@ const StyledTabs = withStyles({
 
 const StyledToolbar = withStyles({
     gutters: {
-        marginLeft: "11%",
-        marginRight: "11%",
+        marginLeft: "128px",
+        marginRight: "128px",
+        paddingLeft: "0px",
+        paddingRight: "0px",
         '@media (max-width: 1000px)' : {
+            marginLeft: "0px",
+            marginRight: "0px",
+            paddingLeft: "0px",
+            paddingRight: "0px",
+            height: 100
+        },
+        '@media (max-width: 1200px)' : {
             marginLeft: "0px",
             marginRight: "0px",
             paddingLeft: "0px",

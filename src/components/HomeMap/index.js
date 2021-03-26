@@ -37,7 +37,7 @@ export class MapContainer extends Component {
                         position: "absolute",
                         zIndex: 11,
                         top: "185px",
-                        left: "20px",
+                        left: width < 800 ? "20px" : "128px",
                         right: "20px",
                         height: "120px",
                         color: "white",
@@ -45,8 +45,7 @@ export class MapContainer extends Component {
                     }}
                 >
                     <Typography
-
-                        variant="h2"
+                        variant={ width < 800 ? "h3" :"h2"}
                     >
                         {`Сообщайте\nо проблемах`}
                     </Typography>

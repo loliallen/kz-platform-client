@@ -1,10 +1,7 @@
 import { Divider, List, ListItem, ListItemText } from '@material-ui/core'
 import React from 'react'
 
-const New = ({ time, new_item, address, onClick }) => {
-
-    const isNewItemIsArray = Array.isArray(new_item)
-    const title = isNewItemIsArray ? new_item.find(p => p.type === "text") : new_item
+const New = ({ title, time, new_item, address, onClick }) => {
 
     return (
         <>
@@ -25,7 +22,7 @@ const New = ({ time, new_item, address, onClick }) => {
                             fontSize: "16px"
                         }
                     }}
-                    secondary={title?.text}
+                    secondary={title}
                     primary={new Date(time).toLocaleDateString()}
                 />
             </ListItem>
