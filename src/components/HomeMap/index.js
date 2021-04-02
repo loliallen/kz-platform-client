@@ -37,17 +37,21 @@ export class MapContainer extends Component {
                         position: "absolute",
                         zIndex: 11,
                         top: "185px",
-                        left: width < 800 ? "20px" : "128px",
+                        left: width < 800 ? "11%" : "11%",
                         right: "20px",
                         height: "120px",
                         color: "white",
-                        fontWeight: "700"
                     }}
                 >
                     <Typography
                         variant={ width < 800 ? "h3" :"h2"}
+                        style={{
+                            fontWeight: width < 800 ? "700": "900"
+                        }}
                     >
-                        {`Сообщайте\nо проблемах`}
+                        Сообщайте
+                        <br/>
+                        о проблемах
                     </Typography>
                     {width < 800 &&
                         <Link to="/home/appeal/create">

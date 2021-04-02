@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Route, useHistory } from 'react-router'
 import HomeMap from '../../components/HomeMap'
 import HomeSelectAction from '../../components/HomeSelectAction'
-import { Header } from '../../containers/Header'
 import { AuthorizationPage } from '../AuthorizationPage'
 import { CreateAppealPage } from '../CreateAppealPage'
 
@@ -22,7 +21,6 @@ export const HomePage = () => {
 
     return (
         <div className="home_page__container">
-            <Header/>
             <HomeMap
                 google
             />

@@ -33,7 +33,7 @@ export const CurrentNew = ({
             <Typography
                 variant="h6"
             >
-                { title }
+                { title || "Заголовок новости" }
             </Typography>
             <Typography
                 style={{

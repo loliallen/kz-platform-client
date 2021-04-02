@@ -7,6 +7,7 @@ import { PersonalPage } from '../pages/PersonalPage'
 import { AppealsPage } from '../pages/AppealsPage'
 import { IdeasPage } from '../pages/IdeasPage'
 import { TendersPage } from '../pages/TendersPage'
+import { Header } from '../containers/Header'
 
 
 const theme = createMuiTheme({
@@ -21,6 +22,7 @@ const theme = createMuiTheme({
 export const App = () => {
     return (
         <MuiThemeProvider theme={theme}>
+            <Header />
             <Switch>
                 <Route exact path="/" component={()=><Redirect to="/home" />} />
                 <Route path="/home" component={()=><HomePage/>}/>

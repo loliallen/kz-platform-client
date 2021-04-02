@@ -10,17 +10,18 @@ import { StyledButton } from '../StyledButton'
 import { MobileHeader } from "./MobileHeader"
 
 
-const StyledAppBar = withStyles({
+const StyledAppBar = withStyles(theme => ({
     root: {
         boxShadow: "none",
-        color: "white"
+        backgroundColor: "hsla(0, 0%, 0%, 0.3)",
+        color: theme.palette.getContrastText("hsla(0, 0%, 10%, 0)")
     }
-})(AppBar)
+}))(AppBar)
 
 const StyledToolbar = withStyles({
     gutters: {
-        paddingLeft: "128px",
-        paddingRight: "128px",
+        paddingLeft: "11%",
+        paddingRight: "11%",
         '@media (max-width: 1200px)' : {
             paddingLeft: "32px",
             paddingRight: "32px",
@@ -44,37 +45,39 @@ export const Header = ({color, textColor}) => {
         >
             <StyledToolbar>
                 <div className="header__align_left">
-                    <Typography
-                        variant="h4"
-                    >
-                        logotip
-                    </Typography>
+                    <Link to="/home">
+                        <Typography
+                            variant="h4"
+                        >
+                            logotip
+                        </Typography>
+                    </Link>
                 </div>
                 <div className="header__align_center">
                     <Link to="/appeals">
-                        <div>
+                        <h3>
                             Обращения
-                        </div>
+                        </h3>
                     </Link>
                     <Link to="/news">
-                        <div>
+                        <h3>
                             Новости
-                        </div>
+                        </h3>
                     </Link>
                     <Link to="/tenders">
-                        <div>
+                        <h3>
                             Тендеры
-                        </div>
+                        </h3>
                     </Link>
-                    <Link to="/ideas&tenders">
-                        <div>
+                    <Link to="/ideas">
+                        <h3>
                             Идеи и предложения
-                        </div>
+                        </h3>
                     </Link>
                     <Link to="/contacts">
-                        <div>
+                        <h3>
                             Контакты
-                        </div>
+                        </h3>
                     </Link>
                 </div>
                 <div className="header__align_rigth">

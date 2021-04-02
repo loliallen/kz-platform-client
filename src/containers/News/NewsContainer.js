@@ -22,7 +22,7 @@ const New = ({ title, time, new_item, address, onClick }) => {
                             fontSize: "16px"
                         }
                     }}
-                    secondary={title}
+                    secondary={title || "Заголовок новости"}
                     primary={new Date(time).toLocaleDateString()}
                 />
             </ListItem>
