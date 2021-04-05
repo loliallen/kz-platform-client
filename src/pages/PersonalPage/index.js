@@ -1,6 +1,6 @@
 import { Divider, Grid, IconButton, Tabs, TextField, Typography, withStyles } from '@material-ui/core'
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { AppealContainer } from '../../containers/AppealContainer'
 import { PersonEmail } from '../../containers/Icons/PersonEmail'
 import { PersonLocation } from '../../containers/Icons/PersonLocation'
@@ -12,6 +12,8 @@ import { Header } from "../../containers/Header"
 
 import "./style.css"
 import { Edit } from '@material-ui/icons'
+import appealAction from '../../storage/actions/appealAction'
+import appActions from '../../storage/actions/appActions'
 
 const StyledTabs = withStyles({
     indicator: {
@@ -20,7 +22,8 @@ const StyledTabs = withStyles({
 })(Tabs)
 
 
-const AboutMe = ({ user }) => {
+const AboutMe = ({ user, token }) => {
+    const dispatch = useDispatch()
     const [edit, setEdit] = useState(false)
 
     const [name, setName] = useState("")
@@ -33,15 +36,33 @@ const AboutMe = ({ user }) => {
     const handleSetEmail = (e) => setEmail(e.target.value)
     const handleSetPhone = (e) => setPhone(e.target.value)
 
+    const handleSave = () => {
+        dispatch(appActions.saveEdits({
+            token: token,
+            data: {
+                name: name === "" ? null : name,
+                address: city === "" ? null : city,
+                email: email === "" ? null : email,
+                phone: phone === "" ? null : phone,
+            }
+        }))
+
+    }
     return <div className="aboutme__container">
         <div
             className="aboutme__avatar_container"
         >
-            <img
+            {user.image ? <img
                 className="aboutme__avatar"
                 src={user.image}
                 alt="aboutme__avatar"
             />
+            :
+            <div
+                className="aboutme__avatar"
+                style={{ backgroundColor: "lightgray"}}
+                />
+            }
         </div>
         {!edit ?
             <div className="aboutme__info_container">
@@ -55,7 +76,7 @@ const AboutMe = ({ user }) => {
 
                 <div className="aboutme__info_inner">
                     <PersonLocation />
-                    <span>{user.address.city}</span>
+                    <span>{user.address?.city}</span>
                 </div>
                 <div className="aboutme__info_inner">
                     <PersonEmail />
@@ -91,6 +112,7 @@ const AboutMe = ({ user }) => {
                             fullWidth
                             variant="contained"
                             color="primary"
+                            onClick={handleSave}
                         >Сохранить</StyledButton>
                     </Grid>
                 </Grid>
@@ -130,27 +152,31 @@ const AboutMe = ({ user }) => {
     </div>
 }
 
-const MyAppeals = ({ user }) => {
-    const appeal = {
-        appeal_id: "321312",
-        comment: "На комплексе ППИ около гаражей снег не вывозится, а сгребается в огромную кучу. Местная детвора вырыла в горе пещеру и играет в ней. Над пещерой 2 метра плотного снега. Если он рухнет, то детей заживо похоронит под 2х метровым слоем. Надо срочно вывезти эту кучу!",
-        category: "Дворы / Неубранный снег, гололед во дворе",
-        photos: [
-            "https://images.unsplash.com/photo-1566503732689-934bcd9a4d90?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fGxvY2F0aW9ufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-            "https://images.unsplash.com/photo-1600003014308-b91e8feb7dbc?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
-            "https://images.unsplash.com/photo-1595350576574-c04292c1b371?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTZ8fGxvY2F0aW9ufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-        ],
-        status: 0,
-        address: "Пермь ГО, Пермь, Профессора Дедюкина, 8",
-        date: Date.now(),
-        user: user
-    }
+const MyAppeals = ({ user, token }) => {
+    const dispatch = useCallback(useDispatch(),[])
+    const appeals = useSelector(s => s.appeal.mine)
+    // const appeal = {
+    //     appeal_id: "321312",
+    //     comment: "На комплексе ППИ около гаражей снег не вывозится, а сгребается в огромную кучу. Местная детвора вырыла в горе пещеру и играет в ней. Над пещерой 2 метра плотного снега. Если он рухнет, то детей заживо похоронит под 2х метровым слоем. Надо срочно вывезти эту кучу!",
+    //     category: "Дворы / Неубранный снег, гололед во дворе",
+    //     photos: [
+    //         "https://images.unsplash.com/photo-1566503732689-934bcd9a4d90?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fGxvY2F0aW9ufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+    //         "https://images.unsplash.com/photo-1600003014308-b91e8feb7dbc?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
+    //         "https://images.unsplash.com/photo-1595350576574-c04292c1b371?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTZ8fGxvY2F0aW9ufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+    //     ],
+    //     status: 0,
+    //     address: "Пермь ГО, Пермь, Профессора Дедюкина, 8",
+    //     date: Date.now(),
+    //     user: user
+    // }
+
+    useEffect(()=>{
+        dispatch(appealAction.requestMine(token))
+    }, [])
     return <div className="myappeals__container">
-        <AppealContainer {...appeal} />
-        <AppealContainer {...appeal} />
-        <AppealContainer {...appeal} />
-        <AppealContainer {...appeal} />
-        <AppealContainer {...appeal} />
+        {appeals.map((appeal, index) =>
+            <AppealContainer key={index} {...appeal} />
+        )}
     </div>
 }
 
@@ -165,6 +191,7 @@ export const PersonalPage = () => {
     const [page, setPage] = useState(0)
 
     const user = useSelector(s => s.app.user)
+    const token = useSelector(s => s.app.token)
 
 
     const handleChangePage = (e, v) => setPage(v)
@@ -184,13 +211,13 @@ export const PersonalPage = () => {
                 page={page}
                 index={0}
             >
-                <AboutMe user={user} />
+                <AboutMe user={user} token={token}/>
             </TabPanel>
             <TabPanel
                 page={page}
                 index={1}
             >
-                <MyAppeals user={user} />
+                <MyAppeals user={user} token={token}/>
             </TabPanel>
         </Main>
         </>

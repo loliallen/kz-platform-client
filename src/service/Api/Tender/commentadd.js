@@ -1,7 +1,7 @@
 import config from "./config"
 
-export default async (id=null, category=null, status=null) => {
-    let response = await fetch(config.path+"get", {
+export default async (id, text, parent, token) => {
+    let response = await fetch(config.path+"commentadd", {
         headers: {
             "Content-Type": "application/json",
         },

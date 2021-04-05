@@ -12,35 +12,43 @@ const RED = "#EC2F2F"
 
 
 export const TenderContainer = ({
-    user,
-    date,
     id,
-    comment,
-    category,
-    address,
+    author,
+    created_at,
+    header,
+    text,
     photos,
     comments,
     liked,
     disliked,
     likes,
     dislikes,
+    ...rest
 }) => {
+    const getCommentsLength = () => {
+        let l = comments.length;
+        for(let c of comments){
+            if (c.children)
+                l+=c.children.length;
+        }
+        return l
+    }
     return (
-        <StyledCard>
+        <StyledCard {...rest}>
             <StyledCardHeader
                 avatar={
                     <Avatar
-                        src={user?.image}
-                        alt={user?.name}
+                        src={author?.photo}
+                        alt={author?.name}
                     />
                 }
                 title={
-                    user?.name
+                    author?.name
                 }
-                subheader={`${new Date(date).toLocaleDateString()} ${new Date(date).toLocaleTimeString()}  №${id}`}
+                subheader={`${new Date(created_at).toLocaleDateString()} ${new Date(created_at).toLocaleTimeString()}  №${id}`}
             />
             <CardContent>
-                <div className="appeal__content__info">
+                {/* <div className="appeal__content__info">
                     <div className="appeal__content__info__inner">
                         <BriefcaseIcon />
                         <span>{category}</span>
@@ -49,9 +57,15 @@ export const TenderContainer = ({
                         <PersonLocation />
                         <span>{address}</span>
                     </div>
-                </div>
+                </div> */}
                 <div className="appeal__content__comment">
-                    {comment}
+                    {header &&
+                        <>
+                            {header}
+                            <br></br>
+                        </>
+                    }
+                    {text}
                 </div>
                 <Grid
                     container
@@ -68,13 +82,13 @@ export const TenderContainer = ({
                         </Grid>
                     )}
                 </Grid>
-                <Divider style={{marginTop: 15}}/>
+                <Divider style={{ marginTop: 15 }} />
                 <div className="tender_footer">
                     <div className="tender_footer__left">
                     </div>
                     <div className="tender_footer__right">
                         <div>
-                            {comments} Ответов
+                            {getCommentsLength()} Ответов
                     </div>
                         <div className="tender_footer__right_likes">
                             <IconButton>

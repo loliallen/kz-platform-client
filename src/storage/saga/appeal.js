@@ -9,6 +9,14 @@ const Service = Api.Appeal
 function *GetWatcher() {
     try {
         const payload = yield call(Service.Get)
+        yield put({ type: BaseTypes.SET_MINE, payload })
+    } catch {
+    }
+}
+
+function *GetMineWatcher({payload: data}) {
+    try {
+        const payload = yield call(Service.GetMine, data)
         yield put({ type: BaseTypes.SET, payload })
     } catch {
         yield put({ type: BaseTypes.SET, payload: [] })
@@ -27,5 +35,6 @@ function *CreateWatcher({ payload: data }) {
 
 export default {
     GetWatcher,
-    CreateWatcher
+    CreateWatcher,
+    GetMineWatcher
 }

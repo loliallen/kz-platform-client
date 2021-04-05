@@ -1,6 +1,6 @@
 import config from "./config"
 
-export default async (id=null, category=null, status=null) => {
+export default async (id=null) => {
     let response = await fetch(config.path+"get", {
         headers: {
             "Content-Type": "application/json",

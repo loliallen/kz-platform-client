@@ -1,7 +1,9 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useCallback, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import HomeMap from '../../components/HomeMap'
 import { AppealContainer } from '../../containers/AppealContainer'
 import { Main } from '../../containers/Main'
+import appealAction from '../../storage/actions/appealAction'
 
 
 const LatestAppealBlock = (props) => {
@@ -29,9 +31,19 @@ const LatestAppealBlock = (props) => {
 
 
 export const AppealsPage = () => {
+    const dispatch = useCallback(useDispatch(), [])
+
+    useEffect(()=>{
+        dispatch(appealAction.request())
+    },[])
     return (
         <Main>
             <LatestAppealBlock/>
+            <div>
+                <HomeMap
+                    google
+                />
+            </div>
         </Main>
     )
 }

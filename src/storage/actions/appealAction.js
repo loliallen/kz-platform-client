@@ -4,6 +4,11 @@ const request = () => ({
     type: appeal.REQUEST
 })
 
+const requestMine = (data) => ({
+    type: appeal.REQUEST_MINE,
+    payload: data
+})
+
 const create = (data) => ({
     type: appeal.CREATE,
     payload: data
@@ -21,6 +26,7 @@ const set_latest = (data) => ({
 
 export default {
     request,
+    requestMine,
     create,
     set_latest,
     set

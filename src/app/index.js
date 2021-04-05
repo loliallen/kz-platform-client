@@ -7,6 +7,7 @@ import { PersonalPage } from '../pages/PersonalPage'
 import { AppealsPage } from '../pages/AppealsPage'
 import { IdeasPage } from '../pages/IdeasPage'
 import { TendersPage } from '../pages/TendersPage'
+import { TenderCurrentPage } from '../pages/TenderCurrentPage'
 import { Header } from '../containers/Header'
 
 
@@ -30,7 +31,8 @@ export const App = () => {
                 <Route path="/personal" component={()=><PersonalPage/>}/>
                 <Route path="/appeals" component={()=><AppealsPage/>}/>
                 <Route path="/ideas" component={()=><IdeasPage/>}/>
-                <Route path="/tenders" component={()=><TendersPage/>}/>
+                <Route exact path="/tenders" component={()=><TendersPage/>}/>
+                <Route path="/tenders/current" component={()=><TenderCurrentPage/>}/>
             </Switch>
         </MuiThemeProvider>
     )

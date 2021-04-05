@@ -22,7 +22,13 @@ const register = ({
     }
 })
 
+const saveEdits = (data) => ({
+    type: app.SAVE_EDITS,
+    payload: data
+})
+
 export default {
     loginAction: login,
-    register
+    register,
+    saveEdits
 }

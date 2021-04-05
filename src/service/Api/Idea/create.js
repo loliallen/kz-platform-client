@@ -1,12 +1,12 @@
 import config from "./config"
 
-export default async (id=null, category=null, status=null) => {
-    let response = await fetch(config.path+"get", {
+export default async (data) => {
+    let response = await fetch(config.path+"create", {
         headers: {
             "Content-Type": "application/json",
         },
         method: "POST",
-        body: JSON.stringify({})
+        body: JSON.stringify(data)
     })
 
     if(response.ok)

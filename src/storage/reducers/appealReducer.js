@@ -3,6 +3,7 @@ import types from "../types"
 
 const initialState = {
     list: [],
+    mine: [],
     latest: null,
     loaded: false
 }
@@ -37,6 +38,9 @@ export default (state = initialState, action) => {
                 return state
         case types.APPEAL.SET_LATEST:
             return {... state, latest: action.payload }
+
+        case types.APPEAL.SET_MINE:
+            return {...state, mine: action.payload}
         default:
             return state
     }
