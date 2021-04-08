@@ -1,8 +1,20 @@
 import { GoogleApiWrapper, Map, Marker } from 'google-maps-react'
 import React, { Component } from 'react'
 import UserPointSVG from './UserPoint.svg'
+import PointIdleSVG from './PointIdle.svg'
+import PointOnReviewSVG from './PointOnReview.svg'
+import PointAnsweredSVG from './PointAnswered.svg'
 
-
+const SelectSvg = (s) => {
+    if (s > 0 && s < 5)
+        return  PointOnReviewSVG;
+    switch (s) {
+        case 5:
+            return PointAnsweredSVG;
+        default:
+            return PointIdleSVG;
+    }
+}
 
 class MapContainer extends Component {
     state = {
@@ -17,6 +29,7 @@ class MapContainer extends Component {
     }
     render() {
         const containerStyle = this.props.styles
+        const points = this.props.points
         return (
             <Map
                 google={this.props.google}
@@ -45,6 +58,17 @@ class MapContainer extends Component {
                     }}
                     draggable={true}
                 />}
+                {points.map((e, i) => {
+                    return <Marker
+                    key={i}
+                    position={e.coords}
+                    icon={{
+                        url: SelectSvg(e.status),
+                        anchor: new window.google.maps.Point(30, 42),
+                        scaledSize: new window.google.maps.Size(60, 65)
+                    }}
+                    />
+                })}
             </Map>
         )
     }

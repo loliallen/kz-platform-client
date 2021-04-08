@@ -13,6 +13,7 @@ import actions from '../../storage/actions'
 import { ImagePreview } from '../../containers/ImagePreview'
 import { ImapeAppend } from '../../containers/ImageAppend'
 import appealAction from '../../storage/actions/appealAction'
+import Api from '../../service/Api'
 
 const DialogActionsContainer = ({
     step,

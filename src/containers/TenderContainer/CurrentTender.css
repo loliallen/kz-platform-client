@@ -1,0 +1,14 @@
+.current_tender__container{
+    display: flex;
+}
+.current_tender__text_container{
+    flex: 1;
+    margin-right: 40px;
+}
+.current_tender__comments_imgs__container{
+    margin-bottom: 30px;
+}
+
+.current_tender__comments_container{
+    flex: 1;
+}

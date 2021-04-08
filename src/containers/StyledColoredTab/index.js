@@ -7,7 +7,9 @@ const StyledTab = withStyles((theme) => ({
         "--hover-color": "green",
         "--icon-fill-color": "white",
         "--icon-stroke-color": "var(--hover-color)",
-        height: "160px",
+        height: "20vh",
+        color: "black",
+        opacity: 1,
         flex: 1,
         maxWidth: "none",
         borderRadius: "20px",
@@ -22,6 +24,14 @@ const StyledTab = withStyles((theme) => ({
             backgroundColor: "var(--hover-color)",
             color: 'white'
         },
+        '&::after': {
+            content: "''",
+            position: "absolute",
+            right: 0,
+            width: 1,
+            height: "100%",
+            borderRight: "1px solid lightgray",
+        },
         paddingLeft: "40px",
         paddingBottom: "28px",
         '@media (max-width: 1000px)' : {
@@ -34,7 +44,7 @@ const StyledTab = withStyles((theme) => ({
     wrapper: {
         alignItems: "start",
         textTransform: "none",
-        fontSize: "22px",
+        fontSize: "2.75vh",
         textAlign: "left",
         lineHeight: "26.4px",
         '@media (max-width: 800px)' : {

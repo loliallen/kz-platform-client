@@ -1,6 +1,6 @@
 import { Dialog, DialogContent, DialogTitle, Tab, Tabs, TextField, withStyles } from '@material-ui/core'
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import { LockIcon } from '../../containers/Icons/Lock'
 import { MessageIcon } from '../../containers/Icons/Message'
@@ -156,9 +156,18 @@ export const AuthorizationPage = () => {
     const [page, setPage] = useState(0)
 
     const history = useHistory()
+    const isAuthed = useSelector(s => s.app.isAuthed)
+
 
     const handleChangeTab = (e, nv) => setPage(nv)
     const handleClose = () => history.goBack()
+
+    useEffect(() => {
+        if(isAuthed){
+            handleClose()
+        }
+    }, [isAuthed])
+
     return (
         <StyledDialog
             open={true}

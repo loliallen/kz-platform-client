@@ -29,7 +29,7 @@ export class MapContainer extends Component {
                         backgroundColor: "black",
                         width: "100%",
                         height: "100vh",
-                        opacity: 0.75
+                        opacity: 0.8
                     }}
                 />
                 <div
@@ -44,7 +44,7 @@ export class MapContainer extends Component {
                     }}
                 >
                     <Typography
-                        variant={ width < 800 ? "h3" :"h2"}
+                        variant={ width < 800 ? "h3" :"h1"}
                         style={{
                             fontWeight: width < 800 ? "700": "900"
                         }}

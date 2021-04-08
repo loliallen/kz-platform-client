@@ -12,7 +12,7 @@ import { useHistory } from "react-router-dom"
 const StyledAppBar = withStyles({
     root: {
         position: "absolute",
-        height: "160px",
+        height: "20vh",
         bottom: "24px",
         boxShadow: "none",
         '@media (max-width: 1000px)' : {
@@ -27,7 +27,7 @@ const StyledTabs = withStyles({
         justifyContent: "center"
     },
     root: {
-        height: "160px",
+        height: "20vh",
         width: "100%",
         alignItems: "center",
         backgroundColor: "white",
@@ -92,11 +92,11 @@ export const HomeSelectAction = ({
                     onChange={handleChange}
                     value={value}
                 >
-                        { isMobile && <StyledColoredTab icon={<MessageSendIcon style={{width: "30px", height: "30px"}}  />} hoverColor="blue" label={"Подать обращение"} />}
-                        <StyledColoredTab icon={<WarnFileIcon style={{width: "30px", height: "30px"}} />} hoverColor="red" label={ !isMobile ? "Сообщить" :"Сообщайте о проблемах"} />
-                        <StyledColoredTab icon={<ChatIcon style={{width: "30px", height: "30px"}}  />} hoverColor="blue2" label={ !isMobile ? "Новости" :"Местные\n\rновости"} />
-                        <StyledColoredTab icon={<BillNoteIcon style={{width: "30px", height: "30px"}} />} hoverColor="purple" label={ !isMobile ? "Тендеры" :"Обсуждение тендеров"} />
-                        <StyledColoredTab icon={<LightIcon style={{width: "30px", height: "30px"}} />}hoverColor="green" label={ !isMobile ? "Идеи" :"Идеи и предложения"} />
+                        { isMobile && <StyledColoredTab icon={<MessageSendIcon style={{width: "5vh", height: "5vh"}}  />} hoverColor="blue" label={"Подать обращение"} />}
+                        <StyledColoredTab icon={<WarnFileIcon style={{width: "5vh", height: "5vh"}} />} hoverColor="red" label={ !isMobile ? "Сообщить" :"Сообщайте о проблемах"} />
+                        <StyledColoredTab icon={<ChatIcon style={{width: "5vh", height: "5vh"}}  />} hoverColor="blue2" label={ !isMobile ? "Новости" :"Местные\n\rновости"} />
+                        <StyledColoredTab icon={<BillNoteIcon style={{width: "5vh", height: "5vh"}} />} hoverColor="purple" label={ !isMobile ? "Тендеры" :"Обсуждение тендеров"} />
+                        <StyledColoredTab icon={<LightIcon style={{width: "5vh", height: "5vh"}} />}hoverColor="green" label={ !isMobile ? "Идеи" :"Идеи и предложения"} />
                 </StyledTabs>
             </StyledToolbar>
         </StyledAppBar>

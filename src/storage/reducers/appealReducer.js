@@ -5,7 +5,13 @@ const initialState = {
     list: [],
     mine: [],
     latest: null,
-    loaded: false
+    loaded: false,
+    counters: {
+        total: 0,
+        idle: 0,
+        on_review: 0,
+        answered: 0
+    }
 }
 
 export default (state = initialState, action) => {
@@ -25,15 +31,19 @@ export default (state = initialState, action) => {
                         },
                         comment: e.comment,
                         comments: e.comments,
-                        status: e.status,
+                        status: Number(e.status),
                         organId: e.organId,
                         date: e.date,
                         photos: e.photo,
                         user: e.user
                     }
                 })
+                const total = list.length
+                const idle = list.filter(e => e.status === 0).length
+                const on_review = list.filter(e => e.status >= 1 && e.status < 5).length
+                const answered = list.filter(e => e.status === 5).length
 
-                return {... state, list, loaded: true}
+                return {... state, list, loaded: true, counters: { total, idle, on_review, answered }}
             }
                 return state
         case types.APPEAL.SET_LATEST:

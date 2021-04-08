@@ -8,11 +8,11 @@ import "./style.css"
 
 
 const SelectStatus = ({ s }) => {
+    if (s > 0 && s < 5)
+        return  <span style={{ color: "#F2C94C" }}>На рассмотрении</span>;
     switch (s) {
         case 5:
-
             return <span style={{ color: "green" }}>Дан ответ</span>;
-
         default:
             return <span style={{ color: "red" }}>Не рассмотрена</span>;
 
@@ -27,20 +27,11 @@ export const AppealContainer = ({
     status,
     address,
     date,
-    user
+    user,
+    ...rest
 }) => {
-    console.log(
-        appeal_id,
-        comment,
-        category,
-        photos,
-        status,
-        address,
-        date,
-        user
-    )
     return (
-        <StyledCard>
+        <StyledCard {...rest}>
             <StyledCardHeader
                 avatar={
                     <Avatar

@@ -4,6 +4,7 @@ import User from "./User";
 import Category from "./Category";
 import Tender from "./Tender";
 import Idea from "./Idea";
+import Photo from "./Photo";
 
 export default {
     Appeal,
@@ -11,5 +12,6 @@ export default {
     News,
     Category,
     Tender,
-    Idea
+    Idea,
+    Photo
 }
