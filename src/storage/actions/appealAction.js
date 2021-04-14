@@ -24,10 +24,16 @@ const set_latest = (data) => ({
     payload: data
 })
 
+const set_filter = (field) => ({
+    type: appeal.SET_FILTER,
+    payload: field
+})
+
 export default {
     request,
     requestMine,
     create,
     set_latest,
-    set
+    set,
+    set_filter
 }

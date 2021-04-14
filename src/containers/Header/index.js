@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AppBar, Button, Toolbar, Typography, withStyles } from "@material-ui/core"
 
 import "./style.css"
 import { UserAvatar } from './UserAvatarContainer'
 import { UsersNotifications } from './UsersNotifications'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { StyledButton } from '../StyledButton'
 import { MobileHeader } from "./MobileHeader"
@@ -32,12 +32,14 @@ const StyledToolbar = withStyles({
 export const Header = ({color, textColor}) => {
     const app = useSelector(state => state.app)
     const history = useHistory()
+    const location = useLocation()
 
     const width = window.innerWidth
 
+
+    // render
     if (width < 800)
         return <MobileHeader color="white" textColor="black"/>
-
     return (
         <StyledAppBar
             color={!color ? "transparent" : color}
@@ -91,7 +93,7 @@ export const Header = ({color, textColor}) => {
                             </>
                             :
                             <Link
-                                to='/home/auth'
+                                to={`${location.pathname}/auth`}
                             >
                                 <StyledButton
                                     color="primary"

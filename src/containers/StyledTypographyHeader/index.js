@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core'
 import { Link } from "react-router-dom"
 
-export const StyledTypographyHeader = ({ title, linkLabel, link }) => {
+export const StyledTypographyHeader = ({ title, linkLabel, link, light = true }) => {
     return (
         <div
             style={{
@@ -11,10 +11,11 @@ export const StyledTypographyHeader = ({ title, linkLabel, link }) => {
             }}
         >
             <Typography
-                variant="h5"
+                variant="h6"
                 style={{
-                    color: "#ADADAD",
-                    fontWeight: "700"
+                    color: light ? "#ADADAD" : "#000000",
+                    fontWeight: "700",
+                    fontSize: 32
                 }}
             >
                 {title}

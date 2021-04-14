@@ -1,0 +1,41 @@
+
+.appeal_filters__container{
+    position: relative;
+}
+.appeal_filters{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.appeals_container {
+    display: flex;
+}
+.appeals_container > * {
+    flex: 1;
+}
+.appeals_container > div:nth-child(1) {
+    margin-right: 40px;
+}
+
+.appeal_filters_c{
+    position: absolute;
+    top: 0;
+    z-index: 6;
+}
+.create__appeal_button{
+    position: absolute;
+    z-index: 6;
+    right: 8px;
+    bottom: 8px;
+}
+
+@media screen and (max-width: 800px) {
+    .appeals_container{
+        flex-direction: column;
+    }
+    .appeals_container > div:nth-child(1) {
+        margin-right: 0px;
+    }
+}

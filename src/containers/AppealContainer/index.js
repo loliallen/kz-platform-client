@@ -50,14 +50,14 @@ export const AppealContainer = ({
             </StyledCardHeader>
             <CardContent>
                 <div className="appeal__content__info">
-                    <div className="appeal__content__info__inner">
+                    { category && <div className="appeal__content__info__inner">
                         <BriefcaseIcon />
                         <span>{category}</span>
-                    </div>
-                    <div className="appeal__content__info__inner">
+                    </div>}
+                    { address && <div className="appeal__content__info__inner">
                         <PersonLocation />
                         <span>{address}</span>
-                    </div>
+                    </div>}
                 </div>
                 <div className="appeal__content__comment">
                     {comment}

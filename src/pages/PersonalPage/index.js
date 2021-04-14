@@ -30,11 +30,13 @@ const AboutMe = ({ user, token }) => {
     const [city, setCity] = useState("")
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
+    const [vk, setVk] = useState("")
 
     const handleSetName = (e) => setName(e.target.value)
     const handleSetCity = (e) => setCity(e.target.value)
     const handleSetEmail = (e) => setEmail(e.target.value)
     const handleSetPhone = (e) => setPhone(e.target.value)
+    const handleSetVk = (e) => setVk(e.target.value)
 
     const handleSave = () => {
         dispatch(appActions.saveEdits({
@@ -57,10 +59,10 @@ const AboutMe = ({ user, token }) => {
                 src={user.image}
                 alt="aboutme__avatar"
             />
-            :
-            <div
-                className="aboutme__avatar"
-                style={{ backgroundColor: "lightgray"}}
+                :
+                <div
+                    className="aboutme__avatar"
+                    style={{ backgroundColor: "lightgray" }}
                 />
             }
         </div>
@@ -94,7 +96,7 @@ const AboutMe = ({ user, token }) => {
                     <Grid item xs>
                         <TextField
                             variant="outlined"
-                            label="ФИО"
+                            label="Фамилия"
                             value={name}
                             onChange={handleSetName}
                         />
@@ -102,9 +104,9 @@ const AboutMe = ({ user, token }) => {
                     <Grid item xs>
                         <TextField
                             variant="outlined"
-                            label="Телефон"
-                            value={phone}
-                            onChange={handleSetPhone}
+                            label="Имя"
+                            value={name}
+                            onChange={handleSetName}
                         />
                     </Grid>
                     <Grid item xs>
@@ -117,7 +119,7 @@ const AboutMe = ({ user, token }) => {
                     </Grid>
                 </Grid>
 
-                <Grid container >
+                <Grid container style={{ marginBottom: "30px" }} >
 
                     <Grid item xs>
                         <TextField
@@ -127,12 +129,13 @@ const AboutMe = ({ user, token }) => {
                             onChange={handleSetCity}
                         />
                     </Grid>
+
                     <Grid item xs>
                         <TextField
                             variant="outlined"
-                            label="Email"
-                            value={email}
-                            onChange={handleSetEmail}
+                            label="Телефон"
+                            value={phone}
+                            onChange={handleSetPhone}
                         />
                     </Grid>
                     <Grid item xs>
@@ -143,7 +146,28 @@ const AboutMe = ({ user, token }) => {
                             onClick={() => setEdit(false)}
                         >
                             Отмена
-                </StyledButton>
+                        </StyledButton>
+                    </Grid>
+                </Grid>
+
+                <Grid container >
+                    <Grid item xs>
+                        <TextField
+                            variant="outlined"
+                            label="Email"
+                            value={email}
+                            onChange={handleSetEmail}
+                        />
+                    </Grid>
+                    <Grid item xs>
+                        <TextField
+                            variant="outlined"
+                            label="ВКонтакте"
+                            value={vk}
+                            onChange={handleSetVk}
+                        />
+                    </Grid>
+                    <Grid item xs>
                     </Grid>
                 </Grid>
             </div>
@@ -153,7 +177,7 @@ const AboutMe = ({ user, token }) => {
 }
 
 const MyAppeals = ({ user, token }) => {
-    const dispatch = useCallback(useDispatch(),[])
+    const dispatch = useCallback(useDispatch(), [])
     const appeals = useSelector(s => s.appeal.mine)
     // const appeal = {
     //     appeal_id: "321312",
@@ -170,7 +194,7 @@ const MyAppeals = ({ user, token }) => {
     //     user: user
     // }
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(appealAction.requestMine(token))
     }, [])
     return <div className="myappeals__container">
@@ -197,29 +221,29 @@ export const PersonalPage = () => {
     const handleChangePage = (e, v) => setPage(v)
     return (
         <>
-        {/* <Header textColor="black"/> */}
-        <Main>
-            <StyledTabs
-                value={page}
-                onChange={handleChangePage}
-            >
-                <StyledTab style={{ fontSize: 32, fontWeight: 700 }} label="Обо мне" />
-                <StyledTab style={{ fontSize: 32, fontWeight: 700 }} label="Мои обращения" />
-            </StyledTabs>
-            <Divider style={{ marginBottom: 40 }} />
-            <TabPanel
-                page={page}
-                index={0}
-            >
-                <AboutMe user={user} token={token}/>
-            </TabPanel>
-            <TabPanel
-                page={page}
-                index={1}
-            >
-                <MyAppeals user={user} token={token}/>
-            </TabPanel>
-        </Main>
+            {/* <Header textColor="black"/> */}
+            <Main>
+                <StyledTabs
+                    value={page}
+                    onChange={handleChangePage}
+                >
+                    <StyledTab label="Обо мне" />
+                    <StyledTab style={{ maxWidth: "none" }} label="Мои обращения" />
+                </StyledTabs>
+                <Divider style={{ marginBottom: 40 }} />
+                <TabPanel
+                    page={page}
+                    index={0}
+                >
+                    <AboutMe user={user} token={token} />
+                </TabPanel>
+                <TabPanel
+                    page={page}
+                    index={1}
+                >
+                    <MyAppeals user={user} token={token} />
+                </TabPanel>
+            </Main>
         </>
     )
 }

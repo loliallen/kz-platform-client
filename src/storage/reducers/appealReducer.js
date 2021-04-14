@@ -3,6 +3,7 @@ import types from "../types"
 
 const initialState = {
     list: [],
+    plist: [],
     mine: [],
     latest: null,
     loaded: false,
@@ -43,7 +44,7 @@ export default (state = initialState, action) => {
                 const on_review = list.filter(e => e.status >= 1 && e.status < 5).length
                 const answered = list.filter(e => e.status === 5).length
 
-                return {... state, list, loaded: true, counters: { total, idle, on_review, answered }}
+                return {... state, list, plist: list, loaded: true, counters: { total, idle, on_review, answered }}
             }
                 return state
         case types.APPEAL.SET_LATEST:
@@ -51,6 +52,17 @@ export default (state = initialState, action) => {
 
         case types.APPEAL.SET_MINE:
             return {...state, mine: action.payload}
+        case types.APPEAL.SET_FILTER:
+            const filter_field = action.payload
+            if (filter_field === "total")
+                return { ...state, list: state.plist }
+                if (filter_field === "idle")
+                    return { ...state, list: state.plist.filter(e => e.status === 0) }
+                if (filter_field === "on_review")
+                    return { ...state, list: state.plist.filter(e => e.status >= 1 && e.status < 5) }
+                if (filter_field === "answered")
+                    return { ...state, list: state.plist.filter(e => e.status === 5) }
+
         default:
             return state
     }

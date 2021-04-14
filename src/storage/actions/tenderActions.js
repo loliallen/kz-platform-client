@@ -11,9 +11,14 @@ const set_current = (data) => ({
     type: types.TENDER.SET_CURRENT,
     payload: data
 })
+const add_comment = (data) => ({
+    type: types.TENDER.ADD_COMMENT,
+    payload: data
+})
 
 export default {
     request,
     set,
-    set_current
+    set_current,
+    add_comment
 }

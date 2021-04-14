@@ -6,7 +6,7 @@ export default async (id, text, parent, token) => {
             "Content-Type": "application/json",
         },
         method: "POST",
-        body: JSON.stringify({})
+        body: JSON.stringify({id, text, parent: parent, token})
     })
 
     if(response.ok)

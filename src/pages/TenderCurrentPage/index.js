@@ -16,7 +16,8 @@ export const TenderCurrentPage = () => {
     return (
         <Main>
             <StyledTypographyHeader
-                title={tender.header}
+                title={`Название тендера${tender.header ? " -" : ""} ${tender.header}`}
+                light={false}
             />
             <CurrentTender
                 {...tender}

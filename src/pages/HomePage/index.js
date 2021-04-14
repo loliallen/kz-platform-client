@@ -21,15 +21,11 @@ export const HomePage = () => {
 
     return (
         <div className="home_page__container">
-            <HomeMap
-                google
-            />
+            <HomeMap/>
             <HomeSelectAction
                 value={page}
                 setValue={handleChangePage}
             />
-            <Route path="/home/auth" component={()=><AuthorizationPage />}/>
-            <Route path="/home/appeal/create" component={()=><CreateAppealPage />}/>
         </div>
     )
 }

@@ -58,17 +58,6 @@ class MapContainer extends Component {
                     }}
                     draggable={true}
                 />}
-                {points.map((e, i) => {
-                    return <Marker
-                    key={i}
-                    position={e.coords}
-                    icon={{
-                        url: SelectSvg(e.status),
-                        anchor: new window.google.maps.Point(30, 42),
-                        scaledSize: new window.google.maps.Size(60, 65)
-                    }}
-                    />
-                })}
             </Map>
         )
     }

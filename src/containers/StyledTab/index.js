@@ -2,13 +2,15 @@ import { Tab, withStyles } from "@material-ui/core";
 
 export const StyledTab = withStyles({
     root: {
-        minWidth: "0px"
+        minWidth: "0px",
+        opacity: 0.2
     },
     wrapper: {
         fontWeight: "900",
         textTransform: "none",
-        fontSize: "22px",
+        fontSize: "32px",
         flexDirection: "row",
-        justifyContent: "start"
-    }
+        justifyContent: "start",
+    },
+
 })(Tab)

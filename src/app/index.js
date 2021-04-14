@@ -9,6 +9,8 @@ import { IdeasPage } from '../pages/IdeasPage'
 import { TendersPage } from '../pages/TendersPage'
 import { TenderCurrentPage } from '../pages/TenderCurrentPage'
 import { Header } from '../containers/Header'
+import { CreateAppealPage } from '../pages/CreateAppealPage'
+import { AuthorizationPage } from '../pages/AuthorizationPage'
 
 
 const theme = createMuiTheme({
@@ -37,6 +39,8 @@ export const App = () => {
                 <Route exact path="/tenders" component={()=><TendersPage/>}/>
                 <Route path="/tenders/current" component={()=><TenderCurrentPage/>}/>
             </Switch>
+            <Route path="/*/auth" component={()=><AuthorizationPage />}/>
+            <Route path="/*/appeal/create" component={()=><CreateAppealPage />}/>
         </MuiThemeProvider>
     )
 }

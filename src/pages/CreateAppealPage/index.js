@@ -317,6 +317,7 @@ const Step4 = ({
 }
 
 const Step5 = ({
+    comment,
     setComment,
     step,
     index,
@@ -333,6 +334,7 @@ const Step5 = ({
         }}
     >
         <TextField
+            value={comment}
             onChange={e => setComment(e.target.value)}
             multiline
             placeholder="..."
@@ -346,6 +348,7 @@ export const CreateAppealPage = () => {
     const history = useHistory()
     const dispatch = useCallback(useDispatch(), [])
     const user = useSelector(s => s.app.user)
+    const token = useSelector(s => s.app.token)
     const steps = 5
 
     const [loc, setLoc] = useState()
@@ -353,6 +356,8 @@ export const CreateAppealPage = () => {
     const [fullName, setFullName] = useState("")
     const [city, setCity] = useState("")
     const [address, setAddress] = useState("")
+    const [anonim, setAnonim] = useState(true)
+    const [valid, setValid] = useState(false)
     const [comment, setComment] = useState("")
 
     const [imgs, setImgs] = useState([])
@@ -406,8 +411,16 @@ export const CreateAppealPage = () => {
             address,
             loc,
             imgs,
-            comment
+            comment,
+            token
         }
+
+        // setAnonim(!token)
+        // setValid(!token ? fullName && city && address : true)
+
+        // if (!valid)
+        //     alert("Авторизуйтесь или укажите свои данные на шаге 4")
+
         dispatch(appealAction.create(data))
         history.push('/appeals')
     }
@@ -456,7 +469,7 @@ export const CreateAppealPage = () => {
                             setAddress={setAddress}
                             address={address}
                         />
-                        <Step5 step={step} index={4} setComment={setComment} />
+                        <Step5 step={step} index={4} setComment={setComment} comment={comment} />
                     </SwipeableViews>
                 </div>
             </StyledDialogContent>

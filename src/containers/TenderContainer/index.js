@@ -1,8 +1,10 @@
-import { Avatar, CardContent, Divider, Grid, IconButton } from '@material-ui/core'
+import { Avatar, CardContent, Divider, Grid, Icon, IconButton, withStyles } from '@material-ui/core'
+import { ArrowRight } from '@material-ui/icons'
 import React from 'react'
 import { ArrowDownIcon } from '../Icons/ArrowDown'
 import { ArrowUpIcon } from '../Icons/ArrowUp'
 import { BriefcaseIcon } from '../Icons/Brifecase'
+import { CommentBoxIcon } from '../Icons/CommentBox'
 import { PersonLocation } from '../Icons/PersonLocation'
 import { ImagePreview } from '../ImagePreview'
 import { StyledCardHeader, StyledCard } from "../StyledCard"
@@ -10,6 +12,12 @@ import { StyledCardHeader, StyledCard } from "../StyledCard"
 const GREEN = "#219653"
 const RED = "#EC2F2F"
 
+
+const StyledCardContent = withStyles({
+    root: {
+        paddingBottom: "0px!important"
+    }
+})(CardContent)
 
 export const TenderContainer = ({
     id,
@@ -23,13 +31,14 @@ export const TenderContainer = ({
     disliked,
     likes,
     dislikes,
+    onClick,
     ...rest
 }) => {
     const getCommentsLength = () => {
         let l = comments.length;
-        for(let c of comments){
+        for (let c of comments) {
             if (c.children)
-                l+=c.children.length;
+                l += c.children.length;
         }
         return l
     }
@@ -46,18 +55,13 @@ export const TenderContainer = ({
                     author?.name
                 }
                 subheader={`${new Date(created_at).toLocaleDateString()} ${new Date(created_at).toLocaleTimeString()}  №${id}`}
+                action={
+                    <IconButton onClick={onClick}>
+                        <ArrowRight />
+                    </IconButton>
+                }
             />
-            <CardContent>
-                {/* <div className="appeal__content__info">
-                    <div className="appeal__content__info__inner">
-                        <BriefcaseIcon />
-                        <span>{category}</span>
-                    </div>
-                    <div className="appeal__content__info__inner">
-                        <PersonLocation />
-                        <span>{address}</span>
-                    </div>
-                </div> */}
+            <StyledCardContent>
                 <div className="appeal__content__comment">
                     {header &&
                         <>
@@ -87,9 +91,19 @@ export const TenderContainer = ({
                     <div className="tender_footer__left">
                     </div>
                     <div className="tender_footer__right">
-                        <div>
-                            {getCommentsLength()} Ответов
-                    </div>
+                        <div style={{
+                            display: "flex",
+                            alignItems: "center",
+                            height: 32,
+                            color: "rgba(156, 156, 156, 1)"
+                        }}>
+                            <IconButton onClick={onClick}>
+                                <CommentBoxIcon style={{ fill: "transparent", width: 32, height: 32, flex: 1 }} />
+                            </IconButton>
+                            <div style={{ fontSize: 14 }}>
+                                {getCommentsLength()} Ответов
+                            </div>
+                        </div>
                         <div className="tender_footer__right_likes">
                             <IconButton>
                                 <ArrowUpIcon style={{ width: 30, height: 30, stroke: liked ? GREEN : "#BDBDBD" }} />
@@ -105,7 +119,7 @@ export const TenderContainer = ({
                     </div>
                 </div>
 
-            </CardContent>
+            </StyledCardContent>
         </StyledCard>
     )
 }

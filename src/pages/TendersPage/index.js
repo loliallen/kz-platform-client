@@ -24,7 +24,8 @@ export const TendersPage = () => {
     return (
         <Main>
             <StyledTypographyHeader
-                title="Тендеры"
+                title="Обсуждение тендеров"
+                light={false}
             />
             <div className="tender__container">
                 {tenders.map((tender, index) =>

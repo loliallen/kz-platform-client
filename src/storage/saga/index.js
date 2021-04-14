@@ -14,6 +14,8 @@ export function *SagaWatcher(){
     yield takeEvery(types.CATEGORY.REQUEST, category.GetWatcher)
     yield takeEvery(types.TENDER.REQUEST, tender.requestWatcher)
 
+    yield takeEvery(types.TENDER.ADD_COMMENT, tender.addCommentWatcher)
+
     yield takeEvery(types.APPEAL.CREATE, appeal.CreateWatcher)
 
 

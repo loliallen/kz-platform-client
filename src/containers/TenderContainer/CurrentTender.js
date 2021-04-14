@@ -1,12 +1,19 @@
-import { Grid } from '@material-ui/core'
+import { Grid, Typography, withStyles } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { ImagePreview } from '../ImagePreview'
 import { CurrentTenderComments } from './CurrentTenderComments'
 import { CurrentTenderTextContainer } from './CurrentTenderTextContainer'
 
+const StyledTypography = withStyles({
+    root: {
+        fontSize: 20
+    }
+})(Typography)
 
 export const CurrentTender = (tender) => {
+    const token = useSelector(s => s.app.token)
+    const isAuthed = useSelector(s => s.app.isAuthed)
 
     return (
         <div className="current_tender__container">
@@ -18,11 +25,13 @@ export const CurrentTender = (tender) => {
                 />
             </div>
             <div className="current_tender__comments_container">
-                <div className="current_tender__comments_container">
+                <div className="current_tender__comments__img">
+                    <StyledTypography>Фотографии к тендеру</StyledTypography>
                     <Grid
                         container
                         style={{
-                            gap: 10
+                            gap: 10,
+                            marginTop: 20
                         }}
                     >
                         {tender.photos.map((p, i) =>
@@ -35,7 +44,10 @@ export const CurrentTender = (tender) => {
                         )}
                     </Grid>
                 </div>
-                <CurrentTenderComments comments={tender.comments} />
+                <div className="current_tender__comments__content">
+                <StyledTypography style={{marginTop: 60, marginBottom: 20}}>Комментарии</StyledTypography>
+                <CurrentTenderComments comments={tender.comments} isAuthed={isAuthed} token={token} id={tender.id} />
+                </div>
             </div>
         </div>
     )
