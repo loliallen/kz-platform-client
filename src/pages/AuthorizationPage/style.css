@@ -10,7 +10,8 @@
     margin-right: 41px;
     display: flex;
     align-items: center;
+    flex: 1;
 }
 .login_action__button {
-    flex: 1
+    flex: 1;
 }

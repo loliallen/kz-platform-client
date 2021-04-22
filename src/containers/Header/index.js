@@ -13,7 +13,7 @@ import { MobileHeader } from "./MobileHeader"
 const StyledAppBar = withStyles(theme => ({
     root: {
         boxShadow: "none",
-        backgroundColor: "hsla(0, 0%, 0%, 0.3)",
+        backgroundColor: "hsla(0, 0%, 0%, 0.4)",
         color: theme.palette.getContrastText("hsla(0, 0%, 10%, 0)")
     }
 }))(AppBar)

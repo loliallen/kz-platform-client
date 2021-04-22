@@ -23,6 +23,6 @@ export const StyledDialog = (props) => {
         TransitionComponent={Transition}
         keepMounted
         fullScreen={width <= 800}
-        fullWidth={width <= 800}
+        fullWidth={width <= 800 || props.fullWidth}
     />
 }

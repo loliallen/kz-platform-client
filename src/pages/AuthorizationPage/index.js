@@ -72,7 +72,7 @@ const LoginPanel = () => {
         <div className="login_container login_action">
             <div className="login_action__a">
                 <Link
-                    style={{textDecoration: "none", color: "#2F80ED"}}
+                    style={{ textDecoration: "none", color: "#2F80ED" }}
                     to="/forgot"
                 >
                     Забыли пароль?
@@ -138,13 +138,13 @@ const RegisterPanel = () => {
             />
         </div>
         <div className="login_container login_action">
-                <StyledButton
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                >
-                    Зарегистрироваться
+            <StyledButton
+                fullWidth
+                variant="contained"
+                color="primary"
+                type="submit"
+            >
+                Зарегистрироваться
                 </StyledButton>
         </div>
     </form>
@@ -163,7 +163,7 @@ export const AuthorizationPage = () => {
     const handleClose = () => history.goBack()
 
     useEffect(() => {
-        if(isAuthed){
+        if (isAuthed) {
             handleClose()
         }
     }, [isAuthed])
@@ -171,19 +171,21 @@ export const AuthorizationPage = () => {
     return (
         <StyledDialog
             open={true}
-            maxWidth="xs"
             fullWidth
+
             onClose={handleClose}
         >
-            <StyledDialogTitle onClose={handleClose}/>
+            <StyledDialogTitle onClose={handleClose} />
             <StyledDialogContent>
-                <StyledTabs
-                    value={page}
-                    onChange={handleChangeTab}
-                >
-                    <StyledTab label="Вход" />
-                    <StyledTab label="Регистрация" />
-                </StyledTabs>
+                <div>
+                    <StyledTabs
+                        value={page}
+                        onChange={handleChangeTab}
+                    >
+                        <StyledTab label="Вход" />
+                        <StyledTab label="Регистрация" />
+                    </StyledTabs>
+                </div>
                 <TabPanel
                     index={0}
                     page={page}

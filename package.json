@@ -54,5 +54,6 @@
     "email": "cronenbergclaw@gmail.com",
     "url": "https://github.com/loliallen"
   },
+  "homepage": ".",
   "proxy": "http://fdevlf.space/api.php/"
 }
