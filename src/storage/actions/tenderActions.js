@@ -16,9 +16,15 @@ const add_comment = (data) => ({
     payload: data
 })
 
+const vote = (id, isUpvote=true) => ({
+    type: types.TENDER.ADD_COMMENT,
+    payload: { id, isUpvote }
+})
+
 export default {
     request,
     set,
     set_current,
-    add_comment
+    add_comment,
+    vote
 }

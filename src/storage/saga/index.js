@@ -6,13 +6,17 @@ import app from "../saga/app"
 import news from "../saga/news"
 import category from "../saga/category"
 import tender from "./tender"
+import idea from "./idea"
 
 export function *SagaWatcher(){
+    yield takeEvery(types.APP.INIT, app.InitWatcher)
     yield takeEvery(types.APPEAL.REQUEST, appeal.GetWatcher)
     yield takeEvery(types.APPEAL.REQUEST_MINE, appeal.GetMineWatcher)
     yield takeEvery(types.NEWS.REQUEST, news.GetWatcher)
     yield takeEvery(types.CATEGORY.REQUEST, category.GetWatcher)
     yield takeEvery(types.TENDER.REQUEST, tender.requestWatcher)
+    yield takeEvery(types.IDEA.CREATE, idea.createWatcher)
+    yield takeEvery(types.IDEA.REQUEST, idea.requestWatcher)
 
     yield takeEvery(types.TENDER.ADD_COMMENT, tender.addCommentWatcher)
 

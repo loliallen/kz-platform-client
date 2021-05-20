@@ -126,15 +126,24 @@ const Step2 = ({
     const pushFile = f => setImgs(p => p.concat(f))
 
     const readFile = (file) => {
-        if (file.type === "application/pdf" || file.type === "image/jpeg" || file.type === "image/png") {
-            var fr = new FileReader();
+        if (imgs.length > 5)
+            return
 
-            fr.onload = () => {
-                pushFile(fr.result);
-            }
-            fr.onabort = () => console.log('aborted')
-            fr.onerror = () => console.log("error")
-            fr.readAsDataURL(file)
+        if (file.type === "image/jpeg" || file.type === "image/png") {
+            var fd = new FormData();
+            fd.append("var_file", file)
+            Api.Photo.create(fd)
+                .then(res => {
+                    pushFile(res.url)
+                })
+            // var fr = new FileReader();
+
+            // fr.onload = () => {
+            //     pushFile(fr.result);
+            // }
+            // fr.onabort = () => console.log('aborted')
+            // fr.onerror = () => console.log("error")
+            // fr.readAsDataURL(file)
         }
     }
 
@@ -410,6 +419,7 @@ export const CreateAppealPage = () => {
             city,
             address,
             loc,
+            photos: imgs,
             imgs,
             comment,
             token

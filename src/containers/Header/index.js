@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
-import { AppBar, Button, Toolbar, Typography, withStyles } from "@material-ui/core"
-
-import "./style.css"
+import { AppBar, Button, Icon, IconButton, Toolbar, Typography, withStyles } from "@material-ui/core"
 import { UserAvatar } from './UserAvatarContainer'
 import { UsersNotifications } from './UsersNotifications'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { StyledButton } from '../StyledButton'
 import { MobileHeader } from "./MobileHeader"
+import LogoImage from './logo.png'
 
+import "./style.css"
 
 const StyledAppBar = withStyles(theme => ({
     root: {
@@ -48,11 +48,11 @@ export const Header = ({color, textColor}) => {
             <StyledToolbar>
                 <div className="header__align_left">
                     <Link to="/home">
-                        <Typography
-                            variant="h4"
+                        <img
+                            src={LogoImage}
+                            className="header__logo"
                         >
-                            logotip
-                        </Typography>
+                        </img>
                     </Link>
                 </div>
                 <div className="header__align_center">
@@ -87,7 +87,7 @@ export const Header = ({color, textColor}) => {
                         app.isAuthed ?
                             <>
                                 <div style={{ padding: "16px 20px 16px 16px" }}>
-                                    <UsersNotifications notificationsCount={3} />
+                                    <UsersNotifications notificationsCount={0} />
                                 </div>
                                 <UserAvatar onClick={() => history.push('/personal')} />
                             </>

@@ -1,21 +1,25 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { Main } from '../../containers/Main'
 import { StyledTypographyHeader } from '../../containers/StyledTypographyHeader'
 import { IdeaContainer } from '../../containers/IdeaContainer'
 
 import "./style.css"
+import { useDispatch, useSelector } from 'react-redux'
+import { StyledButton } from '../../containers/StyledButton'
+import ideaAction from "../../storage/actions/ideaActions"
+import { useHistory } from 'react-router'
 
 export const IdeasPage = () => {
-    const tenders = [
-        {
-            date: new Date(2021, 2, 25),
-            title: "А давайте что-то как сделаем, чтобы прям класно стало всем, а потом сделаем еще что-то.",
-            content: "Жители Пермского края могут принять участие в совершенствовании внесудебной процедуры банкротства - на портале «Управляем вместе» стартовал онлайн-опрос, в котором пользователи могут поделиться мнениями о внесудебной процедуре банкротства физических лиц. К участию приглашаются граждане, на которых рассчитана данная процедура – физические лица с долгами в размере от 50 до 500 тыс. руб., не имеющие возможности их заплатить. ",
-            userId: 1,
-            likes: 28,
-            dislikes: 1
-        }
-    ]
+    const ideas = useSelector(s => s.idea.list)
+    const dispatch = useCallback(useDispatch())
+    const isAuthed = useSelector(s => s.app.isAuthed)
+    const history = useHistory()
+
+    const handleCreate = () => history.push("/ideas/idea/create")
+
+    useEffect(()=>{
+        dispatch(ideaAction.request())
+    }, [])
     return (
         <>
             <Main>
@@ -23,17 +27,20 @@ export const IdeasPage = () => {
                 <StyledTypographyHeader
                     title="Идеи и предложения"
                 />
+                {isAuthed && <div className="create_container">
+                    <StyledButton
+                        color="primary"
+                        variant="contained"
+                        onClick={handleCreate}
+                    >Создать идею</StyledButton>
+                </div>}
                 <div className="tender__container">
-
-                    <IdeaContainer
-                        {...tenders[0]}
-                        liked
-                    />
-                    <IdeaContainer
-                        {...tenders[0]}
-                        disliked
-                    />
-
+                    {ideas.map((idea, key) => {
+                        return <IdeaContainer
+                            key={key}
+                            {...idea}
+                        />
+                    })}
                 </div>
             </Main>
         </>

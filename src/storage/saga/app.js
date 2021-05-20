@@ -1,8 +1,13 @@
-import { call, put } from "@redux-saga/core/effects";
+import { call, put, select } from "@redux-saga/core/effects";
 import Api from "../../service/Api";
+import actions from "../actions";
 import types from "../types";
 import app from "../types/app";
 import news from "../types/news";
+// import Geocode from "react-geocode"
+import { api_key } from "../../utils/mapConfig";
+
+// Geocode.setApiKey(api_key)
 
 const BaseTypes = types.APP
 const Service = Api.User
@@ -112,9 +117,23 @@ function* RegisterWatcher({ payload }) {
     }
 }
 
+function* InitWatcher() {
+    try {
+        console.log("Init watcher")
+
+        const token = yield select(s => s.app.token)
+        console.log("token", token)
+        if (token)
+            yield put({ type: BaseTypes.SET_TOKEN, payload: {token} })
+    } catch (error) {
+        console.error(error)
+    }
+}
+
 export default {
     LoginWatcher,
     RegisterWatcher,
     SetTokenWatcher,
-    SaveEditWatcher
+    SaveEditWatcher,
+    InitWatcher
 }

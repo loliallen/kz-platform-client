@@ -5,22 +5,7 @@ import { Typography } from '@material-ui/core';
 import { StyledButton } from '../../containers/StyledButton';
 import { MessageSendIcon } from '../../containers/Icons/MessageSend';
 import { Link } from 'react-router-dom';
-// import UserPointSVG from '../Map/UserPoint.svg'
-// import PointIdleSVG from '../Map/PointIdle.svg'
-// import PointOnReviewSVG from '../Map/PointOnReview.svg'
-// import PointAnsweredSVG from '../Map/PointAnswered.svg'
-
-
-// const SelectSvg = (s) => {
-//     if (s > 0 && s < 5)
-//         return PointOnReviewSVG;
-//     switch (s) {
-//         case 5:
-//             return PointAnsweredSVG;
-//         default:
-//             return PointIdleSVG;
-//     }
-// }
+import { api_key } from "../../utils/mapConfig"
 
 export class MapContainer extends Component {
     state = {
@@ -158,7 +143,7 @@ export class MapContainer extends Component {
                     }
                 </div>
                 <Map
-                    googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDWEKKmejfg92St2a1RJoo4gQeBseUjD3Q"
+                    googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${api_key}`}
                     loadingElement={<div style={{ height: `100%` }} />}
                     containerElement={<div style={{ height: `100%` }} />}
                     mapElement={<div style={{ height: `100%` }} />}

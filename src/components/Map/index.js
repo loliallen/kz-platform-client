@@ -4,6 +4,8 @@ import UserPointSVG from './UserPoint.svg'
 import PointIdleSVG from './PointIdle.svg'
 import PointOnReviewSVG from './PointOnReview.svg'
 import PointAnsweredSVG from './PointAnswered.svg'
+import { api_key } from "../../utils/mapConfig"
+
 
 const SelectSvg = (s) => {
     if (s > 0 && s < 5)
@@ -41,7 +43,7 @@ class MapContainer extends Component {
                 panControl={false}
                 streetViewControl={false}
                 center={this.props.center}
-                initialCenter={{ lat: 55.738367999999994, lng: 49.2077056 }}
+                initialCenter={this.state.center}
             >
                 {this.props.center && <Marker
                     position={this.props.center}
@@ -58,12 +60,23 @@ class MapContainer extends Component {
                     }}
                     draggable={true}
                 />}
+                {points.map((e, i) => {
+                    return <Marker
+                    key={i}
+                    position={e.coords}
+                    icon={{
+                        url: SelectSvg(e.status),
+                        anchor: new window.google.maps.Point(30, 42),
+                        scaledSize: new window.google.maps.Size(60, 65)
+                    }}
+                    />
+                })}
             </Map>
         )
     }
 }
 
 export default GoogleApiWrapper({
-    apiKey: "AIzaSyDWEKKmejfg92St2a1RJoo4gQeBseUjD3Q",
+    apiKey: api_key,
     language: "ru"
 })(MapContainer)

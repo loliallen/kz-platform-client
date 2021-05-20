@@ -1,5 +1,6 @@
 .image_preview__container{
     --background-color: transparent;
+    position: relative;
     width: 100px;
     height: 100px;
     display: flex;
@@ -22,4 +23,10 @@
 .image_preview__container:hover{
     cursor: pointer;
     background-color: #e3e3e3;
+}
+.image_preview__remove_action{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: red;
 }

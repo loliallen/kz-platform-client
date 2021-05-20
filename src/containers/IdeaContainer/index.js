@@ -3,6 +3,8 @@ import React from 'react'
 import { ArrowUpIcon } from '../Icons/ArrowUp'
 import { ArrowDownIcon } from '../Icons/ArrowDown'
 import { StyledCard, StyledCardHeader } from '../StyledCard'
+import { CommentBoxIcon } from '../Icons/CommentBox'
+import { Link } from 'react-router-dom'
 import "./style.css"
 
 const GREEN = "#219653"
@@ -12,7 +14,7 @@ export const IdeaContainer = ({
     date,
     title,
     content,
-    userId,
+    user,
     comments,
     likes,
     dislikes,
@@ -33,14 +35,31 @@ export const IdeaContainer = ({
             <Divider />
             <div className="tender_footer">
                 <div className="tender_footer__left">
-                    <Avatar />
+                    <Avatar
+                        src={user.photo}
+                        alt={user.name}
+                    />
                     <div className="tender_footer__userId">
-                        {userId}
+                        <Link to={`/users/${user.id}`}>
+                            {user.name}
+                        </Link>
                     </div>
                 </div>
                 <div className="tender_footer__right">
-                    <div>
-                        {comments} Ответов
+                    <div
+                        style={{
+                            display: "flex",
+                            alignItems: "center",
+                            height: 32,
+                            color: "rgba(156, 156, 156, 1)"
+                        }}
+                    >
+                        <IconButton>
+                            <CommentBoxIcon style={{ fill: "transparent", width: 32, height: 32, flex: 1 }} />
+                        </IconButton>
+                        <div style={{ fontSize: 14 }}>
+                            {comments} Ответов
+                        </div>
                     </div>
                     <div className="tender_footer__right_likes">
                         <IconButton>

@@ -13,6 +13,7 @@ import { WarnFileIcon } from '../Icons/WarnFile'
 import { ChatIcon } from '../Icons/Chat'
 import { LightIcon } from '../Icons/Light'
 import { BillNoteIcon } from '../Icons/BillNote'
+import { LogoIcon } from './LogoIcon'
 
 const StyledAppBar = withStyles({
     root: {
@@ -96,8 +97,11 @@ export const MobileHeader = ({ color, textColor }) => {
                         </IconButton>
                     </div>
                     <div className="header__align_center" style={{ justifyContent: "center" }}>
-                        LOGO
-                </div>
+
+                        <IconButton>
+                            <LogoIcon />
+                        </IconButton>
+                    </div>
                     <div className="header__align_rigth">
                         {
                             app.isAuthed ?

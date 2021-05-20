@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import Geocode from "react-geocode"
+// import Geocode from "react-geocode"
 import { Button, Grid, IconButton, ListItemIcon, ListItemText, Menu, MenuItem, withStyles } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -17,8 +17,9 @@ import { Link } from "react-router-dom"
 
 import "./style.css"
 import { FilterIcon } from '../../containers/Icons/FilterIcon'
+import { api_key } from '../../utils/mapConfig'
 
-Geocode.setApiKey("AIzaSyDvMJHc6z8X0finyFVX1gMHfzG8hxKeOAY")
+
 
 
 const StyledMenu = withStyles({
@@ -68,17 +69,23 @@ const LatestAppealBlock = (props) => {
     const categories = useSelector(s => s.category.list)
     const [address, setAddress] = useState("")
 
-    useEffect(() => {
-        if (latestAppeal && latestAppeal.coords)
-            Geocode.fromLatLng(latestAppeal.coords.lat.toString(), latestAppeal.coords.lng.toString()).then(
-                (response) => {
-                    const addr = response.results[0].formatted_address;
-                    console.log("addr", addr)
-                    setAddress(addr)
-                })
-                .catch(error => console.log(error))
+    // useEffect(() => {
+    //     if (latestAppeal && latestAppeal.coords)
+    //         Geocode.fromLatLng(latestAppeal.coords.lat.toString(), latestAppeal.coords.lng.toString()).then(
+    //             (response) => {
+    //                 console.log(response)
+    //                 const addr = response.results[0].formatted_address;
+    //                 console.log("addr", addr)
+    //                 setAddress(addr)
+    //             })
+    //             .catch(error => console.log(error))
+    // }, [latestAppeal])
+    useEffect(()=>{
+        if (latestAppeal) {
+            alert(JSON.stringify(latestAppeal.latlng))
+            setAddress(latestAppeal.address)
+        }
     }, [latestAppeal])
-
     if (!latestAppeal)
         return null
     return <div
@@ -239,7 +246,7 @@ export const AppealsPage = () => {
     const dispatch = useCallback(useDispatch(), [])
     const appeals = useSelector(s => s.appeal.list)
     const appeal_counters = useSelector(s => s.appeal.counters)
-
+    const location = useSelector(s => s.app.position)
     const handleFiltering = field => () => {
         dispatch(appealAction.set_filter(field))
     }
@@ -281,6 +288,7 @@ export const AppealsPage = () => {
                         pointerEvents: "none"
                     }} />
                     <Map
+                        center={location}
                         styles={{
                             height: "60vh",
                             borderRadius: "20px"

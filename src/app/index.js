@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core"
 import { HomePage } from '../pages/HomePage'
 import { Redirect, Route, Switch } from 'react-router'
@@ -11,7 +11,15 @@ import { TenderCurrentPage } from '../pages/TenderCurrentPage'
 import { Header } from '../containers/Header'
 import { CreateAppealPage } from '../pages/CreateAppealPage'
 import { AuthorizationPage } from '../pages/AuthorizationPage'
+import { useDispatch } from 'react-redux'
+import actions from '../storage/actions'
+import { api_key } from '../utils/mapConfig'
+import { CreateIdeaPage } from '../pages/CreateIdeaPage'
+// import Geocode from "react-geocode"
 
+// Geocode.setApiKey("AIzaSyDjU7YWT1VGnfDpyU_87VznB6xGNRWXpJM")
+// Geocode.setLanguage("ru")
+// Geocode.setRegion("ru")
 
 const theme = createMuiTheme({
     palette: {
@@ -25,7 +33,33 @@ const theme = createMuiTheme({
     }
 })
 
+const fromGeocode = async () => {
+    // const res = await Geocode.fromLatLng("55.7267532", "49.1759529")
+    // console.log(res)
+}
+
+
 export const App = () => {
+    const dispatch = useCallback(useDispatch(), [])
+
+    useEffect(()=>{
+        fromGeocode()
+        const setPosition = (position) => {
+            // yield put(actions.app.setPosition(position))
+            // cast a region after position here
+            let lat = position.coords.latitude
+            let lng = position.coords.longitude
+            console.log(lat, lng)
+
+            dispatch(actions.app.setPosition({lat,lng}))
+
+        }
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(setPosition, (err) => console.log(err));
+        }
+        dispatch(actions.app.init())
+    }, [])
+
     return (
         <MuiThemeProvider theme={theme}>
             <Header />
@@ -41,6 +75,7 @@ export const App = () => {
             </Switch>
             <Route path="/*/auth" component={()=><AuthorizationPage />}/>
             <Route path="/*/appeal/create" component={()=><CreateAppealPage />}/>
+            <Route path="/*/idea/create" component={()=><CreateIdeaPage />}/>
         </MuiThemeProvider>
     )
 }

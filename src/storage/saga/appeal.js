@@ -27,8 +27,7 @@ function *GetMineWatcher({payload: data}) {
 function *CreateWatcher({ payload: data }) {
     try {
         data.latlng = data.loc
-        data.loc = null
-        data.photos = []
+        delete data.loc
         data.anonim = !Boolean(data.token)
         const payload = yield call(Service.Create, data)
         yield put({ type: BaseTypes.SET_LATEST, payload: data })

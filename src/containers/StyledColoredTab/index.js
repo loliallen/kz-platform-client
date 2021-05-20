@@ -66,6 +66,7 @@ const useStyles = makeStyles({
 
 export const StyledColoredTab = ({
     hoverColor,
+    wordBreak = false,
     ...rest
 }) => {
     const styles = useStyles()
@@ -76,10 +77,12 @@ export const StyledColoredTab = ({
     if (!currentColor)
         currentColor = "lightgray"
 
-        return (<StyledTab
-        style={{ "--hover-color": currentColor }}
-        icon={rest.icon}
-        {...rest}
-    />)
+    return (
+        <StyledTab
+            style={{ "--hover-color": currentColor }}
+            icon={rest.icon}
+            {...rest}
+        />
+    )
 }
 export default StyledColoredTab

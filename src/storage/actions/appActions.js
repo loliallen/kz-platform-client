@@ -27,8 +27,30 @@ const saveEdits = (data) => ({
     payload: data
 })
 
+const setRawRegion = (data) => ({
+    type: app.SET_RAW_REGION,
+    payload: data
+})
+
+const setRegionId = (id) => ({
+    type: app.SET_REGION_ID,
+    payload: id
+})
+const setPosition = (pos) => ({
+    type: app.SET_POSITION,
+    payload: pos
+})
+const init = (pos) => ({
+    type: app.INIT,
+    payload: pos
+})
+
 export default {
     loginAction: login,
     register,
-    saveEdits
+    saveEdits,
+    setRawRegion,
+    setRegionId,
+    setPosition,
+    init
 }

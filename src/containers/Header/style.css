@@ -3,7 +3,12 @@
     display: flex;
     text-align: center;
 }
-
+.header__logo{
+    object-position: center;
+    object-fit: cover;
+    width: 66px;
+    height: 80px;
+}
 .header__align_center{
     flex: 3;
     text-align: center;

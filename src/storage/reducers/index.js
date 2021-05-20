@@ -5,6 +5,7 @@ import appReducer from "./appReducer"
 import newsReducer from "./newsReducer"
 import categoryReducer from "./categoryReducer"
 import tenderReducer from "./tenderReducer"
+import ideaReducer from "./ideaReducer"
 
 
 export const combinedReducers = combineReducers({
@@ -12,5 +13,6 @@ export const combinedReducers = combineReducers({
     appeal: appealReducer,
     news: newsReducer,
     category: categoryReducer,
-    tender: tenderReducer
+    tender: tenderReducer,
+    idea: ideaReducer
 })

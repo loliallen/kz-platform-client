@@ -1,7 +1,7 @@
 import { BASENAME } from "./config"
 const createPhoto = async (data) => {
     let res = await fetch(
-        `${BASENAME}/upload.photo`,
+        `${BASENAME}/upload.photoext`,
         {
             method: "POST",
             body: data

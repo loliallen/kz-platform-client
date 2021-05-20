@@ -4,6 +4,10 @@
     gap: 40px;
 }
 
+.create_container{
+    margin-bottom: 1rem;
+}
+
 @media screen and (max-width: 1000px){
     .tender__container{
         grid-template-columns: 1fr;

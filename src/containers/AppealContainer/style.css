@@ -1,6 +1,9 @@
 .appeal__content__info, .appeal__content__comment{
     margin-bottom: 20px;
 }
+.appeal__content__comment{
+    word-break: break-all;
+}
 
 .appeal__content__info__inner{
     display: flex;
