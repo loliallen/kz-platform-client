@@ -109,7 +109,9 @@ export const MobileHeader = ({ color, textColor }) => {
                                     <div style={{ padding: "16px 20px 16px 16px" }}>
                                         <UsersNotifications notificationsCount={3} />
                                     </div>
-                                    <UserAvatar onClick={() => history.push('/personal')} />
+                                    <IconButton onClick={() => history.push('/personal')} >
+                                        <UserAvatar/>
+                                    </IconButton>
                                 </>
                                 :
                                 <Link

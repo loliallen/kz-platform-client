@@ -31,7 +31,7 @@ class MapContainer extends Component {
     }
     render() {
         const containerStyle = this.props.styles
-        const points = this.props.points
+        const points = this.props.points || []
         return (
             <Map
                 google={this.props.google}
@@ -62,13 +62,13 @@ class MapContainer extends Component {
                 />}
                 {points.map((e, i) => {
                     return <Marker
-                    key={i}
-                    position={e.coords}
-                    icon={{
-                        url: SelectSvg(e.status),
-                        anchor: new window.google.maps.Point(30, 42),
-                        scaledSize: new window.google.maps.Size(60, 65)
-                    }}
+                        key={i}
+                        position={e.coords}
+                        icon={{
+                            url: SelectSvg(e.status),
+                            anchor: new window.google.maps.Point(30, 42),
+                            scaledSize: new window.google.maps.Size(60, 65)
+                        }}
                     />
                 })}
             </Map>

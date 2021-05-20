@@ -28,6 +28,7 @@
     flex: 1;
     /* justify-items: end; */
     text-align: end;
+    align-items: center;
     display: flex;
     justify-content: flex-end;
 }

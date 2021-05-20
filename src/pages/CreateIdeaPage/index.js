@@ -287,7 +287,7 @@ export const CreateIdeaPage = () => {
         const data = {
             title,
             text: content,
-            photoes,
+            photos: photoes,
             token
         }
 
@@ -298,7 +298,7 @@ export const CreateIdeaPage = () => {
         //     alert("Авторизуйтесь или укажите свои данные на шаге 4")
 
         dispatch(ideaAction.create(data))
-        // history.push('/ideas')
+        history.push('/ideas')
     }
 
     const width = window.innerWidth

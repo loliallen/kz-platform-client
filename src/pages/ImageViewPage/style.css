@@ -1,0 +1,5 @@
+.image_modal {
+    height: 60vh;
+    /* width: 75%; */
+    object-fit: contain;
+}

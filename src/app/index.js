@@ -15,6 +15,7 @@ import { useDispatch } from 'react-redux'
 import actions from '../storage/actions'
 import { api_key } from '../utils/mapConfig'
 import { CreateIdeaPage } from '../pages/CreateIdeaPage'
+import { ImageViewPage } from '../pages/ImageViewPage'
 // import Geocode from "react-geocode"
 
 // Geocode.setApiKey("AIzaSyDjU7YWT1VGnfDpyU_87VznB6xGNRWXpJM")
@@ -76,6 +77,7 @@ export const App = () => {
             <Route path="/*/auth" component={()=><AuthorizationPage />}/>
             <Route path="/*/appeal/create" component={()=><CreateAppealPage />}/>
             <Route path="/*/idea/create" component={()=><CreateIdeaPage />}/>
+            <Route path="/*/image/:src" component={()=><ImageViewPage />}/>
         </MuiThemeProvider>
     )
 }

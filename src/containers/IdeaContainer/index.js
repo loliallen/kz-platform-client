@@ -30,7 +30,7 @@ export const IdeaContainer = ({
             />
             <CardContent>
                 <Typography variant="h5" style={{ fontWeight: 500, lineHeight: "1.48rem", marginBottom: 10}}>{title}</Typography>
-                <Typography>{content}</Typography>
+                <Typography style={{wordBreak: "break-all"}}>{content}</Typography>
             </CardContent>
             <Divider />
             <div className="tender_footer">
