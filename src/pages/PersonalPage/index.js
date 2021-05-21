@@ -194,29 +194,28 @@ const AboutMe = ({ user, token }) => {
                             onChange={handleSetVk}
                         />
                     </Grid>
+                    <Grid item xs/>
                 </Grid>
-                <Grid container spacing={1} className="aboutme_grid_first aboutme_mobile">
-                    <Grid item xs>
-                        <StyledButton
-                            fullWidth
-                            variant="contained"
-                            color="default"
-                            onClick={() => setEdit(false)}
-                        >
-                            Отмена
-                        </StyledButton>
+                    <Grid container spacing={1} className="aboutme_grid_first aboutme_mobile aboutme_actions">
+                        <Grid item xs className="aboutme_mobile">
+                            <StyledButton
+                                fullWidth
+                                variant="contained"
+                                color="default"
+                                onClick={() => setEdit(false)}
+                            >
+                                Отмена
+                            </StyledButton>
+                        </Grid>
+                        <Grid item xs className="aboutme_mobile">
+                            <StyledButton
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                onClick={handleSave}
+                            >Сохранить</StyledButton>
+                        </Grid>
                     </Grid>
-                    <Grid item xs>
-                        <StyledButton
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            onClick={handleSave}
-                        >Сохранить</StyledButton>
-                    </Grid>
-
-                </Grid>
-
             </div>
         }
 

@@ -56,9 +56,9 @@
     margin-top: 30px!important;
 }
 .aboutme_grid_second {
+    margin-top: 30px;
     margin-bottom: 30px;
 }
-
 @media screen and (max-width: 800px){
     .aboutme__container {
         flex-direction: column;
@@ -85,6 +85,10 @@
     }
     .aboutme_grid_second {
         margin-bottom: 10px;
+    }
+    .aboutme_actions{
+        display: flex;
+        justify-content: center;
     }
 
 }

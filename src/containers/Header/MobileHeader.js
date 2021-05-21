@@ -134,9 +134,6 @@ export const MobileHeader = ({ color, textColor }) => {
                         {
                             app.isAuthed ?
                                 <>
-                                    <div style={{ padding: "16px 20px 16px 16px" }}>
-                                        <UsersNotifications notificationsCount={3} />
-                                    </div>
                                     <IconButton onClick={() => toggleOpenAlt()} >
                                         <UserAvatar/>
                                     </IconButton>
