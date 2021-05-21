@@ -130,10 +130,22 @@ function* InitWatcher() {
     }
 }
 
+
+function* RequestRegionWatcher() {
+    try {
+        const payload = yield call(Api.Region.get)
+        yield put({ type: BaseTypes.SET_REGIONS, payload })
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+
 export default {
     LoginWatcher,
     RegisterWatcher,
     SetTokenWatcher,
     SaveEditWatcher,
-    InitWatcher
+    InitWatcher,
+    RequestRegionWatcher
 }

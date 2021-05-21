@@ -10,6 +10,7 @@ import idea from "./idea"
 
 export function *SagaWatcher(){
     yield takeEvery(types.APP.INIT, app.InitWatcher)
+    yield takeEvery(types.APP.REQUEST_REGION, app.RequestRegionWatcher)
     yield takeEvery(types.APPEAL.REQUEST, appeal.GetWatcher)
     yield takeEvery(types.APPEAL.REQUEST_MINE, appeal.GetMineWatcher)
     yield takeEvery(types.NEWS.REQUEST, news.GetWatcher)

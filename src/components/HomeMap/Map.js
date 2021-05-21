@@ -254,7 +254,7 @@ const GoogleMapComponentWithMarker = withScriptjs(
                 >
                     <div>
                         <h4>{props.infoboxMessage}</h4>
-                        <a href="#">{"> Подробнее"}</a>
+                        <a href="/appeals">{"> Подробнее"}</a>
                     </div>
                 </InfoWindow>
             )}

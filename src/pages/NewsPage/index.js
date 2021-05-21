@@ -1,4 +1,4 @@
-import { Tabs, withStyles } from '@material-ui/core'
+import { Tabs, withStyles, FormControl, FormLabel, InputLabel, Select, MenuItem } from '@material-ui/core'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Main } from '../../containers/Main'
@@ -28,12 +28,17 @@ export const NewsPage = () => {
 
     const newsList = useSelector(state => state.news.list)
     const currentNew = useSelector(state => state.news.current)
+    const regions = useSelector(s => s.app.regions)
+    const regionId = useSelector(s => s.app.regionId)
+
+    const onChange = (e) => dispatch(actions.app.setRegionId(e.target.value))
 
 
     const [page, setPage] = useState(0)
 
     useEffect(()=>{
         dispatch(actions.news.get())
+        dispatch(actions.app.requestRegions())
     }, [])
 
     const selectNew = v => dispatch(actions.news.set_current(v))
@@ -48,6 +53,29 @@ export const NewsPage = () => {
                 <StyledTab label="Общие" />
                 <StyledTab label="Местные" />
             </StyledTabs>
+            {page === 1 && <FormControl
+                fullWidth
+                variant="outlined"
+            >
+                <InputLabel id="select-sphere-label">Регион</InputLabel>
+                <Select
+                    labelId="select-sphere-label"
+                    id="select-sphere"
+                    label="Сфера"
+                    onChange={onChange}
+                    value={regionId}
+                >
+                    <MenuItem value={null}>
+                        <em>Не выбрано</em>
+                    </MenuItem>
+                    {regions.map((r, i) => {
+                        return <MenuItem key={i} value={r.id}>
+                            {r?.name}
+                        </MenuItem>
+                    })}
+
+                </Select>
+            </FormControl>}
             <NewsFlexContainer>
                 <CurrentNew {...currentNew}/>
                 <NewsContainer

@@ -62,8 +62,8 @@ export class MapContainer extends Component {
                     },
                     {
                         coords: {
-                            lat: pos.coords.latitude + 0.01,
-                            lng: pos.coords.longitude + 0.01
+                            lat: pos.coords.latitude + 0.015,
+                            lng: pos.coords.longitude + 0.015
                         },
                         label: "Mock infobox",
                         status: 5
@@ -108,44 +108,10 @@ export class MapContainer extends Component {
                     position: 'relative'
                 }}
             >
-                <div
-                    style={{
-                        position: "absolute",
-                        top: "185px",
-                        left: width < 800 ? "11%" : "11%",
-                        right: "20px",
-                        height: "120px",
-                        color: "white",
-                        zIndex: 10,
-                        pointerEvents: "none"
-                    }}
-                >
-                    <Typography
-                        variant={width < 800 ? "h3" : "h1"}
-                        style={{
-                            fontWeight: width < 800 ? "700" : "900"
-                        }}
-                    >
-                        Сообщайте
-                        <br />
-                        о проблемах
-                    </Typography>
-                    {width < 800 &&
-                        <Link to="/home/appeal/create">
-                            <StyledButton
-                                style={{ marginTop: "30px" }}
-                                color="primary"
-                                variant="contained"
-                                fullWidth
-                                startIcon={<MessageSendIcon style={{ width: "30px", height: "30px", stroke: "white", fill: "transparent" }} />}
-                            >Подать обращение</StyledButton>
-                        </Link>
-                    }
-                </div>
                 <Map
                     googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${api_key}`}
                     loadingElement={<div style={{ height: `100%` }} />}
-                    containerElement={<div style={{ height: `100%` }} />}
+                    containerElement={<div style={{ position: "absolute", width: "100%", height: "100%" }} />}
                     mapElement={<div style={{ height: `100%` }} />}
                     isInfoboxVisible={this.state.isInfoboxVisible} // Show/hide info window
                     infoboxMessage={this.state.infoboxMessage} // Message shown in info window

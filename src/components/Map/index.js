@@ -48,7 +48,7 @@ class MapContainer extends Component {
                 {this.props.center && <Marker
                     position={this.props.center}
                     onDragend={(props, marker, e) => {
-                        this.props.setLoc({
+                        this.props.setLoc && this.props.setLoc({
                             lat: marker.position.lat(),
                             lng: marker.position.lng()
                         })

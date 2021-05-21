@@ -36,6 +36,10 @@ const setRegionId = (id) => ({
     type: app.SET_REGION_ID,
     payload: id
 })
+const requestRegions = (id) => ({
+    type: app.REQUEST_REGION,
+    payload: id
+})
 const setPosition = (pos) => ({
     type: app.SET_POSITION,
     payload: pos
@@ -45,6 +49,11 @@ const init = (pos) => ({
     payload: pos
 })
 
+const logout = () => ({
+    type: app.LOGOUT
+})
+
+
 export default {
     loginAction: login,
     register,
@@ -52,5 +61,7 @@ export default {
     setRawRegion,
     setRegionId,
     setPosition,
-    init
+    init,
+    requestRegions,
+    logout
 }

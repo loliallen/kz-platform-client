@@ -1,5 +1,6 @@
-import { Divider, List, ListItem, ListItemText } from '@material-ui/core'
+import { Divider, FormControl, FormLabel, InputLabel, List, ListItem, ListItemText, MenuItem, Select } from '@material-ui/core'
 import React from 'react'
+
 
 const New = ({ title, time, new_item, address, onClick }) => {
 
@@ -35,8 +36,10 @@ export const NewsContainer = ({
     onSelect
 }) => {
     return (
-        <List>
-            {news.map((n, i) => <New onClick={()=>onSelect(n)} key={i} {...n} />)}
-        </List>
+        <>
+            <List>
+                {news.map((n, i) => <New onClick={() => onSelect(n)} key={i} {...n} />)}
+            </List>
+        </>
     )
 }
