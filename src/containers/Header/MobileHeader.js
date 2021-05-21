@@ -6,7 +6,7 @@ import { UserAvatar } from './UserAvatarContainer'
 import { UsersNotifications } from './UsersNotifications'
 import { Link, useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { Close, Menu } from '@material-ui/icons'
+import { Close, ExitToApp, ExitToAppOutlined, Menu } from '@material-ui/icons'
 import { PersonIcon } from '../Icons/PersonIcon'
 import { InfoIcon } from '../Icons/InfoIcon'
 import { WarnFileIcon } from '../Icons/WarnFile'
@@ -14,6 +14,7 @@ import { ChatIcon } from '../Icons/Chat'
 import { LightIcon } from '../Icons/Light'
 import { BillNoteIcon } from '../Icons/BillNote'
 import { LogoIcon } from './LogoIcon'
+import { MessageSendIcon } from '../Icons/MessageSend'
 
 const StyledAppBar = withStyles({
     root: {
@@ -45,7 +46,7 @@ const PATHS = [
     {
         icon: WarnFileIcon,
         label: "Сообщайте о проблемах",
-        path: "#",
+        path: "/home",
         color: "#EC2F2F"
     },
     {
@@ -74,14 +75,38 @@ const PATHS = [
     },
 ]
 
+const PATHS_ALT = [
+    {
+        icon: PersonIcon,
+        label: "Личный кабинет",
+        path: "/personal",
+        color: "#EC2F2F"
+    },
+    {
+        icon: MessageSendIcon,
+        label: "Мои обращения",
+        path: "/personal",
+        color: "#EC2F2F"
+    },
+    {
+        icon: ExitToAppOutlined,
+        label: "Выйти",
+        path: "/logout",
+        color: "#EC2F2F"
+    },
+
+]
+
 export const MobileHeader = ({ color, textColor }) => {
     const app = useSelector(state => state.app)
 
     const [open, setOpen] = useState(false)
+    const [openAlt, setOpenAlt] = useState(false)
 
     const history = useHistory()
 
     const toggleOpen = () => setOpen(p => !p)
+    const toggleOpenAlt = () => setOpenAlt(p => !p)
     return (
         <>
             <StyledAppBar
@@ -97,10 +122,13 @@ export const MobileHeader = ({ color, textColor }) => {
                         </IconButton>
                     </div>
                     <div className="header__align_center" style={{ justifyContent: "center" }}>
-
-                        <IconButton>
-                            <LogoIcon />
-                        </IconButton>
+                        <Link
+                            to='/home'
+                        >
+                            <IconButton>
+                                <LogoIcon />
+                            </IconButton>
+                        </Link>
                     </div>
                     <div className="header__align_rigth">
                         {
@@ -109,7 +137,7 @@ export const MobileHeader = ({ color, textColor }) => {
                                     <div style={{ padding: "16px 20px 16px 16px" }}>
                                         <UsersNotifications notificationsCount={3} />
                                     </div>
-                                    <IconButton onClick={() => history.push('/personal')} >
+                                    <IconButton onClick={() => toggleOpenAlt()} >
                                         <UserAvatar/>
                                     </IconButton>
                                 </>
@@ -126,24 +154,44 @@ export const MobileHeader = ({ color, textColor }) => {
                 </StyledToolbar>
             </StyledAppBar>
             <StyledDrawer
-                open={open}
-                onClose={toggleOpen}
+                open={open || openAlt}
+                onClose={()=>{
+                    if (open)
+                        toggleOpen()
+                    if (openAlt)
+                        toggleOpenAlt()
+                }}
                 anchor="top"
                 variant="persistent"
             >
                 <List className="mobile_list">
-                    {PATHS.map((e, i) => {
-                        const Icon = e.icon
-                        return <Link to={e.path} key={i}>
-                            <Divider/>
-                            <ListItem button>
-                                <ListItemIcon>
-                                    <Icon style={{ fill: "transparent", stroke: e.color, width: 30, height: 30 }} />
-                                </ListItemIcon>
-                                <ListItemText primary={e.label}/>
-                            </ListItem>
-                        </Link>
-                    })}
+                    { open ?
+                        PATHS.map((e, i) => {
+                            const Icon = e.icon
+                            return <Link to={e.path} key={i}>
+                                <Divider/>
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <Icon style={{ fill: "transparent", stroke: e.color, width: 30, height: 30 }} />
+                                    </ListItemIcon>
+                                    <ListItemText primary={e.label}/>
+                                </ListItem>
+                            </Link>
+                        })
+                    :
+                        PATHS_ALT.map((e, i) => {
+                            const Icon = e.icon
+                            return <Link to={e.path} key={i}>
+                                <Divider/>
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <Icon style={{ fill: "transparent", stroke: "gray", width: 30, height: 30 }} />
+                                    </ListItemIcon>
+                                    <ListItemText primary={e.label}/>
+                                </ListItem>
+                            </Link>
+                        })
+                }
                 </List>
             </StyledDrawer>
         </>

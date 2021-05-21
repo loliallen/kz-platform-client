@@ -14,6 +14,8 @@ import "./style.css"
 import { Edit } from '@material-ui/icons'
 import appealAction from '../../storage/actions/appealAction'
 import appActions from '../../storage/actions/appActions'
+import { VkIcon } from '../../containers/Icons/Vk'
+import { Redirect } from 'react-router'
 
 const StyledTabs = withStyles({
     indicator: {
@@ -50,6 +52,10 @@ const AboutMe = ({ user, token }) => {
         }))
 
     }
+    if (!user && !token)
+        return <Redirect to="/home/auth" />
+    if (!user)
+        return null
     return <div className="aboutme__container">
         <div
             className="aboutme__avatar_container"
@@ -70,11 +76,16 @@ const AboutMe = ({ user, token }) => {
             <div className="aboutme__info_container">
                 <Typography variant="h4" style={{ fontWeight: 700 }}>
                     {user.name}
-                    <IconButton
-                        onClick={() => setEdit(true)}
+                    <div
+                        className="aboutme_desktop"
                     >
-                        <Edit />
-                    </IconButton></Typography>
+                        <IconButton
+                            onClick={() => setEdit(true)}
+                        >
+                            <Edit />
+                        </IconButton>
+                    </div>
+                </Typography>
 
                 <div className="aboutme__info_inner">
                     <PersonLocation />
@@ -88,11 +99,26 @@ const AboutMe = ({ user, token }) => {
                     <PersonPhone />
                     <span>{user.phone}</span>
                 </div>
+                <div className="aboutme__info_inner">
+                    <VkIcon />
+                    <span>{user.vk}</span>
+                </div>
+                <div className="aboutme__info_inner aboutme_mobile">
+                    <StyledButton
+                        variant="contained"
+                        color="primary"
+                        onClick={() => setEdit(true)}
+                        fullWidth
+                    >
+                        Редактировать
+                    </StyledButton>
+                </div>
 
             </div>
             :
             <div style={{ width: "100%" }}>
-                <Grid container style={{ marginBottom: "30px" }}>
+                <Grid container className="aboutme_grid aboutme_grid_first">
+
                     <Grid item xs>
                         <TextField
                             variant="outlined"
@@ -101,6 +127,7 @@ const AboutMe = ({ user, token }) => {
                             onChange={handleSetName}
                         />
                     </Grid>
+
                     <Grid item xs>
                         <TextField
                             variant="outlined"
@@ -109,7 +136,7 @@ const AboutMe = ({ user, token }) => {
                             onChange={handleSetName}
                         />
                     </Grid>
-                    <Grid item xs>
+                    <Grid item xs className="aboutme_desktop">
                         <StyledButton
                             fullWidth
                             variant="contained"
@@ -119,7 +146,7 @@ const AboutMe = ({ user, token }) => {
                     </Grid>
                 </Grid>
 
-                <Grid container style={{ marginBottom: "30px" }} >
+                <Grid container className="aboutme_grid aboutme_grid_second">
 
                     <Grid item xs>
                         <TextField
@@ -138,7 +165,7 @@ const AboutMe = ({ user, token }) => {
                             onChange={handleSetPhone}
                         />
                     </Grid>
-                    <Grid item xs>
+                    <Grid item xs className="aboutme_desktop">
                         <StyledButton
                             fullWidth
                             variant="contained"
@@ -150,7 +177,7 @@ const AboutMe = ({ user, token }) => {
                     </Grid>
                 </Grid>
 
-                <Grid container >
+                <Grid container className="aboutme_grid">
                     <Grid item xs>
                         <TextField
                             variant="outlined"
@@ -167,9 +194,29 @@ const AboutMe = ({ user, token }) => {
                             onChange={handleSetVk}
                         />
                     </Grid>
-                    <Grid item xs>
-                    </Grid>
                 </Grid>
+                <Grid container spacing={1} className="aboutme_grid_first aboutme_mobile">
+                    <Grid item xs>
+                        <StyledButton
+                            fullWidth
+                            variant="contained"
+                            color="default"
+                            onClick={() => setEdit(false)}
+                        >
+                            Отмена
+                        </StyledButton>
+                    </Grid>
+                    <Grid item xs>
+                        <StyledButton
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            onClick={handleSave}
+                        >Сохранить</StyledButton>
+                    </Grid>
+
+                </Grid>
+
             </div>
         }
 
