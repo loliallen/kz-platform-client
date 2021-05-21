@@ -29,7 +29,7 @@ const Comment = ({ id, parent_author, author, text, children, giveAnswer, create
                                 text
                             }
                         </Typography>
-                        <span>{created_at} {showAnswerLink && <Link onClick={() => giveAnswer(id, author)}>Ответить</Link>}</span>
+                        <span>{created_at} {showAnswerLink && <Link className="link" onClick={() => giveAnswer(id, author)}>Ответить</Link>}</span>
                     </React.Fragment>
                 }
             >

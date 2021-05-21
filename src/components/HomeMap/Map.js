@@ -13,7 +13,7 @@ import UserPointSVG from './UserPoint.svg'
 import PointIdleSVG from './PointIdle.svg'
 import PointOnReviewSVG from './PointOnReview.svg'
 import PointAnsweredSVG from './PointAnswered.svg'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 const SelectSvg = (s) => {
     if (s > 0 && s < 5)
@@ -199,8 +199,8 @@ const styles = [
 // const mapMarker = require('./GoogleMapMarker.svg')
 
 // Google Map component
-const GoogleMapComponentWithMarker = withScriptjs(
-    withGoogleMap(props => (
+const GoogleMapComponentWithMarker = withScriptjs(withGoogleMap(
+    withRouter(props => (
         <GoogleMap
 
             defaultZoom={13}
@@ -227,7 +227,7 @@ const GoogleMapComponentWithMarker = withScriptjs(
                     onClick={(message, lang, lat) =>
                         props.handleMarkerClick(
                             p.label,
-                            p.coords.lat, p.coords.lng
+                            p.coords.lat, p.coords.lng, p.id
                         )
                     } // Get the data that will be used for InfoWindow.
                 />
@@ -254,13 +254,13 @@ const GoogleMapComponentWithMarker = withScriptjs(
                 >
                     <div>
                         <h4>{props.infoboxMessage}</h4>
-                        <a href="/appeals">{"> Подробнее"}</a>
+                        <a className="link" href={`/appeals#${props.markerId}`}>{"> Подробнее"}</a>
                     </div>
                 </InfoWindow>
             )}
         </GoogleMap>
     ))
-)
+))
 
 // Export Google Map component
 export default GoogleMapComponentWithMarker

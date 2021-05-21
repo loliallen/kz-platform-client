@@ -47,7 +47,7 @@ export const Header = ({color, textColor}) => {
         >
             <StyledToolbar>
                 <div className="header__align_left">
-                    <Link to="/home">
+                    <Link className="link" to="/home">
                         <img
                             src={LogoImage}
                             className="header__logo"
@@ -56,27 +56,27 @@ export const Header = ({color, textColor}) => {
                     </Link>
                 </div>
                 <div className="header__align_center">
-                    <Link to="/appeals">
+                    <Link className="link" to="/appeals">
                         <h3>
                             Обращения
                         </h3>
                     </Link>
-                    <Link to="/news">
+                    <Link className="link" to="/news">
                         <h3>
                             Новости
                         </h3>
                     </Link>
-                    <Link to="/tenders">
+                    <Link className="link" to="/tenders">
                         <h3>
                             Тендеры
                         </h3>
                     </Link>
-                    <Link to="/ideas">
+                    <Link className="link" to="/ideas">
                         <h3>
                             Идеи и предложения
                         </h3>
                     </Link>
-                    <Link to="/contacts">
+                    <Link className="link" to="/contacts">
                         <h3>
                             Контакты
                         </h3>
@@ -92,7 +92,7 @@ export const Header = ({color, textColor}) => {
                                 <UserAvatar onClick={() => history.push('/personal')} />
                             </>
                             :
-                            <Link
+                            <Link className="link"
                                 to={`${location.pathname}/auth`}
                             >
                                 <StyledButton

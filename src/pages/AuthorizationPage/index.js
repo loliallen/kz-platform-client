@@ -71,7 +71,7 @@ const LoginPanel = () => {
         </div>
         <div className="login_container login_action">
             <div className="login_action__a">
-                <Link
+                <Link className="link"
                     style={{ textDecoration: "none", color: "#2F80ED" }}
                     to="/forgot"
                 >

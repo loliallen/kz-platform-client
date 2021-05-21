@@ -358,6 +358,7 @@ export const CreateAppealPage = () => {
     const dispatch = useCallback(useDispatch(), [])
     const user = useSelector(s => s.app.user)
     const token = useSelector(s => s.app.token)
+    const position = useSelector(s => s.app.position)
     const steps = 5
 
     const [loc, setLoc] = useState()
@@ -372,25 +373,17 @@ export const CreateAppealPage = () => {
     const [imgs, setImgs] = useState([])
 
     useEffect(() => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(getPosition);
-        }
-
-        function getPosition(position) {
-            setLoc({
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            })
-        }
-    }, [])
-
-    useEffect(() => {
         if (user) {
             setFullName(user.name)
             setCity(user.address.city)
             setAddress(user.address.full)
         }
     }, [user])
+
+    useEffect(() => {
+        if (position)
+            setLoc(position)
+    }, [position])
 
     const [step, setStep] = useState(0)
 

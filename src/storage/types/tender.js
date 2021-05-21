@@ -1,6 +1,6 @@
 const BASENAME = "TENDER/"
+
 export default {
-    REQUEST: BASENAME + "REQUEST",
     REQUEST: BASENAME + "REQUEST",
     GET: BASENAME + "GET",
     SET_CURRENT: BASENAME + "SET_CURRENT",

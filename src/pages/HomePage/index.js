@@ -1,11 +1,13 @@
 import { Typography } from '@material-ui/core'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Route, useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import HomeMap from '../../components/HomeMap'
 import HomeSelectAction from '../../components/HomeSelectAction'
 import { MessageSendIcon } from '../../containers/Icons/MessageSend'
 import { StyledButton } from '../../containers/StyledButton'
+import appealAction from '../../storage/actions/appealAction'
 import { AuthorizationPage } from '../AuthorizationPage'
 import { CreateAppealPage } from '../CreateAppealPage'
 
@@ -20,13 +22,42 @@ const PATHS = [
 ]
 export const HomePage = () => {
     const history = useHistory()
+    const dispatch = useCallback(useDispatch())
+    const appeals = useSelector(s => s.appeal.list)
+
     const [page, setPage] = useState(0)
+    const [random4Appeals, setRandom4Appeals] = useState([])
+
     const handleChangePage = p => history.push(PATHS[p])
     const width = window.innerWidth
 
+    useEffect(() => {
+        dispatch(appealAction.request())
+    }, [])
+
+    useEffect(()=> {
+        console.log(appeals)
+        if (appeals?.length > 0) {
+            const ri = Array.from({ length: appeals.length }, () => Math.random())
+            console.log(ri)
+            let l = 4
+            let r = []
+            for (let i = 0; i < appeals.length; i++){
+
+                if (r.length >= l)
+                    break
+                if (ri[i] < 0.5)
+                    r.push(appeals[i])
+            }
+            setRandom4Appeals(r)
+        }
+    }, [appeals])
+
     return (
         <div className="home_page__container">
-            <HomeMap/>
+            <HomeMap
+                randomPoints={random4Appeals}
+            />
             <HomeSelectAction
                 value={page}
                 setValue={handleChangePage}
@@ -39,13 +70,14 @@ export const HomePage = () => {
                         right: "20px",
                         height: "120px",
                         color: "white",
-                        zIndex: 100,
+                        zIndex: 100
                     }}
                 >
                     <Typography
                         variant={width < 800 ? "h3" : "h1"}
                         style={{
-                            fontWeight: width < 800 ? "700" : "900"
+                            fontWeight: width < 800 ? "700" : "900",
+                            pointerEvents: "none"
                         }}
                     >
                         Сообщайте
@@ -53,7 +85,7 @@ export const HomePage = () => {
                         о проблемах
                     </Typography>
                     {width < 800 &&
-                        <Link to="/home/appeal/create">
+                        <Link className="link" to="/home/appeal/create">
                             <StyledButton
                                 style={{ marginTop: "30px", zIndex: 3000 }}
                                 color="primary"

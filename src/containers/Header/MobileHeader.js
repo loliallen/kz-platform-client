@@ -122,7 +122,7 @@ export const MobileHeader = ({ color, textColor }) => {
                         </IconButton>
                     </div>
                     <div className="header__align_center" style={{ justifyContent: "center" }}>
-                        <Link
+                        <Link className="link"
                             to='/home'
                         >
                             <IconButton>
@@ -139,7 +139,7 @@ export const MobileHeader = ({ color, textColor }) => {
                                     </IconButton>
                                 </>
                                 :
-                                <Link
+                                <Link className="link"
                                     to='/home/auth'
                                 >
                                     <IconButton>
@@ -165,7 +165,7 @@ export const MobileHeader = ({ color, textColor }) => {
                     { open ?
                         PATHS.map((e, i) => {
                             const Icon = e.icon
-                            return <Link to={e.path} key={i}>
+                            return <Link className="link" to={e.path} key={i}>
                                 <Divider/>
                                 <ListItem button>
                                     <ListItemIcon>
@@ -178,7 +178,7 @@ export const MobileHeader = ({ color, textColor }) => {
                     :
                         PATHS_ALT.map((e, i) => {
                             const Icon = e.icon
-                            return <Link to={e.path} key={i}>
+                            return <Link className="link" to={e.path} key={i}>
                                 <Divider/>
                                 <ListItem button>
                                     <ListItemIcon>

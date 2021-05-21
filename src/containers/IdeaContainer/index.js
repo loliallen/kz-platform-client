@@ -40,7 +40,7 @@ export const IdeaContainer = ({
                         alt={user.name}
                     />
                     <div className="tender_footer__userId">
-                        <Link to={`/users/${user.id}`}>
+                        <Link className="link" to={`/users/${user.id}`}>
                             {user.name}
                         </Link>
                     </div>

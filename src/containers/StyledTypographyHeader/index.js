@@ -20,7 +20,7 @@ export const StyledTypographyHeader = ({ title, linkLabel, link, light = true })
             >
                 {title}
             </Typography>
-            {link && <Link
+            {link && <Link className="link"
                 style={{
                     color: "#2F80ED",
                     alignItems: "center",

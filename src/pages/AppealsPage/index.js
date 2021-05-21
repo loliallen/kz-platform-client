@@ -12,7 +12,7 @@ import appealAction from '../../storage/actions/appealAction'
 import { BriefcaseIcon } from '../../containers/Icons/Brifecase'
 import { PersonLocation } from '../../containers/Icons/PersonLocation'
 import { MoreVertOutlined } from '@material-ui/icons'
-import { useLocation } from "react-router"
+import { useLocation, useRouteMatch } from "react-router"
 import { Link } from "react-router-dom"
 
 import "./style.css"
@@ -231,7 +231,7 @@ const CreateAppealButton = () => {
     if (width > 800)
         return null
     return <div className="create__appeal_button">
-        <Link to={`${location.pathname}/appeal/create`}>
+        <Link className="link" to={`${location.pathname}/appeal/create`}>
             <Button
                 color="primary"
                 variant="contained"
@@ -247,6 +247,9 @@ export const AppealsPage = () => {
     const appeals = useSelector(s => s.appeal.list)
     const appeal_counters = useSelector(s => s.appeal.counters)
     const location = useSelector(s => s.app.position)
+    const match = useRouteMatch()
+
+
     const handleFiltering = field => () => {
         dispatch(appealAction.set_filter(field))
     }
@@ -258,6 +261,7 @@ export const AppealsPage = () => {
     useEffect(() => {
         dispatch(appealAction.request())
     }, [])
+
     return (
         <Main>
             <StyledTypographyHeader
@@ -301,12 +305,12 @@ export const AppealsPage = () => {
             <div className="appeals_container">
                 <div>
                     {appeals.slice(0, Math.round(appeals.length / 2)).map((appeal, i) => {
-                        return <AppealContainer style={{ marginBottom: 20 }} key={i} {...appeal} appeal_id={appeal.id} category={appeal.category.title} />
+                        return <AppealContainer id={appeal.id} style={{ marginBottom: 20 }} key={i} {...appeal} appeal_id={appeal.id} category={appeal.category.title} />
                     })}
                 </div>
                 <div>
                     {appeals.slice(Math.round(appeals.length / 2), appeals.length).map((appeal, i) => {
-                        return <AppealContainer style={{ marginBottom: 20 }} key={i} {...appeal} appeal_id={appeal.id} category={appeal.category.title} />
+                        return <AppealContainer id={appeal.id} style={{ marginBottom: 20 }} key={i} {...appeal} appeal_id={appeal.id} category={appeal.category.title} />
                     })}
                 </div>
 

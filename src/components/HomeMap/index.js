@@ -15,74 +15,65 @@ export class MapContainer extends Component {
         isInfoboxVisible: false,
         markerLang: 0,
         markerLat: 0,
+        markerId: null,
         points: []
+    }
+    setCoords(pos, i){
+        let dlat = 0;
+        let dlng = 0;
+        if (i === 0)
+            dlat = + 0.015
+            dlng = + 0.012
+        if (i === 1)
+            dlat = + 0.01
+            dlng = - 0.012
+        if (i === 2)
+            dlat = - 0.015
+            dlng = + 0.012
+        if (i === 3)
+            dlat = - 0.015
+            dlng = - 0.012
+
+        return {
+            lat: pos.coords.latitude + dlat,
+            lng: pos.coords.longitude + dlng
+        }
+    }
+    getPosition(pos) {
+        this.setState({
+            center: {
+                lat: pos.coords.latitude,
+                lng: pos.coords.longitude
+            },
+            points: this.props.randomPoints.map((r, i) => {
+                return {
+                    id: r.id,
+                    status: r.status,
+                    coords: this.setCoords(pos, i),
+                    label: r.comment.substr(0, 15) + '...'
+                }
+            }),
+            markerId: this.props.randomPoints[0]?.id,
+            infoboxMessage: this.props.randomPoints[0]?.comment?.substr(0, 15) + '...', // Message shown in info window
+            isInfoboxVisible: !this.state.isInfoboxVisible, // Show info window
+            markerLang: pos.coords.latitude + 0.01 + 0.006, // Y coordinate for positioning info window
+            markerLat: pos.coords.longitude + 0.01 - 0.0004 // X coordinate for positioning info window
+        })
     }
     componentDidMount() {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(getPosition.bind(this));
-        }
-        function getPosition(pos) {
-            this.setState({
-                center: {
-                    lat: pos.coords.latitude,
-                    lng: pos.coords.longitude
-                },
-                points: [
-                    {
-                        coords: {
-                            lat: pos.coords.latitude - 0.01,
-                            lng: pos.coords.longitude - 0.1
-                        },
-                        label: "Mock infobox",
-                        status: 0
-                    },
-                    {
-                        coords: {
-                            lat: pos.coords.latitude,
-                            lng: pos.coords.longitude
-                        },
-                        label: "Mock infobox",
-                        status: 0
-                    },
-                    {
-                        coords: {
-                            lat: pos.coords.latitude + 0.001,
-                            lng: pos.coords.longitude - 0.04
-                        },
-                        label: "Mock infobox",
-                        status: 1
-                    },
-                    {
-                        coords: {
-                            lat: pos.coords.latitude - 0.2,
-                            lng: pos.coords.longitude + 0.023
-                        },
-                        label: "Mock infobox",
-                        status: 3
-                    },
-                    {
-                        coords: {
-                            lat: pos.coords.latitude + 0.015,
-                            lng: pos.coords.longitude + 0.015
-                        },
-                        label: "Mock infobox",
-                        status: 5
-                    },
-                ],
-                infoboxMessage: "Mock infobox", // Message shown in info window
-                isInfoboxVisible: !this.state.isInfoboxVisible, // Show info window
-                markerLang: pos.coords.latitude + 0.01 + 0.006, // Y coordinate for positioning info window
-                markerLat: pos.coords.longitude + 0.01 - 0.0004 // X coordinate for positioning info window
-            })
+            if (this.props.randomPoints)
+                navigator.geolocation.getCurrentPosition(this.getPosition.bind(this));
         }
     }
 
-    handleMarkerClick = (message, lang, lat) => {
+    handleMarkerClick = (message, lang, lat, id) => {
         this.setState({
             infoboxMessage: message, // Message shown in info window
             isInfoboxVisible: !this.state.isInfoboxVisible, // Show info window
             markerLang: lang + 0.006, // Y coordinate for positioning info window
-            markerLat: lat - 0.0004 // X coordinate for positioning info window
+            markerLat: lat - 0.0004, // X coordinate for positioning info window
+            markerId: id
         })
     }
 
@@ -119,6 +110,7 @@ export class MapContainer extends Component {
                     handleMarkerClick={this.handleMarkerClick} // Handle click on Marker component
                     infoboxPosY={this.state.markerLang} // Y coordinate for positioning info window
                     infoboxPosX={this.state.markerLat} // X coordinate for positioning info window
+                    markerId={this.state.markerId}
                     points={this.state.points}
                 />
                 {/* <div style={{
@@ -160,7 +152,7 @@ export default MapContainer
                         о проблемах
                     </Typography>
                     {width < 800 &&
-                        <Link to="/home/appeal/create">
+                        <Link className="link" to="/home/appeal/create">
                             <StyledButton
                                 style={{ marginTop: "30px" }}
                                 color="primary"

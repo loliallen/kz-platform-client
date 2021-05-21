@@ -30,7 +30,7 @@ export default (state = initalState, action) => {
             if (action.payload.code == 200)
                 return { ...state, regions: action.payload.data}
             return state
-        case types.APP.LOGOUNT:
+        case types.APP.LOGOUT:
             localStorage.removeItem('token')
             return { ...state, isAuthed: false, token: "", user: null}
         default:
