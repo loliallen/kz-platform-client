@@ -10,10 +10,11 @@ import {
     GroundOverlay
 } from 'react-google-maps' // Add "InfoWindow"
 import UserPointSVG from './UserPoint.svg'
-import PointIdleSVG from './PointIdle.svg'
-import PointOnReviewSVG from './PointOnReview.svg'
-import PointAnsweredSVG from './PointAnswered.svg'
+import PointIdleSVG from '../../svgs/outlined/PointIdle.svg'
+import PointOnReviewSVG from '../../svgs/outlined/PointOnReview.svg'
+import PointAnsweredSVG from '../../svgs/outlined/PointAnswered.svg'
 import { Link, withRouter } from 'react-router-dom'
+import { Component } from 'react'
 
 const SelectSvg = (s) => {
     if (s > 0 && s < 5)
@@ -199,10 +200,9 @@ const styles = [
 // const mapMarker = require('./GoogleMapMarker.svg')
 
 // Google Map component
-const GoogleMapComponentWithMarker = withScriptjs(withGoogleMap(
+const GoogleMapComponentWithMarker = withGoogleMap(
     withRouter(props => (
         <GoogleMap
-
             defaultZoom={13}
             defaultCenter={{
                 lat: 55.73,
@@ -221,7 +221,8 @@ const GoogleMapComponentWithMarker = withScriptjs(withGoogleMap(
 
                 return <Marker
                     icon={{
-                        url: SelectSvg(p.status)
+                        url: SelectSvg(p.status),
+                        fillColor: "transparent",
                     }}
                     position={p.coords}
                     onClick={(message, lang, lat) =>
@@ -260,7 +261,15 @@ const GoogleMapComponentWithMarker = withScriptjs(withGoogleMap(
             )}
         </GoogleMap>
     ))
-))
+)
 
-// Export Google Map component
+
+// const Scripted = withScriptjs(GoogleMapComponentWithMarker)
+
+// // Export Google Map component
+// class Map extends Component {
+//     render() {
+//         return <GoogleMapComponentWithMarker {...this.props}/>
+//     }
+// }
 export default GoogleMapComponentWithMarker

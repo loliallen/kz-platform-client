@@ -195,6 +195,7 @@ const Filters = ({handleFiltering, getAppealCounter}) => {
             >
                 {FILTERS.map((filter, i) =>
                     <StyledMenuItem
+                        key={i}
                         onClick={handleFiltering(filter.filterName)}
                     >
                         <ListItemIcon>
@@ -305,12 +306,12 @@ export const AppealsPage = () => {
             <div className="appeals_container">
                 <div>
                     {appeals.slice(0, Math.round(appeals.length / 2)).map((appeal, i) => {
-                        return <AppealContainer id={appeal.id} style={{ marginBottom: 20 }} key={i} {...appeal} appeal_id={appeal.id} category={appeal.category.title} />
+                        return <AppealContainer key={i} id={appeal.id} style={{ marginBottom: 20 }} key={i} {...appeal} appeal_id={appeal.id} category={appeal.category.title} />
                     })}
                 </div>
                 <div>
                     {appeals.slice(Math.round(appeals.length / 2), appeals.length).map((appeal, i) => {
-                        return <AppealContainer id={appeal.id} style={{ marginBottom: 20 }} key={i} {...appeal} appeal_id={appeal.id} category={appeal.category.title} />
+                        return <AppealContainer key={i} id={appeal.id} style={{ marginBottom: 20 }} key={i} {...appeal} appeal_id={appeal.id} category={appeal.category.title} />
                     })}
                 </div>
 

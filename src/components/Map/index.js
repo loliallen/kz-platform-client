@@ -1,9 +1,9 @@
 import { GoogleApiWrapper, Map, Marker } from 'google-maps-react'
 import React, { Component } from 'react'
 import UserPointSVG from './UserPoint.svg'
-import PointIdleSVG from './PointIdle.svg'
-import PointOnReviewSVG from './PointOnReview.svg'
-import PointAnsweredSVG from './PointAnswered.svg'
+import PointIdleSVG from '../../svgs/contained/PointIdle.svg'
+import PointOnReviewSVG from '../../svgs/contained/PointOnReview.svg'
+import PointAnsweredSVG from '../../svgs/contained/PointAnswered.svg'
 import { api_key } from "../../utils/mapConfig"
 
 
@@ -34,7 +34,7 @@ class MapContainer extends Component {
         const points = this.props.points || []
         return (
             <Map
-                google={this.props.google}
+                google={window.google}
                 zoom={this.state.zoom}
                 containerStyle={containerStyle}
                 mapTypeControl={false}
@@ -42,6 +42,7 @@ class MapContainer extends Component {
                 zoomControl={false}
                 panControl={false}
                 streetViewControl={false}
+
                 center={this.props.center}
                 initialCenter={this.state.center}
             >
@@ -76,7 +77,9 @@ class MapContainer extends Component {
     }
 }
 
-export default GoogleApiWrapper({
-    apiKey: api_key,
-    language: "ru"
-})(MapContainer)
+// export default GoogleApiWrapper({
+//     language: "ru",
+
+// })(MapContainer)
+
+export default MapContainer

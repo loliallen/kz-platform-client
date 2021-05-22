@@ -100,7 +100,7 @@ export class MapContainer extends Component {
                 }}
             >
                 <Map
-                    googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${api_key}`}
+                    // googleMapURL={``}
                     loadingElement={<div style={{ height: `100%` }} />}
                     containerElement={<div style={{ position: "absolute", width: "100%", height: "100%" }} />}
                     mapElement={<div style={{ height: `100%` }} />}
