@@ -34,7 +34,7 @@ class MapContainer extends Component {
         const points = this.props.points || []
 
         let UserMarker = new window.google.maps.MarkerImage(
-            UserPointSVG,
+            "/UserPoint.svg",
             null, /* size is determined at runtime */
             null, /* origin is 0,0 */
             new window.google.maps.Point(30, 42), /* anchor is bottom center of the scaled image */
