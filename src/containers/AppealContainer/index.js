@@ -52,7 +52,7 @@ export const AppealContainer = ({
                 <div className="appeal__content__info">
                     { category && <div className="appeal__content__info__inner">
                         <BriefcaseIcon />
-                        <span>{category}</span>
+                        <span>{category?.title}</span>
                     </div>}
                     { address && <div className="appeal__content__info__inner">
                         <PersonLocation />
@@ -68,7 +68,7 @@ export const AppealContainer = ({
                         gap: 10
                     }}
                 >
-                    {photos.map((p, i) =>
+                    {photos?.map((p, i) =>
                         <Grid item key={i}>
                             <ImagePreview
                                 src={p}

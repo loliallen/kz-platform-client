@@ -18,9 +18,9 @@ function *GetWatcher() {
 function *GetMineWatcher({payload: data}) {
     try {
         const payload = yield call(Service.GetMine, data)
-        yield put({ type: BaseTypes.SET, payload })
+        yield put({ type: BaseTypes.SET_MINE, payload: payload.appealinfo})
     } catch {
-        yield put({ type: BaseTypes.SET, payload: [] })
+        yield put({ type: BaseTypes.SET_MINE, payload: [] })
     }
 }
 

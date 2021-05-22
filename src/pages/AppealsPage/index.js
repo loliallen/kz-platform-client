@@ -267,11 +267,11 @@ export const AppealsPage = () => {
         console.log(match)
     }, [])
 
-    useEffect(() => {
-        if (appeals.length > 0 && match.params.id){
-            document.getElementById(match.params.id).scrollIntoView()
-        }
-    }, [appeals, match.params.id])
+    // useEffect(() => {
+    //     if (appeals.length > 0 && match.params.id){
+    //         document.getElementById(match.params.id)?.scrollIntoView()
+    //     }
+    // }, [appeals, match.params.id])
 
     return (
         <Main>
@@ -316,12 +316,12 @@ export const AppealsPage = () => {
             <div className="appeals_container">
                 <div>
                     {appeals.slice(0, Math.round(appeals.length / 2)).map((appeal, i) => {
-                        return <AppealContainer key={i} id={appeal.id} style={{ marginBottom: 20 }} key={i} {...appeal} appeal_id={appeal.id} category={appeal.category.title} />
+                        return <AppealContainer key={i} id={appeal.id} style={{ marginBottom: 20 }} key={i} {...appeal} appeal_id={appeal.id} category={appeal.category} />
                     })}
                 </div>
                 <div>
                     {appeals.slice(Math.round(appeals.length / 2), appeals.length).map((appeal, i) => {
-                        return <AppealContainer key={i} id={appeal.id} style={{ marginBottom: 20 }} key={i} {...appeal} appeal_id={appeal.id} category={appeal.category.title} />
+                        return <AppealContainer key={i} id={appeal.id} style={{ marginBottom: 20 }} key={i} {...appeal} appeal_id={appeal.id} category={appeal.category} />
                     })}
                 </div>
 

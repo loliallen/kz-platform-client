@@ -51,7 +51,27 @@ export default (state = initialState, action) => {
             return {... state, latest: action.payload }
 
         case types.APPEAL.SET_MINE:
-            return {...state, mine: action.payload}
+            const list = action.payload.map(e => {
+                return {
+                    id: e.id,
+                    coords: {
+                        lat: e.address.latitude,
+                        lng: e.address.longitude,
+                    },
+                    category: {
+                        title: e.category.name,
+                        id: e.category.id
+                    },
+                    comment: e.comment,
+                    comments: e.comments,
+                    status: Number(e.status),
+                    organId: e.organId,
+                    date: e.date,
+                    photos: e.photo,
+                    user: e.user
+                }
+            })
+            return {...state, mine: list}
         case types.APPEAL.SET_FILTER:
             const filter_field = action.payload
             if (filter_field === "total")
