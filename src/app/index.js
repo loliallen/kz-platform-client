@@ -52,10 +52,8 @@ export const App = () => {
             // cast a region after position here
             let lat = position.coords.latitude
             let lng = position.coords.longitude
-            console.log(lat, lng)
 
             dispatch(actions.app.setPosition({lat,lng}))
-
         }
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(setPosition, (err) => console.log(err));
@@ -71,7 +69,7 @@ export const App = () => {
                 <Route path="/home" component={()=><HomePage/>}/>
                 <Route path="/news" component={()=><NewsPage/>}/>
                 <Route path="/personal" component={()=><PersonalPage/>}/>
-                <Route path="/appeals" component={()=><AppealsPage/>}/>
+                <Route path="/appeals/:id?" component={()=><AppealsPage/>}/>
                 <Route path="/ideas" component={()=><IdeasPage/>}/>
                 <Route path="/contacts" component={()=><ContactsPage/>}/>
                 <Route exact path="/tenders" component={()=><TendersPage/>}/>

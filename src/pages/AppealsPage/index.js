@@ -86,6 +86,8 @@ const LatestAppealBlock = (props) => {
             setAddress(latestAppeal.address)
         }
     }, [latestAppeal])
+
+
     if (!latestAppeal)
         return null
     return <div
@@ -209,6 +211,7 @@ const Filters = ({handleFiltering, getAppealCounter}) => {
     return <div className="appeal_filters">
         {FILTERS.map((filter, i) =>
             <Button
+                key={i}
                 variant="outlined"
                 style={{
                     borderRadius: 20,
@@ -261,7 +264,14 @@ export const AppealsPage = () => {
 
     useEffect(() => {
         dispatch(appealAction.request())
+        console.log(match)
     }, [])
+
+    useEffect(() => {
+        if (appeals.length > 0 && match.params.id){
+            document.getElementById(match.params.id).scrollIntoView()
+        }
+    }, [appeals, match.params.id])
 
     return (
         <Main>

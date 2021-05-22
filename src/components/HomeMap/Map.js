@@ -9,7 +9,7 @@ import {
     Marker,
     GroundOverlay
 } from 'react-google-maps' // Add "InfoWindow"
-import UserPointSVG from './UserPoint.svg'
+import UserPointSVG from '../../svgs/contained/UserPoint.svg'
 import PointIdleSVG from '../../svgs/outlined/PointIdle.svg'
 import PointOnReviewSVG from '../../svgs/outlined/PointOnReview.svg'
 import PointAnsweredSVG from '../../svgs/outlined/PointAnswered.svg'
@@ -255,7 +255,7 @@ const GoogleMapComponentWithMarker = withGoogleMap(
                 >
                     <div>
                         <h4>{props.infoboxMessage}</h4>
-                        <a className="link" href={`/appeals#${props.markerId}`}>{"> Подробнее"}</a>
+                        <a className="link" href={`/appeals/${props.markerId}`}>{"> Подробнее"}</a>
                     </div>
                 </InfoWindow>
             )}

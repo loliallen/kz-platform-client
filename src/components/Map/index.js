@@ -1,6 +1,6 @@
 import { GoogleApiWrapper, Map, Marker } from 'google-maps-react'
 import React, { Component } from 'react'
-import UserPointSVG from './UserPoint.svg'
+import UserPointSVG from '../../svgs/contained/UserPoint.svg'
 import PointIdleSVG from '../../svgs/contained/PointIdle.svg'
 import PointOnReviewSVG from '../../svgs/contained/PointOnReview.svg'
 import PointAnsweredSVG from '../../svgs/contained/PointAnswered.svg'
