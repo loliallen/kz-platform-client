@@ -21,18 +21,25 @@ export class MapContainer extends Component {
     setCoords(pos, i){
         let dlat = 0;
         let dlng = 0;
-        if (i === 0)
+        if (i % 4 === 0) {
             dlat = + 0.015
             dlng = + 0.012
-        if (i === 1)
+        }
+        if (i % 4 === 1) {
             dlat = + 0.01
             dlng = - 0.012
-        if (i === 2)
+        }
+        if (i % 4 === 2) {
             dlat = - 0.015
             dlng = + 0.012
-        if (i === 3)
+        }
+        if (i % 4 === 3) {
             dlat = - 0.015
             dlng = - 0.012
+        }
+
+        dlat = dlat * (1 + i * 0.03)
+        dlng = dlng * ( 1 + i * 0.03)
 
         return {
             lat: pos.coords.latitude + dlat,
@@ -40,24 +47,27 @@ export class MapContainer extends Component {
         }
     }
     getPosition(pos) {
+        console.log("randomPoints", this.props.randomPoints)
         this.setState({
             center: {
                 lat: pos.coords.latitude,
                 lng: pos.coords.longitude
             },
             points: this.props.randomPoints.map((r, i) => {
-                return {
+                const res = {
                     id: r.id,
                     status: r.status,
                     coords: this.setCoords(pos, i),
                     label: r.comment.substr(0, 15) + '...'
                 }
+                console.log(`Point ${i}`, res)
+                return res
             }),
             markerId: this.props.randomPoints[0]?.id,
             infoboxMessage: this.props.randomPoints[0]?.comment?.substr(0, 15) + '...', // Message shown in info window
             isInfoboxVisible: !this.state.isInfoboxVisible, // Show info window
-            markerLang: pos.coords.latitude + 0.01 + 0.006, // Y coordinate for positioning info window
-            markerLat: pos.coords.longitude + 0.01 - 0.0004 // X coordinate for positioning info window
+            markerLang: pos.coords.latitude + 0.004 + 0.015, // Y coordinate for positioning info window
+            markerLat: pos.coords.longitude + 0.012 // X coordinate for positioning info window
         })
     }
     componentDidMount() {
@@ -71,8 +81,8 @@ export class MapContainer extends Component {
         this.setState({
             infoboxMessage: message, // Message shown in info window
             isInfoboxVisible: !this.state.isInfoboxVisible, // Show info window
-            markerLang: lang + 0.006, // Y coordinate for positioning info window
-            markerLat: lat - 0.0004, // X coordinate for positioning info window
+            markerLang: lang + 0.004, // Y coordinate for positioning info window
+            markerLat: lat, // X coordinate for positioning info window
             markerId: id
         })
     }

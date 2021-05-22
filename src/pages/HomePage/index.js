@@ -15,7 +15,7 @@ import "./style.css"
 
 const PATHS = [
     '/home/appeal/create',
-    '#',
+    '/appeals',
     '/news',
     '/tenders',
     '/ideas',
@@ -44,7 +44,7 @@ export const HomePage = () => {
             let r = []
             for (let i = 0; i < appeals.length; i++){
 
-                if (r.length >= l)
+                if (r.length - 1 >= l)
                     break
                 if (ri[i] < 0.5)
                     r.push(appeals[i])
@@ -68,7 +68,7 @@ export const HomePage = () => {
                         top: "185px",
                         left: width < 800 ? "11%" : "11%",
                         right: "20px",
-                        height: "120px",
+                        height: "0px",
                         color: "white",
                         zIndex: 100
                     }}
