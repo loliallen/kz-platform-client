@@ -32,6 +32,14 @@ class MapContainer extends Component {
     render() {
         const containerStyle = this.props.styles
         const points = this.props.points || []
+
+        let UserMarker = new window.google.maps.MarkerImage(
+            UserPointSVG,
+            null, /* size is determined at runtime */
+            null, /* origin is 0,0 */
+            new window.google.maps.Point(30, 42), /* anchor is bottom center of the scaled image */
+            new window.google.maps.Size(60, 65)
+        );
         return (
             <Map
                 google={window.google}
@@ -54,12 +62,8 @@ class MapContainer extends Component {
                             lng: marker.position.lng()
                         })
                     }}
-                    icon={{
-                        url: UserPointSVG,
-                        anchor: new window.google.maps.Point(30, 42),
-                        scaledSize: new window.google.maps.Size(60, 65)
-                    }}
-                    draggable={true}
+                    icon={UserMarker}
+                    draggable={!!this.props.setLoc}
                 />}
                 {points.map((e, i) => {
                     return <Marker

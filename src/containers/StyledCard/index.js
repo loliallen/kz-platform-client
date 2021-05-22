@@ -13,10 +13,12 @@ export const StyledCard = withStyles({
 export const StyledCardHeader = withStyles({
     root: {
         paddingTop: 30,
-        paddingBottom: 0
+        paddingBottom: 0,
+        fontFamily: "Golos"
     },
     title: {
-        fontSize: 20
+        fontSize: 20,
+        fontWeight: 500
     },
     action: {
         marginTop: 0

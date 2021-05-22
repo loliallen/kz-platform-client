@@ -14,7 +14,7 @@ export const StyledTypographyHeader = ({ title, linkLabel, link, light = true })
                 variant="h6"
                 style={{
                     color: light ? "#ADADAD" : "#000000",
-                    fontWeight: "700",
+                    fontWeight: "bold",
                     fontSize: 32
                 }}
             >
