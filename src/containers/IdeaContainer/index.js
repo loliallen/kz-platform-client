@@ -19,11 +19,13 @@ export const IdeaContainer = ({
     likes,
     dislikes,
     liked = false,
-    disliked = false
+    disliked = false,
+    ...rest
 }) => {
     return (
         <StyledCard
             style={{ border: `2px solid ${liked ? GREEN : disliked ? RED : "white"}` }}
+            {...rest}
         >
             <StyledCardHeader
                 subheader={date.toLocaleDateString()}
@@ -40,7 +42,7 @@ export const IdeaContainer = ({
                         alt={user.name}
                     />
                     <div className="tender_footer__userId">
-                        <Link className="link" to={`/users/${user.id}`}>
+                        <Link className="idea_author" to={`/users/${user.id}`}>
                             {user.name}
                         </Link>
                     </div>
@@ -57,7 +59,7 @@ export const IdeaContainer = ({
                         <IconButton>
                             <CommentBoxIcon style={{ fill: "transparent", width: 32, height: 32, flex: 1 }} />
                         </IconButton>
-                        <div style={{ fontSize: 14 }}>
+                        <div style={{ fontSize: 14, fontWeight: 500 }}>
                             {comments} Ответов
                         </div>
                     </div>

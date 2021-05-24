@@ -4,13 +4,18 @@
 
 .login_action{
     display: flex;
-    margin-bottom: 52px;
+    margin-bottom: 40px;
+    padding: 0 24px!important;
 }
 .login_action__a {
     margin-right: 41px;
     display: flex;
     align-items: center;
     flex: 1;
+}
+.login_action__a a {
+    width: 100%;
+    text-align: center;
 }
 .login_action__button {
     flex: 1;

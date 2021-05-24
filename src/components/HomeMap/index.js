@@ -9,14 +9,14 @@ import { api_key } from "../../utils/mapConfig"
 
 export class MapContainer extends Component {
     state = {
-        center: { lat: 55.73, lng: 49.2 },
         zoom: 15,
         infoboxMessage: '',
         isInfoboxVisible: false,
         markerLang: 0,
         markerLat: 0,
         markerId: null,
-        points: []
+        center: {},
+        pos: null,
     }
     setCoords(pos, i){
         let dlat = 0;
@@ -42,38 +42,35 @@ export class MapContainer extends Component {
         dlng = dlng * ( 1 + i * 0.03)
 
         return {
-            lat: pos.coords.latitude + dlat,
-            lng: pos.coords.longitude + dlng
+            lat: pos.lat + dlat,
+            lng: pos.lng + dlng
         }
     }
-    getPosition(pos) {
-        console.log("randomPoints", this.props.randomPoints)
+    setPosition(v){
         this.setState({
-            center: {
-                lat: pos.coords.latitude,
-                lng: pos.coords.longitude
-            },
-            points: this.props.randomPoints.map((r, i) => {
-                const res = {
-                    id: r.id,
-                    status: r.status,
-                    coords: this.setCoords(pos, i),
-                    label: r.comment.substr(0, 15) + '...'
-                }
-                console.log(`Point ${i}`, res)
-                return res
-            }),
-            markerId: this.props.randomPoints[0]?.id,
-            infoboxMessage: this.props.randomPoints[0]?.comment?.substr(0, 15) + '...', // Message shown in info window
-            isInfoboxVisible: !this.state.isInfoboxVisible, // Show info window
-            markerLang: pos.coords.latitude + 0.004 + 0.015, // Y coordinate for positioning info window
-            markerLat: pos.coords.longitude + 0.012 // X coordinate for positioning info window
+            pos: {
+                lat: v.coords.latitude,
+                lng: v.coords.longitude
+            }
         })
+    }
+    getPosition() {
+        this.setState({
+            markerId: this.props.randomPoints[0]?.id,
+            infoboxMessage: this.props.randomPoints[0]?.comment?.substr(0, 15) || "" + '...', // Message shown in info window
+            isInfoboxVisible: !this.state.isInfoboxVisible, // Show info window
+            markerLang: this.pos.lat + 0.004 + 0.015, // Y coordinate for positioning info window
+            markerLat: this.pos.lng + 0.012 // X coordinate for positioning info window
+        })
+    }
+    componentDidUpdate(){
+        if (this.props.points?.length > 0)
+            this.getPosition()
     }
     componentDidMount() {
         if (navigator.geolocation) {
             if (this.props.randomPoints)
-                navigator.geolocation.getCurrentPosition(this.getPosition.bind(this));
+                navigator.geolocation.getCurrentPosition(this.setPosition.bind(this));
         }
     }
 
@@ -121,7 +118,18 @@ export class MapContainer extends Component {
                     infoboxPosY={this.state.markerLang} // Y coordinate for positioning info window
                     infoboxPosX={this.state.markerLat} // X coordinate for positioning info window
                     markerId={this.state.markerId}
-                    points={this.state.points}
+                    center={this.state.pos}
+                    points={
+                        this.state.pos && this.props.randomPoints.map((r, i) => {
+                            const res = {
+                                id: r.id,
+                                status: r.status,
+                                coords: this.setCoords(this.state.pos, i),
+                                label: r.comment.substr(0, 15) + '...'
+                            }
+                            return res
+                        })
+                }
                 />
                 {/* <div style={{
                     position: "absolute",

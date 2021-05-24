@@ -39,4 +39,14 @@ export default async (token, data) => {
             body: JSON.stringify({ token, email: data.email })
         })
     }
+    if (data.photo) {
+        let response = await fetch(config.path+"setphoto", {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify({ token, photo: data.photo })
+        })
+        console.log(await response.json())
+    }
 }

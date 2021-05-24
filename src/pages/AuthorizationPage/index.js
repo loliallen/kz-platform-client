@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogTitle, Tab, Tabs, TextField, withStyles } from '@material-ui/core'
+import { Dialog, DialogActions, DialogContent, DialogTitle, Tab, Tabs, TextField, withStyles } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
@@ -19,6 +19,44 @@ const StyledTabs = withStyles({
         display: "none"
     }
 })(Tabs)
+
+const FormContainer = ({
+    children,
+    actionA,
+    actionB,
+    onSubmit
+}) =>
+    <form onSubmit={onSubmit}>
+        <StyledDialogContent>
+            {children}
+        </StyledDialogContent>
+        <DialogActions className="login_container login_action">
+            {actionA && <div className="login_action__a">
+                <Link className="link"
+                    style={{ textDecoration: "none", color: "#2F80ED", width: "100%" }}
+                    to="/forgot"
+                >
+                    Забыли пароль?
+                        </Link>
+            </div>
+            }
+            {actionB && <div
+                className="login_action__button"
+            >
+
+                <StyledButton
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                >
+                    {actionB}
+                </StyledButton>
+            </div>
+            }
+
+        </DialogActions>
+    </form>
 
 
 
@@ -41,8 +79,10 @@ const LoginPanel = () => {
         dispatch(actions.app.loginAction({ login, password }))
     }
 
-    return <form
+    return <FormContainer
         onSubmit={handleSubmit}
+        actionA={true}
+        actionB={"Войти"}
     >
         <div className="login_container">
             <TextField
@@ -69,29 +109,7 @@ const LoginPanel = () => {
                 }}
             />
         </div>
-        <div className="login_container login_action">
-            <div className="login_action__a">
-                <Link className="link"
-                    style={{ textDecoration: "none", color: "#2F80ED" }}
-                    to="/forgot"
-                >
-                    Забыли пароль?
-                </Link>
-            </div>
-            <div
-                className="login_action__button"
-            >
-                <StyledButton
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                >
-                    Войти
-                </StyledButton>
-            </div>
-        </div>
-    </form>
+    </FormContainer>
 }
 
 const RegisterPanel = () => {
@@ -108,8 +126,10 @@ const RegisterPanel = () => {
         e.preventDefault()
         dispatch(actions.app.register({ login, password }))
     }
-    return <form
+    return <FormContainer
         onSubmit={handleSubmit}
+        actionA={false}
+        actionB={"Зарегистрироваться"}
     >
         <div className="login_container"
         >
@@ -137,17 +157,7 @@ const RegisterPanel = () => {
                 }}
             />
         </div>
-        <div className="login_container login_action">
-            <StyledButton
-                fullWidth
-                variant="contained"
-                color="primary"
-                type="submit"
-            >
-                Зарегистрироваться
-                </StyledButton>
-        </div>
-    </form>
+    </FormContainer>
 }
 
 
@@ -171,34 +181,32 @@ export const AuthorizationPage = () => {
     return (
         <StyledDialog
             open={true}
+            auth={true}
             fullWidth
-
             onClose={handleClose}
         >
             <StyledDialogTitle onClose={handleClose} />
-            <StyledDialogContent>
-                <div>
-                    <StyledTabs
-                        value={page}
-                        onChange={handleChangeTab}
-                    >
-                        <StyledTab label="Вход" />
-                        <StyledTab label="Регистрация" />
-                    </StyledTabs>
-                </div>
-                <TabPanel
-                    index={0}
-                    page={page}
+            <div style={{ padding: "0 12px" }}>
+                <StyledTabs
+                    value={page}
+                    onChange={handleChangeTab}
                 >
-                    <LoginPanel />
-                </TabPanel>
-                <TabPanel
-                    index={1}
-                    page={page}
-                >
-                    <RegisterPanel />
-                </TabPanel>
-            </StyledDialogContent>
+                    <StyledTab label="Вход" />
+                    <StyledTab label="Регистрация" />
+                </StyledTabs>
+            </div>
+            <TabPanel
+                index={0}
+                page={page}
+            >
+                <LoginPanel />
+            </TabPanel>
+            <TabPanel
+                index={1}
+                page={page}
+            >
+                <RegisterPanel />
+            </TabPanel>
         </StyledDialog>
     )
 }

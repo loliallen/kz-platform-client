@@ -32,15 +32,27 @@ export const IdeasPage = () => {
                         color="primary"
                         variant="contained"
                         onClick={handleCreate}
-                    >Создать идею</StyledButton>
+                    >Предложить идею</StyledButton>
                 </div>}
-                <div className="tender__container">
+                {/* <div className="tender__container">
                     {ideas.map((idea, key) => {
                         return <IdeaContainer
                             key={key}
                             {...idea}
                         />
                     })}
+                </div> */}
+                <div className="appeals_container">
+                    <div>
+                        {ideas.slice(0, Math.round(ideas.length / 2)).map((idea, i) => {
+                            return <IdeaContainer key={i} {...idea} style={{ marginBottom: 20 }}/>
+                        })}
+                    </div>
+                    <div>
+                        {ideas.slice(Math.round(ideas.length / 2), ideas.length).map((idea, i) => {
+                            return <IdeaContainer key={i} {...idea} style={{ marginBottom: 20 }}/>
+                        })}
+                    </div>
                 </div>
             </Main>
         </>

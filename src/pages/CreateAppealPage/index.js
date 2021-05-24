@@ -4,7 +4,7 @@ import { StyledDialog } from "../../containers/StyledDialog"
 import { StyledDialogContent as SDC } from '../../containers/StyledDialogContent'
 import { StyledDialogTitle } from '../../containers/StyledHeader'
 import SwipeableViews from 'react-swipeable-views'
-import { DialogActions, FormControl, Grid, InputLabel, ListSubheader, makeStyles, MenuItem, Select, TextField, Typography, withStyles } from '@material-ui/core'
+import { Checkbox, DialogActions, FormControl, FormLabel, Grid, InputLabel, ListSubheader, makeStyles, MenuItem, Select, TextField, Typography, withStyles } from '@material-ui/core'
 import { StyledButton } from '../../containers/StyledButton'
 import "./style.css"
 import Map from '../../components/Map'
@@ -57,9 +57,9 @@ const StepContainer = ({
 }) => {
     return <>
         <Typography
-            variant="h5"
+            variant="h4"
             style={{
-                fontWeight: "600"
+                fontWeight: "700"
             }}
         >
             {title}
@@ -274,6 +274,15 @@ const Step3 = ({
                     )}
                 </Select>
             </FormControl>
+
+            <div style={{display: "flex", alignItems: "center"}}>
+                <Checkbox onChange={e => {
+                    if (e.target.checked) {
+                        setCategory(null)
+                   }
+                }} id="check-anonim"></Checkbox>
+                <FormLabel for="check-anonim">Автоназначение категории</FormLabel>
+            </div>
         </StepContainer>
     </>
 }
@@ -287,12 +296,16 @@ const Step4 = ({
     city,
     address
 }) => {
+    const width = window.innerWidth
     if (index !== step)
         return null
     return <>
         <StepContainer
             title="Введите данные"
             subtitle="Тут cтоит уточнить зачем нужны данные от человека, чтобы не боялись оставлять и не бросали заполнение заявки на этом шаге."
+            actionLabels={{
+                next: width < 800 ? "Отправить" : "Подать обращение"
+            }}
         >
             <div className="login_container">
                 <TextField
@@ -331,16 +344,13 @@ const Step5 = ({
     step,
     index,
 }) => {
-    const width = window.innerWidth
 
     if (index !== step)
         return null
     return <StepContainer
-        title="Напишите ваш комментарий"
-        subtitle="Тут стоит уточнить зачем нужно писать его и выбрать другое название"
-        actionLabels={{
-            next: width < 800 ? "Отправить" : "Подать обращение"
-        }}
+        title="Обращение"
+        subtitle="Опишите суть проблемы или предложения."
+
     >
         <TextField
             value={comment}
@@ -407,16 +417,21 @@ export const CreateAppealPage = () => {
 
     const handleSubmit = () => {
         const data = {
-            category,
             fullName,
             city,
             address,
             loc,
             photos: imgs,
             imgs,
-            comment,
-            token
+            comment
         }
+        if (!token)
+            data.anonim = true
+        else
+            data.token = token
+
+        if (category)
+            data.category = category
 
         // setAnonim(!token)
         // setValid(!token ? fullName && city && address : true)
@@ -435,6 +450,7 @@ export const CreateAppealPage = () => {
             open={true}
             maxWidth="sm"
             fullWidth
+
             fullScreen={width < 800}
             onClose={handleClose}
         >
@@ -449,7 +465,6 @@ export const CreateAppealPage = () => {
             >
                 <Typography
                     style={{
-                        fontSize: "14px",
                         color: "#BDBDBD"
                     }}
                 >
@@ -461,10 +476,11 @@ export const CreateAppealPage = () => {
                     >
                         <Step1 step={step} index={0} loc={loc} setLoc={setLoc} />
                         <Step2 step={step} index={1} imgs={imgs} setImgs={setImgs} />
-                        <Step3 step={step} index={2} category={category} setCategory={setCategory} />
+                        <Step5 step={step} index={2} setComment={setComment} comment={comment} />
+                        <Step3 step={step} index={3} category={category} setCategory={setCategory} />
                         <Step4
                             step={step}
-                            index={3}
+                            index={4}
                             setFullName={setFullName}
                             fullName={fullName}
                             setCity={setCity}
@@ -472,7 +488,6 @@ export const CreateAppealPage = () => {
                             setAddress={setAddress}
                             address={address}
                         />
-                        <Step5 step={step} index={4} setComment={setComment} comment={comment} />
                     </SwipeableViews>
                 </div>
             </StyledDialogContent>

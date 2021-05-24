@@ -9,12 +9,12 @@ import "./style.css"
 
 const SelectStatus = ({ s }) => {
     if (s > 0 && s < 5)
-        return  <span style={{ color: "#F2C94C" }}>На рассмотрении</span>;
+        return  <span style={{ fontSize: 16, color: "#F2C94C" }}>На рассмотрении</span>;
     switch (s) {
         case 5:
-            return <span style={{ color: "green" }}>Дан ответ</span>;
+            return <span style={{ fontSize: 16, color: "green" }}>Дан ответ</span>;
         default:
-            return <span style={{ color: "red" }}>Не рассмотрена</span>;
+            return <span style={{ fontSize: 16, color: "red" }}>Не рассмотрена</span>;
 
     }
 }
@@ -40,7 +40,7 @@ export const AppealContainer = ({
                     />
                 }
                 title={
-                    user?.name
+                    user?.name || "Аноним"
                 }
                 subheader={`${new Date(date).toLocaleDateString()} ${new Date(date).toLocaleTimeString()}  №${appeal_id}`}
                 action={

@@ -36,7 +36,6 @@ export const HomePage = () => {
     }, [])
 
     useEffect(()=> {
-        console.log(appeals)
         if (appeals?.length > 0) {
             const ri = Array.from({ length: appeals.length }, () => Math.random())
             console.log(ri)
@@ -76,7 +75,7 @@ export const HomePage = () => {
                     <Typography
                         variant={width < 800 ? "h3" : "h1"}
                         style={{
-                            fontWeight: width < 800 ? "700" : "900",
+                            fontWeight: width < 800 ? "500" : "700",
                             pointerEvents: "none"
                         }}
                     >

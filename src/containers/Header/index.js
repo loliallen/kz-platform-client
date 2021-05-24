@@ -89,7 +89,7 @@ export const Header = ({color, textColor}) => {
                                 <div style={{ padding: "16px 20px 16px 16px" }}>
                                     <UsersNotifications notificationsCount={0} />
                                 </div>
-                                <UserAvatar onClick={() => history.push('/personal')} />
+                                <UserAvatar src={app.user?.photo} alt={app.user?.name} onClick={() => history.push('/personal')} />
                             </>
                             :
                             <Link className="link"

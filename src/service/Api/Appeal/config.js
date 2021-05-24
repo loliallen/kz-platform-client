@@ -1,5 +1,5 @@
 import {BASENAME} from "../config"
 
 export default {
-    path: BASENAME+"/appeal."
+    path: BASENAME+"appeal."
 }

@@ -31,14 +31,16 @@ export const CurrentNew = ({
             {...rest}
         >
             <Typography
-                variant="h6"
+                variant="h5"
+                style={{ fontWeight: 500, lineHeight: "31.2px", marginBottom: "10px" }}
             >
                 { title || "Заголовок новости" }
             </Typography>
             <Typography
                 style={{
                     fontSize: "12px",
-                    color: "#9C9C9C"
+                    color: "#9C9C9C",
+                    marginBottom: "15px"
                 }}
             >
                 { new Date(time).toLocaleDateString() }

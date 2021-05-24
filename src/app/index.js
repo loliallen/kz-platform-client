@@ -32,7 +32,7 @@ const theme = createMuiTheme({
         }
     },
     typography: {
-
+        fontFamily: "Golos"
     }
 })
 

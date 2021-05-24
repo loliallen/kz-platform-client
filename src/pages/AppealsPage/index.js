@@ -69,20 +69,8 @@ const LatestAppealBlock = (props) => {
     const categories = useSelector(s => s.category.list)
     const [address, setAddress] = useState("")
 
-    // useEffect(() => {
-    //     if (latestAppeal && latestAppeal.coords)
-    //         Geocode.fromLatLng(latestAppeal.coords.lat.toString(), latestAppeal.coords.lng.toString()).then(
-    //             (response) => {
-    //                 console.log(response)
-    //                 const addr = response.results[0].formatted_address;
-    //                 console.log("addr", addr)
-    //                 setAddress(addr)
-    //             })
-    //             .catch(error => console.log(error))
-    // }, [latestAppeal])
     useEffect(()=>{
         if (latestAppeal) {
-            alert(JSON.stringify(latestAppeal.latlng))
             setAddress(latestAppeal.address)
         }
     }, [latestAppeal])
@@ -99,7 +87,7 @@ const LatestAppealBlock = (props) => {
             comment={latestAppeal.comment}
             status={0}
             date={Date.now()}
-            photos={latestAppeal.imgs}
+            photos={latestAppeal.photos}
             user={user}
         />
         <div>
@@ -324,7 +312,6 @@ export const AppealsPage = () => {
                         return <AppealContainer key={i} id={appeal.id} style={{ marginBottom: 20 }} key={i} {...appeal} appeal_id={appeal.id} category={appeal.category} />
                     })}
                 </div>
-
             </div>
         </Main>
     )

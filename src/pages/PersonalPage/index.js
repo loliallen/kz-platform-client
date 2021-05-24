@@ -1,5 +1,5 @@
 import { Divider, Grid, IconButton, Tabs, TextField, Typography, withStyles } from '@material-ui/core'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppealContainer } from '../../containers/AppealContainer'
 import { PersonEmail } from '../../containers/Icons/PersonEmail'
@@ -16,6 +16,7 @@ import appealAction from '../../storage/actions/appealAction'
 import appActions from '../../storage/actions/appActions'
 import { VkIcon } from '../../containers/Icons/Vk'
 import { Redirect } from 'react-router'
+import Api from '../../service/Api'
 
 const StyledTabs = withStyles({
     indicator: {
@@ -26,12 +27,14 @@ const StyledTabs = withStyles({
 
 const AboutMe = ({ user, token }) => {
     const dispatch = useDispatch()
+    const inputRef = useRef()
     const [edit, setEdit] = useState(false)
 
     const [name, setName] = useState("")
     const [city, setCity] = useState("")
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
+    const [photo, setPhoto] = useState(null)
     const [vk, setVk] = useState("")
 
     const handleSetName = (e) => setName(e.target.value)
@@ -39,6 +42,27 @@ const AboutMe = ({ user, token }) => {
     const handleSetEmail = (e) => setEmail(e.target.value)
     const handleSetPhone = (e) => setPhone(e.target.value)
     const handleSetVk = (e) => setVk(e.target.value)
+
+
+    const readFile = (file) => {
+
+        if (file.type === "image/jpeg" || file.type === "image/png") {
+            var fd = new FormData();
+            fd.append("var_file", file)
+            Api.Photo.create(fd)
+                .then(res => {
+                    setPhoto(res.url)
+                })
+            // var fr = new FileReader();
+
+            // fr.onload = () => {
+            //     pushFile(fr.result);
+            // }
+            // fr.onabort = () => console.log('aborted')
+            // fr.onerror = () => console.log("error")
+            // fr.readAsDataURL(file)
+        }
+    }
 
     const handleSave = () => {
         dispatch(appActions.saveEdits({
@@ -48,6 +72,7 @@ const AboutMe = ({ user, token }) => {
                 address: city === "" ? null : city,
                 email: email === "" ? null : email,
                 phone: phone === "" ? null : phone,
+                photo: photo,
             }
         }))
 
@@ -60,17 +85,23 @@ const AboutMe = ({ user, token }) => {
         <div
             className="aboutme__avatar_container"
         >
-            {user.image ? <img
+            { edit && <div role="button" className="upload_photo" onClick={()=>inputRef.current.click()}>
+                <svg height="70" width="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.667 49.5833V55.4166C11.667 56.9637 12.2816 58.4475 13.3755 59.5414C14.4695 60.6354 15.9532 61.25 17.5003 61.25H52.5003C54.0474 61.25 55.5311 60.6354 56.6251 59.5414C57.7191 58.4475 58.3337 56.9637 58.3337 55.4166V49.5833" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M20.417 32.0833L35.0003 46.6666L49.5837 32.0833" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M35 11.6667V46.6667" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            </div>}
+            {(user.photo && !photo) && <img
                 className="aboutme__avatar"
-                src={user.image}
+                src={user.photo}
                 alt="aboutme__avatar"
-            />
-                :
-                <div
-                    className="aboutme__avatar"
-                    style={{ backgroundColor: "lightgray" }}
-                />
-            }
+            />}
+            {photo && <img
+                className="aboutme__avatar"
+                src={photo}
+                alt="aboutme__avatar"
+            />}
         </div>
         {!edit ?
             <div className="aboutme__info_container">
@@ -218,7 +249,21 @@ const AboutMe = ({ user, token }) => {
                     </Grid>
             </div>
         }
+        <input
+            type="file"
+            hidden
+            ref={inputRef}
+            multiple
+            onChange={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
 
+                const files = e.target.files;
+                Object.keys(files).forEach(index => {
+                    readFile(files[index]);
+                })
+            }}
+        />
     </div>
 }
 

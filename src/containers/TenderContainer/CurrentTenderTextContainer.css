@@ -1,0 +1,28 @@
+.tender__content__info, .tender__content__comment{
+    margin-bottom: 20px;
+}
+.tender__content__info{
+    margin-top: 30px;
+}
+.tender__content__comment{
+    word-break: break-all;
+}
+
+.tender__content__info__inner{
+    display: flex;
+    align-items: center;
+    line-height: 28px;
+    margin-bottom: 10px;
+
+}
+.tender__content__info__inner svg{
+    margin-right: 10px;
+}
+
+
+.latest_tender__container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 20px;
+}

@@ -1,7 +1,30 @@
 .aboutme__container{
     display: flex;
 }
+.upload_photo{
+    border-radius: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: hsla(0, 0%, 0%, 0.5);
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 3;
+    transition: all 300ms ease;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.aboutme__avatar_container:hover > .upload_photo {
+    opacity: 1;
+    pointer-events: all;
+    cursor: pointer;
+
+}
 .aboutme__avatar_container{
     width: 260px;
     height: 260px;
@@ -10,6 +33,7 @@
     margin-right: 40px;
 
     flex-shrink: 0;
+    position: relative;
 }
 .aboutme__avatar{
     width: 100%;

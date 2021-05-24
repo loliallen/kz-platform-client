@@ -16,7 +16,7 @@ const Comment = ({ id, parent_author, author, text, children, giveAnswer, create
     <>
         <ListItem>
             <ListItemAvatar>
-                <Avatar />
+                <Avatar src={author?.photo} alt={author?.name} />
             </ListItemAvatar>
             <ListItemText
                 primary={author.name}

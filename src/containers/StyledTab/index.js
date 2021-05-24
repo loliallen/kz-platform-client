@@ -6,7 +6,7 @@ export const StyledTab = withStyles({
         opacity: 0.2
     },
     wrapper: {
-        fontWeight: "900",
+        fontWeight: "700",
         textTransform: "none",
         fontSize: "32px",
         flexDirection: "row",
