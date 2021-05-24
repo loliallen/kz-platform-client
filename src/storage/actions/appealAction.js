@@ -18,6 +18,10 @@ const set = (data) => ({
     type: appeal.SET,
     payload: data
 })
+const set_current = (data) => ({
+    type: appeal.SET_CURRENT,
+    payload: data
+})
 
 const set_latest = (data) => ({
     type: appeal.SET_LATEST,
@@ -35,5 +39,6 @@ export default {
     create,
     set_latest,
     set,
-    set_filter
+    set_filter,
+    set_current
 }

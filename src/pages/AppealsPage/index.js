@@ -18,6 +18,7 @@ import { Link } from "react-router-dom"
 import "./style.css"
 import { FilterIcon } from '../../containers/Icons/FilterIcon'
 import { api_key } from '../../utils/mapConfig'
+import categoryActions from '../../storage/actions/categoryActions'
 
 
 
@@ -109,6 +110,68 @@ const LatestAppealBlock = (props) => {
                 <div className="appeal__content__info__inner">
                     <BriefcaseIcon />
                     <span>{categories.find(c => c.id == latestAppeal.category).name}</span>
+                </div>
+                <div className="appeal__content__info__inner">
+                    <PersonLocation />
+                    <span>{address}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+const CurrentAppealBlock = (props) => {
+    const appeal = useSelector(s => s.appeal.current)
+    const categories = useSelector(s => s.category.list)
+    const [address, setAddress] = useState("")
+    const [categoryLabel, setCategoryLabel] = useState("")
+    const user = appeal?.author
+    useEffect(()=>{
+        if (appeal) {
+            setAddress(appeal.address)
+        }
+    }, [appeal])
+
+    useEffect(() => {
+        if (categories.length > 0 && appeal) {
+            setCategoryLabel(categories.find(c => c.id == appeal.category)?.name || "------")
+        }
+    }, [categories.length, appeal])
+
+
+    if (!appeal)
+        return null
+    return <div
+        className="latest_appeal__container"
+    >
+        <AppealContainer
+            appeal_id={appeal.id || "XXXXXX"}
+            category={appeal.category}
+            comment={appeal.comment}
+            status={0}
+            date={Date.now()}
+            photos={appeal.photos}
+            user={user}
+        />
+        <div>
+            <div style={{
+                height: "300px",
+                marginBottom: "20px",
+                position: 'relative'
+            }}>
+                <Map
+                    styles={{
+                        height: "300px",
+                        borderRadius: "20px",
+                        width: "100%"
+                    }}
+                    center={appeal.coords}
+                />
+            </div>
+            <div>
+                <div className="appeal__content__info__inner">
+                    <BriefcaseIcon />
+                    <span>{appeal.category?.title}</span>
                 </div>
                 <div className="appeal__content__info__inner">
                     <PersonLocation />
@@ -252,14 +315,15 @@ export const AppealsPage = () => {
 
     useEffect(() => {
         dispatch(appealAction.request())
+        dispatch(categoryActions.request())
         console.log(match)
     }, [])
 
-    // useEffect(() => {
-    //     if (appeals.length > 0 && match.params.id){
-    //         document.getElementById(match.params.id)?.scrollIntoView()
-    //     }
-    // }, [appeals, match.params.id])
+    useEffect(() => {
+        if (appeals.length > 0 && match.params.id){
+            dispatch(appealAction.set_current(appeals.find(e => e.id == match.params.id)))
+        }
+    }, [appeals, match.params.id])
 
     return (
         <Main>
@@ -267,6 +331,7 @@ export const AppealsPage = () => {
                 title="Обращения"
             />
             <LatestAppealBlock />
+            <CurrentAppealBlock />
             <div className="appeal_filters__container">
                 <Filters
                     getAppealCounter={getFilterCounter}

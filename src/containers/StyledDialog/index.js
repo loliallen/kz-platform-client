@@ -3,7 +3,7 @@ import { withStyles, Dialog, Slide } from "@material-ui/core"
 
 export const StyledDialog_ = withStyles({
     paper: {
-        height: "577px",
+        minHeight: "577px",
         borderRadius: "20px",
         '@media (max-width: 800px)' : {
             borderBottomLeftRadius: "0px",
@@ -14,7 +14,7 @@ export const StyledDialog_ = withStyles({
 
 export const StyledDialog_sm = withStyles({
     paper: {
-        height: "406px",
+        minHeight: "406px",
         borderRadius: "20px",
         '@media (max-width: 800px)' : {
             borderBottomLeftRadius: "0px",

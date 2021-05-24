@@ -255,7 +255,7 @@ const GoogleMapComponentWithMarker = withGoogleMap(
                 >
                     <div>
                         <h4>{props.infoboxMessage}</h4>
-                        <a className="link" href={`/appeals#${props.markerId}`}>{"> Подробнее"}</a>
+                        <a className="link" href={`/appeals/${props.markerId}`}>{"> Подробнее"}</a>
                     </div>
                 </InfoWindow>
             )}

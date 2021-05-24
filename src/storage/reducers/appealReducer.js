@@ -6,6 +6,7 @@ const initialState = {
     plist: [],
     mine: [],
     latest: null,
+    current: null,
     loaded: false,
     counters: {
         total: 0,
@@ -49,6 +50,9 @@ export default (state = initialState, action) => {
                 return state
         case types.APPEAL.SET_LATEST:
             return {... state, latest: action.payload }
+
+        case types.APPEAL.SET_CURRENT:
+            return {...state, current: action.payload }
 
         case types.APPEAL.SET_MINE:
             const list = action.payload.map(e => {

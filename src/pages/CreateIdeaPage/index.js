@@ -14,6 +14,7 @@ import { ImagePreview } from '../../containers/ImagePreview'
 import { ImapeAppend } from '../../containers/ImageAppend'
 import ideaAction from '../../storage/actions/ideaActions'
 import Api from '../../service/Api'
+import { StepContainer } from '../../containers/StepContainer'
 
 const DialogActionsContainer = ({
     step,
@@ -50,31 +51,6 @@ const DialogActionsContainer = ({
     </DialogActions>
 }
 
-const StepContainer = ({
-    title,
-    subtitle,
-    children
-}) => {
-    return <>
-        <Typography
-            variant="h5"
-            style={{
-                fontWeight: "600"
-            }}
-        >
-            {title}
-        </Typography>
-        <Typography
-            style={{
-                marginTop: "10px",
-                marginBottom: "30px",
-            }}
-        >
-            {subtitle}
-        </Typography>
-        {children}
-    </>
-}
 
 const StyledDialogContent = withStyles({
     paper: {

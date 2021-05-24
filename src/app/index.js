@@ -69,7 +69,7 @@ export const App = () => {
                 <Route path="/home" component={()=><HomePage/>}/>
                 <Route path="/news" component={()=><NewsPage/>}/>
                 <Route path="/personal" component={()=><PersonalPage/>}/>
-                <Route path="/appeals/" component={()=><AppealsPage/>}/>
+                <Route path="/appeals/:id?" component={()=><AppealsPage/>}/>
                 <Route path="/ideas" component={()=><IdeasPage/>}/>
                 <Route path="/contacts" component={()=><ContactsPage/>}/>
                 <Route exact path="/tenders" component={()=><TendersPage/>}/>

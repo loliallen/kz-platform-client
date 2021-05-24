@@ -1,5 +1,6 @@
 import { Avatar, Card, CardContent, CardHeader, Grid, Typography, withStyles } from '@material-ui/core'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { BriefcaseIcon } from '../Icons/Brifecase'
 import { PersonLocation } from '../Icons/PersonLocation'
 import { ImagePreview } from '../ImagePreview'
@@ -42,7 +43,12 @@ export const AppealContainer = ({
                 title={
                     user?.name || "Аноним"
                 }
-                subheader={`${new Date(date).toLocaleDateString()} ${new Date(date).toLocaleTimeString()}  №${appeal_id}`}
+                subheader={
+                <>
+                    {`${new Date(date).toLocaleDateString()} ${new Date(date).toLocaleTimeString()}`}
+                    <Link className="link" target="_top" to={`/appeals/${appeal_id}`}> №{appeal_id}</Link>
+                </>
+                }
                 action={
                     <SelectStatus s={status} />
                 }
