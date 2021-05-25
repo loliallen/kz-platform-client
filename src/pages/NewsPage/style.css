@@ -1,12 +1,14 @@
 .news_container{
     display: flex;
+
+    justify-content: space-between;
 }
 
 .news_container > .left {
-    flex: 4;
+    max-width: 700px;
 }
 .news_container > .right {
-    flex: 3;
+    max-width: 450px;
 }
 
 @media screen and (max-width: 800px) {
@@ -15,5 +17,10 @@
     }
     .news_container > * {
         word-break: break-all;
+        justify-content: none;
+    }
+    .news_container > .right {
+        flex: 1;
+        max-width: none;
     }
 }

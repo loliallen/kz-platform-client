@@ -66,6 +66,7 @@ export const NewsPage = () => {
             <StyledTabs
                 value={page}
                 onChange={handleChangeTab}
+                style={{ marginBottom: 40 }}
             >
                 <StyledTab label="Общие" />
                 <StyledTab label="Местные" />

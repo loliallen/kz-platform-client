@@ -34,7 +34,7 @@ export const AppealContainer = ({
     ...rest
 }) => {
     return (
-        <StyledCard {...rest}>
+        <StyledCard elevation={0} {...rest}>
             <StyledCardHeader
                 avatar={
                     <Avatar

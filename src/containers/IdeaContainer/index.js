@@ -31,6 +31,7 @@ export const IdeaContainer = ({
 }) => {
     return (
         <SStyledCard
+            elevation={0}
             style={{ border: `2px solid ${liked ? GREEN : disliked ? RED : "white"}` }}
             {...rest}
         >

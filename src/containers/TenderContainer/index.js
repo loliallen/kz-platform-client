@@ -48,7 +48,7 @@ export const TenderContainer = ({
         return l
     }
     return (
-        <SStyledCard {...rest}>
+        <SStyledCard elevation={0} {...rest}>
             <StyledCardHeader
                 avatar={
                     <Avatar

@@ -12,7 +12,7 @@ const StyledListItemText = withStyles({
 
 const StyledListItem = withStyles({
     gutters: {
-        padding: "0px"
+        padding: "20px 0px"
     }
 })(ListItem)
 
@@ -36,7 +36,6 @@ const New = ({ title, time, new_item, address, onClick }) => {
                         style: {
                             color: "black",
                             fontSize: "16px",
-                            marginBottom: 12,
                             fontWeight: 550
                         }
                     }}

@@ -5,7 +5,11 @@ export const StyledCard = withStyles({
         borderRadius: 20,
         padding: 10,
         backgroundColor: "#F9F9F9"
+    },
+    elevation: {
+        boxShadow: "none"
     }
+
 })(Card)
 
 
