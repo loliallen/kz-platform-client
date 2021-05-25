@@ -8,7 +8,6 @@ const Service = Api.Tender
 function* requestWatcher({ payload }){
     try {
         const res = yield call(Service.get, payload)
-        console.log(res)
         if (payload)
             yield put({type: BaseTypes.SET_CURRENT, payload: res.tenders[0] })
         else

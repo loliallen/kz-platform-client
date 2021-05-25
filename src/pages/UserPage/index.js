@@ -9,8 +9,6 @@ import { Main } from '../../containers/Main'
 import { StyledTab } from '../../containers/StyledTab'
 import { StyledButton } from '../../containers/StyledButton'
 import { Header } from "../../containers/Header"
-
-import "./style.css"
 import { Edit } from '@material-ui/icons'
 import appealAction from '../../storage/actions/appealAction'
 import appActions from '../../storage/actions/appActions'
@@ -26,68 +24,24 @@ const StyledTabs = withStyles({
 })(Tabs)
 
 
-const AboutMe = ({ user, token }) => {
-    const dispatch = useDispatch()
-    const inputRef = useRef()
-    const [edit, setEdit] = useState(false)
-    const canEdit = !!token
-    const [name, setName] = useState("")
-    const [city, setCity] = useState("")
-    const [email, setEmail] = useState("")
-    const [phone, setPhone] = useState("")
-    const [photo, setPhoto] = useState(null)
-    const [vk, setVk] = useState("")
-
-    const handleSetName = (e) => setName(e.target.value)
-    const handleSetCity = (e) => setCity(e.target.value)
-    const handleSetEmail = (e) => setEmail(e.target.value)
-    const handleSetPhone = (e) => setPhone(e.target.value)
-    const handleSetVk = (e) => setVk(e.target.value)
-
-
-    const readFile = (file) => {
-
-        if (file.type === "image/jpeg" || file.type === "image/png") {
-            var fd = new FormData();
-            fd.append("var_file", file)
-            Api.Photo.create(fd)
-                .then(res => {
-                    setPhoto(res.url)
-                })
-        }
-    }
-
-    const handleSave = () => {
-        if (canEdit)
-            dispatch(appActions.saveEdits({
-                token: token,
-                data: {
-                    name: name === "" ? null : name,
-                    address: city === "" ? null : city,
-                    email: email === "" ? null : email,
-                    phone: phone === "" ? null : phone,
-                    photo: photo,
-                }
-            }))
-    }
-    if (!user && !token)
-        return <Redirect to="/home/auth" />
-    if (!user)
+const AboutMe = ({ user }) => {
+    if(!user)
         return null
-
-    if (!user)
-        return null
-    return <UserContainer user={user} edit={edit} setEdit={setEdit}/>
+    return <UserContainer user={user} />
 }
 
-const MyAppeals = ({ user, token }) => {
+const MyAppeals = ({ user }) => {
     const dispatch = useCallback(useDispatch(), [])
-    const appeals = useSelector(s => s.appeal.mine)
-    const canEdit = !!token
+    const appeals = useSelector(s => s.appeal.current_user_mine)
+    const canEdit = false
 
     useEffect(() => {
-        dispatch(appealAction.requestMine(token))
-    }, [])
+        if(user && user.id)
+            dispatch(appealAction.requestUser(user.id))
+    }, [user])
+
+    if (!user)
+        return null
     return <div className="myappeals__container">
         {appeals.map((appeal, index) =>
             <AppealContainer key={index} {...appeal} />
@@ -102,18 +56,20 @@ const TabPanel = ({ index, page, children }) => {
 }
 
 
-export const PersonalPage = () => {
-    const [page, setPage] = useState(0)
+export const UserPage = () => {
     const match = useRouteMatch()
-
+    const user = useSelector(s => s.app.current_user)
+    const dispatch = useCallback(useDispatch())
     const userId = match.params.id
 
-    const user = useSelector(s => s.app.user)
-    const token = useSelector(s => s.app.token)
+    const [page, setPage] = useState(0)
 
 
     const handleChangePage = (e, v) => setPage(v)
 
+    useEffect(()=>{
+        dispatch(appActions.getUserInfo(userId))
+    },[])
 
     return (
         <>
@@ -137,7 +93,7 @@ export const PersonalPage = () => {
                     page={page}
                     index={1}
                 >
-                    <MyAppeals user={user} token={token} />
+                    <MyAppeals user={user}/>
                 </TabPanel>
             </Main>
         </>

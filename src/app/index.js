@@ -18,6 +18,7 @@ import { CreateIdeaPage } from '../pages/CreateIdeaPage'
 import { ImageViewPage } from '../pages/ImageViewPage'
 import { LogoutPage } from '../pages/LogoutPage'
 import { ContactsPage } from '../pages/ContactsPage'
+import { UserPage } from '../pages/UserPage'
 // import Geocode from "react-geocode"
 
 // Geocode.setApiKey("AIzaSyDjU7YWT1VGnfDpyU_87VznB6xGNRWXpJM")
@@ -36,17 +37,11 @@ const theme = createMuiTheme({
     }
 })
 
-const fromGeocode = async () => {
-    // const res = await Geocode.fromLatLng("55.7267532", "49.1759529")
-    // console.log(res)
-}
-
 
 export const App = () => {
     const dispatch = useCallback(useDispatch(), [])
 
     useEffect(()=>{
-        fromGeocode()
         const setPosition = (position) => {
             // yield put(actions.app.setPosition(position))
             // cast a region after position here
@@ -56,7 +51,7 @@ export const App = () => {
             dispatch(actions.app.setPosition({lat,lng}))
         }
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(setPosition, (err) => console.log(err));
+            navigator.geolocation.getCurrentPosition(setPosition);
         }
         dispatch(actions.app.init())
     }, [])
@@ -74,6 +69,7 @@ export const App = () => {
                 <Route path="/contacts" component={()=><ContactsPage/>}/>
                 <Route exact path="/tenders" component={()=><TendersPage/>}/>
                 <Route path="/tenders/current" component={()=><TenderCurrentPage/>}/>
+                <Route path="/users/:id" component={()=><UserPage />}/>
                 <Route path="/logout" component={()=><LogoutPage />}/>
             </Switch>
             <Route path="/*/auth" component={()=><AuthorizationPage />}/>

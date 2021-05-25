@@ -9,12 +9,57 @@ import { StyledButton } from '../../containers/StyledButton'
 import "./style.css"
 import Map from '../../components/Map'
 import { useDispatch, useSelector } from 'react-redux'
+import Geocode from 'react-geocode'
 import actions from '../../storage/actions'
 import { ImagePreview } from '../../containers/ImagePreview'
 import { ImapeAppend } from '../../containers/ImageAppend'
 import appealAction from '../../storage/actions/appealAction'
 import Api from '../../service/Api'
 import { StepContainer } from '../../containers/StepContainer'
+import { geocode_key } from '../../utils/mapConfig'
+
+Geocode.setApiKey(geocode_key)
+Geocode.setLanguage("ru-Ru")
+
+const types = {
+    street: ["route", "establishment", "point_of_interest", "transit_station"],
+    city: "locality",
+    street_number: "street_number"
+}
+
+const findInTypes = (t1, t2) => {
+    for (let i = 0; i < t1.length; i++) {
+        let j = t2.indexOf(t1[i])
+        if (j > -1)
+            return j
+    }
+}
+
+const fromGeocode = async (lat, lng, setAddress, setCity) => {
+    const res = await Geocode.fromLatLng(lat.toString(), lng.toString())
+    let addr = res.results[0].address_components
+    let sn = ""
+    let s = ""
+    let c = ""
+    for(let o of addr){
+        let sni = o.types.indexOf(types.street_number)
+        let si = findInTypes(o.types, types.street)
+        let ci = o.types.indexOf(types.city)
+        if ( sni > -1 )
+            sn = o.long_name
+        if (si > -1 )
+            s = o.long_name
+        if (ci > -1)
+            c = o.long_name
+    }
+    let st_addres = [s, sn].join(',')
+    if (st_addres[st_addres.length - 1] == ",")
+        st_addres.replace(',', "")
+    setAddress(st_addres)
+    setCity(c)
+}
+
+// Geocode.setApiKey(api_key)
 
 const DialogActionsContainer = ({
     step,
@@ -113,14 +158,6 @@ const Step2 = ({
                 .then(res => {
                     pushFile(res.url)
                 })
-            // var fr = new FileReader();
-
-            // fr.onload = () => {
-            //     pushFile(fr.result);
-            // }
-            // fr.onabort = () => console.log('aborted')
-            // fr.onerror = () => console.log("error")
-            // fr.readAsDataURL(file)
         }
     }
 
@@ -162,11 +199,11 @@ const Step2 = ({
                         />
                     </Grid>
                 )}
-                <Grid item>
+                {imgs.length <= 5 && <Grid item>
                     <ImapeAppend
                         onClick={() => inputRef.current.click()}
                     />
-                </Grid>
+                </Grid>}
             </Grid>
             <input
                 type="file"
@@ -178,7 +215,8 @@ const Step2 = ({
                     e.stopPropagation()
 
                     const files = e.target.files;
-                    Object.keys(files).forEach(index => {
+
+                    Object.keys(files).slice(0, 5).forEach(index => {
                         readFile(files[index]);
                     })
                 }}
@@ -371,6 +409,11 @@ export const CreateAppealPage = () => {
         if (position)
             setLoc(position)
     }, [position])
+
+    useEffect(()=>{
+        if (loc && loc.lat && loc.lng)
+            fromGeocode(loc.lat, loc.lng, setAddress, setCity)
+    },[loc])
 
     const [step, setStep] = useState(0)
 

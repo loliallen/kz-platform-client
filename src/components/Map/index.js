@@ -23,12 +23,6 @@ class MapContainer extends Component {
         center: this.props.center || { lat: 55.73, lng: 49.2 },
         zoom: 14
     }
-    componentDidMount() {
-        console.log(this.props.center)
-    }
-    componentDidUpdate() {
-        console.log("upd", this.props.center)
-    }
     render() {
         const containerStyle = this.props.styles
         const points = this.props.points || []
@@ -50,7 +44,7 @@ class MapContainer extends Component {
                 zoomControl={false}
                 panControl={false}
                 streetViewControl={false}
-
+                style={this.props.style}
                 center={this.props.center}
                 initialCenter={this.state.center}
             >

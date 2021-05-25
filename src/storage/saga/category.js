@@ -9,7 +9,6 @@ const Service = Api.Category
 function *GetWatcher() {
     try {
         const payload = yield call(Service.get)
-        console.log(payload)
         yield put({ type: BaseTypes.SET, payload: payload.categories })
     } catch {
         yield put({ type: BaseTypes.SET, payload: [] })

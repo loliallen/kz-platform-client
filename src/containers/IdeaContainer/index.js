@@ -1,4 +1,4 @@
-import { Avatar, CardActionArea, CardContent, Divider, IconButton, Typography } from '@material-ui/core'
+import { Avatar, CardActionArea, CardContent, Divider, IconButton, Typography, withStyles } from '@material-ui/core'
 import React from 'react'
 import { ArrowUpIcon } from '../Icons/ArrowUp'
 import { ArrowDownIcon } from '../Icons/ArrowDown'
@@ -10,6 +10,11 @@ import "./style.css"
 const GREEN = "#219653"
 const RED = "#EC2F2F"
 
+const SStyledCard = withStyles({
+    root: {
+        paddingBottom: "0px"
+    }
+})(StyledCard)
 export const IdeaContainer = ({
     date,
     title,
@@ -23,7 +28,7 @@ export const IdeaContainer = ({
     ...rest
 }) => {
     return (
-        <StyledCard
+        <SStyledCard
             style={{ border: `2px solid ${liked ? GREEN : disliked ? RED : "white"}` }}
             {...rest}
         >
@@ -59,7 +64,7 @@ export const IdeaContainer = ({
                         <IconButton>
                             <CommentBoxIcon style={{ fill: "transparent", width: 32, height: 32, flex: 1 }} />
                         </IconButton>
-                        <div style={{ fontSize: 14, fontWeight: 500 }}>
+                        <div style={{ fontWeight: 500 }}>
                             {comments} Ответов
                         </div>
                     </div>
@@ -67,9 +72,10 @@ export const IdeaContainer = ({
                         <IconButton>
                             <ArrowUpIcon style={{ width: 30, height: 30, stroke: liked ? GREEN : "#BDBDBD" }} />
                         </IconButton>
-                        <div style={{ color: liked ? GREEN : disliked ? RED : "#BDBDBD" }}>
+                        <div style={{ color: liked ? GREEN : disliked ? RED : "#BDBDBD", fontWeight: 500 }}>
                             {liked && likes}
                             {disliked && dislikes}
+                            {!(disliked && liked) && "0"}
                         </div>
                         <IconButton>
                             <ArrowDownIcon style={{ width: 30, height: 30, stroke: disliked ? RED : "#BDBDBD" }} />
@@ -77,6 +83,6 @@ export const IdeaContainer = ({
                     </div>
                 </div>
             </div>
-        </StyledCard>
+        </SStyledCard>
     )
 }

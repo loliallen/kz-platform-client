@@ -38,7 +38,6 @@ export const HomePage = () => {
     useEffect(()=> {
         if (appeals?.length > 0) {
             const ri = Array.from({ length: appeals.length }, () => Math.random())
-            console.log(ri)
             let l = 4
             let r = []
             for (let i = 0; i < appeals.length; i++){

@@ -4,6 +4,11 @@ const get = () => ({
     type: types.NEWS.REQUEST
 })
 
+const get_local = regionId => ({
+    type: types.NEWS.REQUEST_LOCAL,
+    payload: regionId
+})
+
 
 const set = (data) => ({
     type: types.NEWS.SET,
@@ -18,5 +23,6 @@ const set_current = (data) => ({
 export default {
     get,
     set,
-    set_current
+    set_current,
+    get_local
 }

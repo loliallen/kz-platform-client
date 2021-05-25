@@ -10,11 +10,17 @@ const StyledListItemText = withStyles({
     }
 })(ListItemText)
 
+const StyledListItem = withStyles({
+    gutters: {
+        padding: "0px"
+    }
+})(ListItem)
+
 const New = ({ title, time, new_item, address, onClick }) => {
 
     return (
         <>
-            <ListItem
+            <StyledListItem
                 onClick={onClick}
                 button
             >
@@ -36,20 +42,21 @@ const New = ({ title, time, new_item, address, onClick }) => {
                     secondary={title || "Заголовок новости"}
                     primary={new Date(time).toLocaleDateString()}
                 />
-            </ListItem>
+            </StyledListItem>
             <Divider />
         </>
     )
 }
 export const NewsContainer = ({
     news,
-    onSelect
+    onSelect,
+    ...rest
 }) => {
     return (
-        <>
-            <List>
-                {news.map((n, i) => <New onClick={() => onSelect(n)} key={i} {...n} />)}
-            </List>
-        </>
+        <List
+            {...rest}
+        >
+            {news.map((n, i) => <New onClick={() => onSelect(n)} key={i} {...n} />)}
+        </List>
     )
 }

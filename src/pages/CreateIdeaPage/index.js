@@ -131,8 +131,6 @@ const Step2 = ({
             fr.onload = () => {
                 pushFile(fr.result);
             }
-            fr.onabort = () => console.log('aborted')
-            fr.onerror = () => console.log("error")
             fr.readAsDataURL(file)
         }
         var fd = new FormData()

@@ -5,7 +5,7 @@ import "./style.css"
 export const ImagePreview = (props) => {
     const match = useRouteMatch()
     return (
-        <Link className="link" className="image_preview__container" to={match.path +'/image/'+encodeURIComponent(props.src)}>
+        <Link className="link" className="image_preview__container" to={match.url +'/image/'+encodeURIComponent(props.src)}>
             <img className="image_preview__img"{...props}/>
         </Link>
     )

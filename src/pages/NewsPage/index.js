@@ -27,6 +27,7 @@ export const NewsPage = () => {
     const dispatch = useCallback(__dispatch,[])
 
     const newsList = useSelector(state => state.news.list)
+    const localNewsList = useSelector(state => state.news.local)
     const currentNew = useSelector(state => state.news.current)
     const regions = useSelector(s => s.app.regions)
     const regionId = useSelector(s => s.app.regionId)
@@ -35,11 +36,27 @@ export const NewsPage = () => {
 
 
     const [page, setPage] = useState(0)
+    const [currentNewsList, setCurrentNewsList] = useState([])
+
+
+    useEffect(()=>{
+        if (page === 0){
+            setCurrentNewsList(newsList)
+        }
+        if (page === 1) {
+            setCurrentNewsList(localNewsList)
+        }
+    },[newsList, localNewsList, page])
 
     useEffect(()=>{
         dispatch(actions.news.get())
         dispatch(actions.app.requestRegions())
     }, [])
+
+    useEffect(()=>{
+        if (regionId)
+            dispatch(actions.news.get_local(regionId))
+    }, [regionId])
 
     const selectNew = v => dispatch(actions.news.set_current(v))
     const handleChangeTab = (e, v) => setPage(v)
@@ -56,6 +73,7 @@ export const NewsPage = () => {
             {page === 1 && <FormControl
                 fullWidth
                 variant="outlined"
+                style={{ marginBottom: 20 }}
             >
                 <InputLabel id="select-sphere-label">Регион</InputLabel>
                 <Select
@@ -77,10 +95,11 @@ export const NewsPage = () => {
                 </Select>
             </FormControl>}
             <NewsFlexContainer>
-                <CurrentNew {...currentNew}/>
+                <CurrentNew {...currentNew} className="left"/>
                 <NewsContainer
                     onSelect={selectNew}
-                    news={newsList}
+                    news={currentNewsList}
+                    className="right"
                 />
             </NewsFlexContainer>
         </Main>

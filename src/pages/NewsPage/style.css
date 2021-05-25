@@ -2,8 +2,11 @@
     display: flex;
 }
 
-.news_container > * {
-    flex: 1;
+.news_container > .left {
+    flex: 3;
+}
+.news_container > .right {
+    flex: 2;
 }
 
 @media screen and (max-width: 800px) {

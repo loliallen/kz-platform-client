@@ -22,6 +22,7 @@ const SelectStatus = ({ s }) => {
 
 export const AppealContainer = ({
     appeal_id,
+    id,
     comment,
     category,
     photos,
@@ -29,6 +30,7 @@ export const AppealContainer = ({
     address,
     date,
     user,
+    organId,
     ...rest
 }) => {
     return (
@@ -46,7 +48,7 @@ export const AppealContainer = ({
                 subheader={
                 <>
                     {`${new Date(date).toLocaleDateString()} ${new Date(date).toLocaleTimeString()}`}
-                    <Link className="link" target="_top" to={`/appeals/${appeal_id}`}> №{appeal_id}</Link>
+                    <Link className="link" target="_top" to={`/appeals/${appeal_id || id}`}> №{appeal_id || id}</Link>
                 </>
                 }
                 action={

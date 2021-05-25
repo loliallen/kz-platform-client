@@ -45,13 +45,13 @@ export const CurrentNew = ({
             >
                 { new Date(time).toLocaleDateString() }
             </Typography>
-            {new_content.map(p => {
+            {new_content.map((p, i) => {
                 const { type } = p
                 if (type === "text")
-                return <Typography>
+                return <Typography key={i}>
                         {p.text}
                     </Typography>
-                return <div className="new_photo"><img src={p.url_photo} alt="photo"/></div>
+                return <div className="new_photo" key={i}><img src={p.url_photo} alt="photo"/></div>
             })}
         </StyledPaper>
     )

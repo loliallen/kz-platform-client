@@ -33,7 +33,7 @@ const FormContainer = ({
         <DialogActions className="login_container login_action">
             {actionA && <div className="login_action__a">
                 <Link className="link"
-                    style={{ textDecoration: "none", color: "#2F80ED", width: "100%" }}
+                    style={{ textDecoration: "none", color: "#2F80ED", width: "100%", fontSize: 16 }}
                     to="/forgot"
                 >
                     Забыли пароль?
@@ -87,7 +87,7 @@ const LoginPanel = () => {
         <div className="login_container">
             <TextField
                 variant="outlined"
-                label="Логин"
+                label="Адрес электронной почты или логин"
                 fullWidth
                 value={login}
                 onChange={handleChangeLogin}
@@ -135,7 +135,7 @@ const RegisterPanel = () => {
         >
             <TextField
                 variant="outlined"
-                label="Логин"
+                label="Адрес электронной почты или логин"
                 fullWidth
                 value={login}
                 onChange={handleChangeLogin}

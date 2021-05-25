@@ -18,6 +18,11 @@ const StyledCardContent = withStyles({
         paddingBottom: "0px!important"
     }
 })(CardContent)
+const SStyledCard = withStyles({
+    root: {
+        paddingBottom: "0px"
+    }
+})(StyledCard)
 
 export const TenderContainer = ({
     id,
@@ -29,8 +34,8 @@ export const TenderContainer = ({
     comments,
     liked,
     disliked,
-    likes,
-    dislikes,
+    likes = 0,
+    dislikes = 0,
     onClick,
     ...rest
 }) => {
@@ -43,7 +48,7 @@ export const TenderContainer = ({
         return l
     }
     return (
-        <StyledCard {...rest}>
+        <SStyledCard {...rest}>
             <StyledCardHeader
                 avatar={
                     <Avatar
@@ -100,7 +105,7 @@ export const TenderContainer = ({
                             <IconButton onClick={onClick}>
                                 <CommentBoxIcon style={{ fill: "transparent", width: 32, height: 32, flex: 1 }} />
                             </IconButton>
-                            <div style={{ fontSize: 14 }}>
+                            <div style={{ fontSize: 14, fontWeight: 500 }}>
                                 {getCommentsLength()} Ответов
                             </div>
                         </div>
@@ -108,9 +113,10 @@ export const TenderContainer = ({
                             <IconButton>
                                 <ArrowUpIcon style={{ width: 30, height: 30, stroke: liked ? GREEN : "#BDBDBD" }} />
                             </IconButton>
-                            <div style={{ color: liked ? GREEN : disliked ? RED : "#BDBDBD" }}>
+                            <div style={{ color: liked ? GREEN : disliked ? RED : "#BDBDBD", fontWeight: 500  }}>
                                 {liked && likes}
                                 {disliked && dislikes}
+                                {(!disliked && !liked) && "0"}
                             </div>
                             <IconButton>
                                 <ArrowDownIcon style={{ width: 30, height: 30, stroke: disliked ? RED : "#BDBDBD" }} />
@@ -120,6 +126,6 @@ export const TenderContainer = ({
                 </div>
 
             </StyledCardContent>
-        </StyledCard>
+        </SStyledCard>
     )
 }

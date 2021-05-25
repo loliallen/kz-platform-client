@@ -11,7 +11,6 @@ export default (state = initalState, action) => {
         case types.TENDER.SET:
             if (action.payload.code === 200)
                 return { ...state, list: action.payload.tenders, loaded: true }
-            console.log("error")
         case types.TENDER.SET_CURRENT:
             return { ...state, current: action.payload }
         default:

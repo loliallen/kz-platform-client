@@ -13,7 +13,9 @@ export function *SagaWatcher(){
     yield takeEvery(types.APP.REQUEST_REGION, app.RequestRegionWatcher)
     yield takeEvery(types.APPEAL.REQUEST, appeal.GetWatcher)
     yield takeEvery(types.APPEAL.REQUEST_MINE, appeal.GetMineWatcher)
+    yield takeEvery(types.APPEAL.REQUEST_USER, appeal.GetUserMineWatcher)
     yield takeEvery(types.NEWS.REQUEST, news.GetWatcher)
+    yield takeEvery(types.NEWS.REQUEST_LOCAL, news.GetLocalWatcher)
     yield takeEvery(types.CATEGORY.REQUEST, category.GetWatcher)
     yield takeEvery(types.TENDER.REQUEST, tender.requestWatcher)
     yield takeEvery(types.IDEA.CREATE, idea.createWatcher)
@@ -28,5 +30,6 @@ export function *SagaWatcher(){
     yield takeEvery(types.APP.SAVE_EDITS, app.SaveEditWatcher)
     yield takeEvery(types.APP.REGISTER, app.RegisterWatcher)
     yield takeEvery(types.APP.SET_TOKEN, app.SetTokenWatcher)
+    yield takeEvery(types.APP.REQUEST_USER, app.RequestUserWatcher)
 }
 

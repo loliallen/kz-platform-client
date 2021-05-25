@@ -12,9 +12,20 @@ function *GetWatcher() {
         const payload = yield call(Service.get, region)
         yield put({ type: BaseTypes.SET, payload: payload.news })
     } catch (error){
-        console.log(error)
+        console.error(error)
     }
 }
+
+function* GetLocalWatcher({ payload }){
+    let region = payload
+
+
+    const _payload = yield call(Service.get, region)
+    yield put({ type: BaseTypes.SET_LOCAL, payload: _payload.news })
+
+}
+
 export default {
-    GetWatcher
+    GetWatcher,
+    GetLocalWatcher
 }

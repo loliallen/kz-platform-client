@@ -71,9 +71,7 @@ const news_list = [
 
 function* LoginWatcher({ payload }) {
     try {
-        console.log(payload)
         const _payload = yield call(Service.login, payload)
-        console.log(_payload)
         if (_payload.code === 200)
             yield put({ type: BaseTypes.SET_TOKEN, payload: _payload })
     } catch (error) {
@@ -85,9 +83,7 @@ function* LoginWatcher({ payload }) {
 
 function* SaveEditWatcher({ payload }) {
     try {
-        console.log(payload)
         const _payload = yield call(Service.update, payload.token, payload.data)
-        console.log("token",payload)
         yield put({ type: BaseTypes.SET_TOKEN, payload: { token: payload.token} })
     } catch (error) {
         console.error(error)
@@ -96,10 +92,8 @@ function* SaveEditWatcher({ payload }) {
 
 function* SetTokenWatcher({ payload }) {
     const token = payload
-    console.log(token)
     try {
         const res = yield call(Service.me, token)
-        console.log("res",res)
         yield put({ type: BaseTypes.SET_USER, payload: res })
     } catch (error) {
         console.error(error)
@@ -108,9 +102,7 @@ function* SetTokenWatcher({ payload }) {
 
 function* RegisterWatcher({ payload }) {
     try {
-        console.log(payload)
         const _payload = yield call(Service.register, payload)
-        console.log(_payload)
         yield put({ type: BaseTypes.SET_USER, payload: _payload })
     } catch (error) {
         console.error(error)
@@ -119,10 +111,8 @@ function* RegisterWatcher({ payload }) {
 
 function* InitWatcher() {
     try {
-        console.log("Init watcher")
 
         const token = yield select(s => s.app.token)
-        console.log("token", token)
         if (token)
             yield put({ type: BaseTypes.SET_TOKEN, payload: {token} })
     } catch (error) {
@@ -141,11 +131,22 @@ function* RequestRegionWatcher() {
 }
 
 
+function* RequestUserWatcher({ payload }) {
+    const id = payload
+    try {
+        const res = yield call(Service.getUserInfo, id)
+        yield put({ type: BaseTypes.SET_CURRENT_USER, payload: res })
+    } catch (error) {
+        console.error(error)
+    }
+}
+
 export default {
     LoginWatcher,
     RegisterWatcher,
     SetTokenWatcher,
     SaveEditWatcher,
     InitWatcher,
-    RequestRegionWatcher
+    RequestRegionWatcher,
+    RequestUserWatcher
 }

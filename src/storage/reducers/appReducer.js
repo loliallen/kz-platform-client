@@ -8,7 +8,8 @@ const initalState = {
     regions: [],
     position: null,
     token: localStorage.getItem("token") || "",
-    user: null
+    user: null,
+    current_user: null
 }
 
 export default (state = initalState, action) => {
@@ -17,8 +18,9 @@ export default (state = initalState, action) => {
             localStorage.setItem("token", action.payload.token)
             return { ...state, isAuthed: true, token: action.payload.token}
         case types.APP.SET_USER:
-            console.log("payload", action.payload)
             return { ...state, user: action.payload?.userinfo}
+        case types.APP.SET_CURRENT_USER:
+            return { ...state, current_user: action.payload?.userinfo}
         case types.APP.SET_RAW_REGION:
             return { ...state, rawRegion: action.payload}
         case types.APP.SET_REGION_ID:

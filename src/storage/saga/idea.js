@@ -19,7 +19,6 @@ function* createWatcher({ payload: data }) {
         const payload = yield call(Service.create, data)
         yield put({ type: BaseTypes.REQUEST })
     } catch (E){
-        console.log(E)
         yield put({ type: BaseTypes.REQUEST })
     }
 }

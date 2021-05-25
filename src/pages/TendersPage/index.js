@@ -15,7 +15,6 @@ export const TendersPage = () => {
 
     useEffect(() => {
         dispatch(tenderActions.request())
-        console.log(tenders)
     }, [])
     const selectTender = (data) => {
         dispatch(tenderActions.set_current(data))
@@ -27,14 +26,18 @@ export const TendersPage = () => {
                 title="Обсуждение тендеров"
                 light={false}
             />
-            <div className="tender__container">
-                {tenders.map((tender, index) =>
-                    <TenderContainer
-                        onClick={()=>selectTender(tender)}
-                        key={index}
-                        {...tender}
-                    />
-                )}
+
+            <div className="appeals_container">
+                <div>
+                    {tenders.slice(0, Math.round(tenders.length / 2)).map((tender, i) => {
+                        return <TenderContainer key={i} {...tender} style={{ marginBottom: 20 }} onClick={()=>selectTender(tender)}/>
+                    })}
+                </div>
+                <div>
+                    {tenders.slice(Math.round(tenders.length / 2), tenders.length).map((tender, i) => {
+                        return <TenderContainer key={i} {...tender} style={{ marginBottom: 20 }} onClick={()=>selectTender(tender)}/>
+                    })}
+                </div>
             </div>
         </Main>
     )

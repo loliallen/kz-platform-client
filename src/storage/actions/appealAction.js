@@ -8,6 +8,10 @@ const requestMine = (data) => ({
     type: appeal.REQUEST_MINE,
     payload: data
 })
+const requestUser = (data) => ({
+    type: appeal.REQUEST_USER,
+    payload: data
+})
 
 const create = (data) => ({
     type: appeal.CREATE,
@@ -40,5 +44,6 @@ export default {
     set_latest,
     set,
     set_filter,
-    set_current
+    set_current,
+    requestUser
 }

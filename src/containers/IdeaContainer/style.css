@@ -1,5 +1,4 @@
 .tender_footer {
-    margin-top: 15px;
     display: flex;
 }
 .tender_footer > div {
@@ -8,6 +7,7 @@
 .tender_footer__left, .tender_footer__right, .tender_footer__right_likes{
     display: flex;
     align-items: center;
+    font-weight: 500;
 }
 
 .tender_footer__left > .MuiAvatar-root {

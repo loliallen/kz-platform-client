@@ -24,6 +24,15 @@ function *GetMineWatcher({payload: data}) {
     }
 }
 
+function *GetUserMineWatcher({payload: data}) {
+    try {
+        const payload = yield call(Service.GetUserMine, data)
+        yield put({ type: BaseTypes.SET_USER_MINE, payload: payload})
+    } catch {
+        yield put({ type: BaseTypes.SET_USER_MINE, payload: [] })
+    }
+}
+
 function *CreateWatcher({ payload: data }) {
     try {
         data.latlng = data.loc
@@ -40,5 +49,6 @@ function *CreateWatcher({ payload: data }) {
 export default {
     GetWatcher,
     CreateWatcher,
-    GetMineWatcher
+    GetMineWatcher,
+    GetUserMineWatcher
 }

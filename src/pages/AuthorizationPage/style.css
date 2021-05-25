@@ -11,12 +11,12 @@
     margin-right: 41px;
     display: flex;
     align-items: center;
-    flex: 1;
+    flex: 2;
 }
 .login_action__a a {
     width: 100%;
     text-align: center;
 }
 .login_action__button {
-    flex: 1;
+    flex: 3;
 }

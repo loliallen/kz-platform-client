@@ -47,6 +47,5 @@ export default async (token, data) => {
             method: "POST",
             body: JSON.stringify({ token, photo: data.photo })
         })
-        console.log(await response.json())
     }
 }

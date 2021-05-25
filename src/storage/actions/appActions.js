@@ -53,6 +53,10 @@ const logout = () => ({
     type: app.LOGOUT
 })
 
+const getUserInfo = (id) => ({
+    type: app.REQUEST_USER,
+    payload: id
+})
 
 export default {
     loginAction: login,
@@ -63,5 +67,6 @@ export default {
     setPosition,
     init,
     requestRegions,
-    logout
+    logout,
+    getUserInfo
 }

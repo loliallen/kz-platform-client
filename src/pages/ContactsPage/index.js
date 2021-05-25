@@ -10,7 +10,7 @@ export const ContactsPage = () => {
                 title="Контакты"
             />
             <Typography variant="h5" component="span" style={{color: "red"}}>Горячая линия: </Typography>
-            <a className="link" href="tel: +77012027766">+7 (701) 202 77-66</a>
+            <a style={{fontSize: 20, fontWeight: 500}}className="link" href="tel: +77012027766">+7 (701) 202 77-66</a>
         </Main>
     )
 }

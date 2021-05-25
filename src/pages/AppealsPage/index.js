@@ -15,6 +15,8 @@ import { MoreVertOutlined } from '@material-ui/icons'
 import { useLocation, useRouteMatch } from "react-router"
 import { Link } from "react-router-dom"
 
+
+
 import "./style.css"
 import { FilterIcon } from '../../containers/Icons/FilterIcon'
 import { api_key } from '../../utils/mapConfig'
@@ -84,7 +86,7 @@ const LatestAppealBlock = (props) => {
     >
         <AppealContainer
             appeal_id="XXXXXX"
-            category={categories.find(c => c.id == latestAppeal.category).name}
+            category={categories.find(c => c.id == latestAppeal.category)?.name || latestAppeal.category}
             comment={latestAppeal.comment}
             status={0}
             date={Date.now()}
@@ -98,7 +100,7 @@ const LatestAppealBlock = (props) => {
                 position: 'relative'
             }}>
                 <Map
-                    styles={{
+                    style={{
                         height: "300px",
                         borderRadius: "20px",
                         width: "100%"
@@ -111,10 +113,10 @@ const LatestAppealBlock = (props) => {
                     <BriefcaseIcon />
                     <span>{categories.find(c => c.id == latestAppeal.category).name}</span>
                 </div>
-                <div className="appeal__content__info__inner">
+                {address && <div className="appeal__content__info__inner">
                     <PersonLocation />
                     <span>{address}</span>
-                </div>
+                </div>}
             </div>
         </div>
     </div>
@@ -160,7 +162,7 @@ const CurrentAppealBlock = (props) => {
                 position: 'relative'
             }}>
                 <Map
-                    styles={{
+                    style={{
                         height: "300px",
                         borderRadius: "20px",
                         width: "100%"
@@ -309,14 +311,12 @@ export const AppealsPage = () => {
         dispatch(appealAction.set_filter(field))
     }
     const getFilterCounter = (name) => () => {
-        console.log(name)
         return appeal_counters[name]
     }
 
     useEffect(() => {
         dispatch(appealAction.request())
         dispatch(categoryActions.request())
-        console.log(match)
     }, [])
 
     useEffect(() => {
