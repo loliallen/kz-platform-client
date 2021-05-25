@@ -323,12 +323,12 @@ export const AppealsPage = () => {
 
     useEffect(() => {
         if (appeals.length > 0 && match.params.id){
-            if(current.id != match.params.id) {
+            if(current?.id != match.params.id) {
                 window.scrollTo(0, 0);
                 dispatch(appealAction.set_current(appeals.find(e => e.id == match.params.id)))
             }
         }
-    }, [appeals, match.params.id])
+    }, [appeals, match.params.id, current])
 
     return (
         <Main>
