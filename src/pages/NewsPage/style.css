@@ -5,7 +5,7 @@
 }
 
 .news_container > .left {
-    max-width: 700px;
+    width: 700px;
 }
 .news_container > .right {
     width: 450px;
@@ -16,10 +16,15 @@
         flex-direction: column;
     }
     .news_container > * {
+
         word-break: break-all;
         justify-content: none;
     }
     .news_container > .right {
+        flex: 1;
+        max-width: none;
+    }
+    .news_container > .left {
         flex: 1;
         max-width: none;
     }
