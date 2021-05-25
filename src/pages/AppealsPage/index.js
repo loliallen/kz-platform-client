@@ -321,6 +321,7 @@ export const AppealsPage = () => {
 
     useEffect(() => {
         if (appeals.length > 0 && match.params.id){
+            window.scrollTo(0, 0);
             dispatch(appealAction.set_current(appeals.find(e => e.id == match.params.id)))
         }
     }, [appeals, match.params.id])
@@ -361,7 +362,8 @@ export const AppealsPage = () => {
                             height: "60vh",
                             borderRadius: "20px"
                         }}
-                        points={appeals.map(a => ({ coords: a.coords, status: a.status }))}
+                        clickable_points={true}
+                        points={appeals.map(a => ({ id: a.id, coords: a.coords, status: a.status }))}
                     />
                 </div>
             </div>

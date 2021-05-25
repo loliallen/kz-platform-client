@@ -1,6 +1,6 @@
 .news_container{
     display: flex;
-
+    align-items: flex-start;
     justify-content: space-evenly;
 }
 
@@ -11,12 +11,20 @@
     width: 450px;
 }
 
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1500px) {
+    .news_container{
+        justify-content: space-between;
+        gap: 50px;
+    }
     .news_container > .left {
         flex: 3;
+        width: none;
+
     }
     .news_container > .right {
         flex: 2;
+        width: none;
+
     }
 }
 

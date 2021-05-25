@@ -4,7 +4,7 @@ import UserPointSVG from '../../svgs/contained/UserPoint.svg'
 import PointIdleSVG from '../../svgs/contained/PointIdle.svg'
 import PointOnReviewSVG from '../../svgs/contained/PointOnReview.svg'
 import PointAnsweredSVG from '../../svgs/contained/PointAnswered.svg'
-import { api_key } from "../../utils/mapConfig"
+import {withRouter} from "react-router"
 
 
 const SelectSvg = (s) => {
@@ -18,7 +18,7 @@ const SelectSvg = (s) => {
     }
 }
 
-class MapContainer extends Component {
+const MapContainer = withRouter(class MapContainer extends Component {
     state = {
         center: this.props.center || { lat: 55.73, lng: 49.2 },
         zoom: 14
@@ -63,6 +63,11 @@ class MapContainer extends Component {
                     return <Marker
                         key={i}
                         position={e.coords}
+                        onClick={()=>{
+                            if(this.props.clickable_points) {
+                                this.props.history.push(`/appeals/${e.id}`)
+                            }
+                        }}
                         icon={{
                             url: SelectSvg(e.status),
                             anchor: new window.google.maps.Point(30, 42),
@@ -73,7 +78,7 @@ class MapContainer extends Component {
             </Map>
         )
     }
-}
+})
 
 // export default GoogleApiWrapper({
 //     language: "ru",

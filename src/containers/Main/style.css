@@ -4,6 +4,13 @@
     margin-right: 120px;
 }
 
+@media screen and (max-width: 1400px){
+    .main_container{
+        margin-left: 62px;
+        margin-right: 62px;
+    }
+}
+
 @media screen and (max-width: 800px){
     .main_container{
         margin-left: 15px;
