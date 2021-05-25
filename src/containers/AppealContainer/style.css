@@ -31,3 +31,20 @@
         margin-bottom: 60px;
     }
 }
+
+.answer__label{
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+.answer__text, .answer__date{
+    margin-left: 20px;
+}
+.answer__text{
+    font-size: 15px;
+}
+.answer__date{
+    color: #9C9C9C;
+    font-size: 13px;
+}

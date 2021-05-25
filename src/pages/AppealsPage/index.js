@@ -150,10 +150,11 @@ const CurrentAppealBlock = (props) => {
             appeal_id={appeal.id || "XXXXXX"}
             category={appeal.category}
             comment={appeal.comment}
-            status={0}
+            status={appeal.status}
             date={Date.now()}
             photos={appeal.photos}
             user={user}
+            response={appeal.response}
         />
         <div>
             <div style={{
@@ -304,6 +305,7 @@ export const AppealsPage = () => {
     const appeals = useSelector(s => s.appeal.list)
     const appeal_counters = useSelector(s => s.appeal.counters)
     const location = useSelector(s => s.app.position)
+    const current = useSelector(s => s.appeal.current)
     const match = useRouteMatch()
 
 
@@ -321,8 +323,10 @@ export const AppealsPage = () => {
 
     useEffect(() => {
         if (appeals.length > 0 && match.params.id){
-            window.scrollTo(0, 0);
-            dispatch(appealAction.set_current(appeals.find(e => e.id == match.params.id)))
+            if(current.id != match.params.id) {
+                window.scrollTo(0, 0);
+                dispatch(appealAction.set_current(appeals.find(e => e.id == match.params.id)))
+            }
         }
     }, [appeals, match.params.id])
 
@@ -371,12 +375,12 @@ export const AppealsPage = () => {
             <div className="appeals_container">
                 <div>
                     {appeals.slice(0, Math.round(appeals.length / 2)).map((appeal, i) => {
-                        return <AppealContainer key={i} id={appeal.id} style={{ marginBottom: 20 }} key={i} {...appeal} appeal_id={appeal.id} category={appeal.category} />
+                        return <AppealContainer hide_response={true} key={i} id={appeal.id} style={{ marginBottom: 20 }} key={i} {...appeal} appeal_id={appeal.id} category={appeal.category} />
                     })}
                 </div>
                 <div>
                     {appeals.slice(Math.round(appeals.length / 2), appeals.length).map((appeal, i) => {
-                        return <AppealContainer key={i} id={appeal.id} style={{ marginBottom: 20 }} key={i} {...appeal} appeal_id={appeal.id} category={appeal.category} />
+                        return <AppealContainer hide_response={true} key={i} id={appeal.id} style={{ marginBottom: 20 }} key={i} {...appeal} appeal_id={appeal.id} category={appeal.category} />
                     })}
                 </div>
             </div>

@@ -39,7 +39,11 @@ export default (state = initialState, action) => {
                         organId: e.organId,
                         date: e.date,
                         photos: e.photo,
-                        user: e.user
+                        user: e.user,
+                        response: {
+                            text: e?.response,
+                            date: e?.resolved_at
+                        }
                     }
                 })
                 const total = list.length
@@ -68,7 +72,11 @@ export default (state = initialState, action) => {
                         status: Number(e.status),
                         organId: e.organId,
                         date: e.date,
-                        photos: e.photo
+                        photos: e.photo,
+                        response: {
+                            text: e?.response,
+                            date: e?.resolved_at
+                        }
                     }
                 })
                 console.log(list)
