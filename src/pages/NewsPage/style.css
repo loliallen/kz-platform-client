@@ -11,6 +11,15 @@
     width: 450px;
 }
 
+@media screen and (max-width: 1400px) {
+    .news_container > .left {
+        flex: 3;
+    }
+    .news_container > .right {
+        flex: 2;
+    }
+}
+
 @media screen and (max-width: 800px) {
     .news_container{
         flex-direction: column;
