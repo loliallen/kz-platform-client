@@ -1,7 +1,7 @@
 .news_container{
     display: flex;
 
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .news_container > .left {
