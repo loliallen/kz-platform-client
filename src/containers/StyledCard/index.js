@@ -24,7 +24,7 @@ export const StyledCardHeader = withStyles({
         marginTop: 0
     },
     subheader: {
-        fontSize: 12,
+        fontSize: 13,
         fontWeight: 500
     }
 })(CardHeader)

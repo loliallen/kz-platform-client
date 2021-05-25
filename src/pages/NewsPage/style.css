@@ -3,10 +3,10 @@
 }
 
 .news_container > .left {
-    flex: 3;
+    flex: 4;
 }
 .news_container > .right {
-    flex: 2;
+    flex: 3;
 }
 
 @media screen and (max-width: 800px) {

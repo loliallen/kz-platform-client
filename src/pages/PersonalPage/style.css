@@ -51,9 +51,12 @@
 .aboutme__info_inner{
     display: flex;
     align-items: center;
+    margin-bottom: 15px;
+
 }
 .aboutme__info_inner span{
     font-size: 14px;
+    font-weight: 500;
 }
 
 /* Appeals */

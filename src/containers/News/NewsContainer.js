@@ -36,7 +36,8 @@ const New = ({ title, time, new_item, address, onClick }) => {
                         style: {
                             color: "black",
                             fontSize: "16px",
-                            marginBottom: 12
+                            marginBottom: 12,
+                            fontWeight: 550
                         }
                     }}
                     secondary={title || "Заголовок новости"}

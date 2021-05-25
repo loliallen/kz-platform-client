@@ -12,7 +12,9 @@ const RED = "#EC2F2F"
 
 const SStyledCard = withStyles({
     root: {
-        paddingBottom: "0px"
+        paddingBottom: "0px",
+        backgroundColor: "white",
+        border: "1px solid #E9E9E9"
     }
 })(StyledCard)
 export const IdeaContainer = ({
@@ -36,8 +38,8 @@ export const IdeaContainer = ({
                 subheader={date.toLocaleDateString()}
             />
             <CardContent>
-                <Typography variant="h5" style={{ fontWeight: 500, lineHeight: "1.48rem", marginBottom: 10}}>{title}</Typography>
-                <Typography style={{wordBreak: "break-all"}}>{content}</Typography>
+                <Typography variant="h6" style={{ fontWeight: 500, marginBottom: 10}}>{title}</Typography>
+                <Typography variant="body1"style={{wordBreak: "break-all", fontSize: '15px' }}>{content}</Typography>
             </CardContent>
             <Divider />
             <div className="tender_footer">

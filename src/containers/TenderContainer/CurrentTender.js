@@ -26,7 +26,7 @@ export const CurrentTender = (tender) => {
             </div>
             <div className="current_tender__comments_container">
                 <div className="current_tender__comments__img">
-                    <StyledTypography>Фотографии к тендеру</StyledTypography>
+                    <StyledTypography style={{ fontWeight: 500 }}>Фотографии к тендеру</StyledTypography>
                     <Grid
                         container
                         style={{
@@ -45,7 +45,7 @@ export const CurrentTender = (tender) => {
                     </Grid>
                 </div>
                 <div className="current_tender__comments__content">
-                <StyledTypography style={{marginTop: 60, marginBottom: 20}}>Комментарии</StyledTypography>
+                <StyledTypography style={{marginTop: 60, marginBottom: 20, fontWeight: 500 }}>Комментарии</StyledTypography>
                 <CurrentTenderComments comments={tender.comments} isAuthed={isAuthed} token={token} id={tender.id} />
                 </div>
             </div>

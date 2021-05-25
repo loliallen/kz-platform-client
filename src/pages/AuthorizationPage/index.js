@@ -13,6 +13,7 @@ import actions from '../../storage/actions'
 
 
 import "./style.css"
+import { validateEmail, validatePassword } from '../../utils/validations'
 
 const StyledTabs = withStyles({
     indicator: {
@@ -118,13 +119,26 @@ const RegisterPanel = () => {
 
     const [login, setLogin] = useState("")
     const [password, setPassword] = useState("")
+    const [loginError, setLoginError] = useState("")
+    const [passwordError, setPasswordError] = useState("")
 
-    const handleChangeLogin = (e) => setLogin(e.target.value)
-    const handleChangePassword = (e) => setPassword(e.target.value)
+    const handleChangeLogin = (e) => {
+        setLoginError(p => p ? "" : "")
+        setLogin(e.target.value)
+    }
+    const handleChangePassword = (e) => {
+        setPasswordError("")
+        setPassword(e.target.value)
+    }
 
     const handleSubmit = e => {
         e.preventDefault()
-        dispatch(actions.app.register({ login, password }))
+        if(validateEmail(login) && !validatePassword(password))
+            dispatch(actions.app.register({ login, password }))
+        if(!validateEmail(login))
+            setLoginError("Указан не валидный адрес электронной почты")
+        if(validatePassword(password))
+        setPasswordError("Пароль должен быть длинее 6 символов")
     }
     return <FormContainer
         onSubmit={handleSubmit}
@@ -142,6 +156,8 @@ const RegisterPanel = () => {
                 InputProps={{
                     startAdornment: <MessageIcon style={{ fill: "white", paddingRight: "14px" }} />
                 }}
+                error={!!loginError}
+                helperText={loginError}
             />
         </div>
         <div className="login_container">
@@ -155,6 +171,8 @@ const RegisterPanel = () => {
                 InputProps={{
                     startAdornment: <LockIcon style={{ fill: "white", paddingRight: "14px" }} />
                 }}
+                error={!!passwordError}
+                helperText={passwordError}
             />
         </div>
     </FormContainer>
@@ -183,6 +201,7 @@ export const AuthorizationPage = () => {
             open={true}
             auth={true}
             fullWidth
+            maxWidth="xs"
             onClose={handleClose}
         >
             <StyledDialogTitle onClose={handleClose} />

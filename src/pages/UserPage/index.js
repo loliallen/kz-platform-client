@@ -80,7 +80,7 @@ export const UserPage = () => {
                     onChange={handleChangePage}
                 >
                     <StyledTab label="Обо мне" />
-                    <StyledTab style={{ maxWidth: "none" }} label="Мои обращения" />
+                    <StyledTab style={{ maxWidth: "none" }} label="Обращения пользователя" />
                 </StyledTabs>
                 <Divider style={{ marginBottom: 40 }} />
                 <TabPanel

@@ -29,7 +29,7 @@ export const UserContainer = ({ user, edit, setEdit, inputRef }) => {
                 />}
             </div>
             <div className="aboutme__info_container">
-                <Typography variant="h4" style={{ fontWeight: 700 }}>
+                <Typography variant="h4" style={{ fontWeight: 700, marginBottom: 24 }}>
                     {user.name}
                     <div
                         className="aboutme_desktop"

@@ -32,7 +32,7 @@ export const CurrentNew = ({
         >
             <Typography
                 variant="h5"
-                style={{ fontWeight: 500, lineHeight: "31.2px", marginBottom: "10px" }}
+                style={{ fontWeight: 550, lineHeight: "31.2px", marginBottom: "10px" }}
             >
                 { title || "Заголовок новости" }
             </Typography>
@@ -48,7 +48,7 @@ export const CurrentNew = ({
             {new_content.map((p, i) => {
                 const { type } = p
                 if (type === "text")
-                return <Typography key={i}>
+                return <Typography key={i} style={{ fontWeight: 500}}>
                         {p.text}
                     </Typography>
                 return <div className="new_photo" key={i}><img src={p.url_photo} alt="photo"/></div>
