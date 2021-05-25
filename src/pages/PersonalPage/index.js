@@ -30,8 +30,8 @@ const AboutMe = ({ user, token }) => {
     const dispatch = useDispatch()
     const inputRef = useRef()
     const [edit, setEdit] = useState(false)
-    const canEdit = !!token
     const [name, setName] = useState("")
+    const [surname, setSurname] = useState("")
     const [city, setCity] = useState("")
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
@@ -39,6 +39,7 @@ const AboutMe = ({ user, token }) => {
     const [vk, setVk] = useState("")
 
     const handleSetName = (e) => setName(e.target.value)
+    const handleSetSurname = (e) => setSurname(e.target.value)
     const handleSetCity = (e) => setCity(e.target.value)
     const handleSetEmail = (e) => setEmail(e.target.value)
     const handleSetPhone = (e) => setPhone(e.target.value)
@@ -58,7 +59,7 @@ const AboutMe = ({ user, token }) => {
     }
 
     const handleSave = () => {
-        if (canEdit)
+        if (!!token)
             dispatch(appActions.saveEdits({
                 token: token,
                 data: {
@@ -70,14 +71,149 @@ const AboutMe = ({ user, token }) => {
                 }
             }))
     }
+
+    useEffect(()=>{
+        if(user?.name){
+            setName(user?.name.split(' ')[0])
+            setSurname(user?.name.split(' ')[1] || "")
+        }
+        if (user?.address)
+            setCity(user?.address)
+        if (user?.email)
+            setEmail(user?.email)
+        if (user?.phone)
+            setPhone(user?.phone)
+        if (user?.vk)
+            setVk(user?.vk)
+    },[user])
+
+
     if (!user && !token)
         return <Redirect to="/home/auth" />
-    if (!user)
-        return null
 
     if (!user)
         return null
-    return <UserContainer user={user} edit={edit} setEdit={setEdit}/>
+
+    return <>
+    <UserContainer inputRef={inputRef} canEdit={!!token} user={user} edit={edit} setEdit={setEdit}>
+        <div style={{ width: "100%" }}>
+            <Grid container className="aboutme_grid aboutme_grid_first">
+
+                <Grid item xs>
+                    <TextField
+                        variant="outlined"
+                        label="Фамилия"
+                        value={name}
+                        onChange={handleSetName}
+                    />
+                </Grid>
+
+                <Grid item xs>
+                    <TextField
+                        variant="outlined"
+                        label="Имя"
+                        value={surname}
+                        onChange={handleSetSurname}
+                    />
+                </Grid>
+                <Grid item xs className="aboutme_desktop">
+                    <StyledButton
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        onClick={handleSave}
+                    >Сохранить</StyledButton>
+                </Grid>
+            </Grid>
+
+            <Grid container className="aboutme_grid aboutme_grid_second">
+
+                <Grid item xs>
+                    <TextField
+                        variant="outlined"
+                        label="Город"
+                        value={city}
+                        onChange={handleSetCity}
+                    />
+                </Grid>
+
+                <Grid item xs>
+                    <TextField
+                        variant="outlined"
+                        label="Телефон"
+                        value={phone}
+                        onChange={handleSetPhone}
+                    />
+                </Grid>
+                <Grid item xs className="aboutme_desktop">
+                    <StyledButton
+                        fullWidth
+                        variant="contained"
+                        color="default"
+                        onClick={() => setEdit(false)}
+                    >
+                        Отмена
+                        </StyledButton>
+                </Grid>
+            </Grid>
+
+            <Grid container className="aboutme_grid">
+                <Grid item xs>
+                    <TextField
+                        variant="outlined"
+                        label="Email"
+                        value={email}
+                        onChange={handleSetEmail}
+                    />
+                </Grid>
+                <Grid item xs>
+                    <TextField
+                        variant="outlined"
+                        label="ВКонтакте"
+                        value={vk}
+                        onChange={handleSetVk}
+                    />
+                </Grid>
+                <Grid item xs />
+            </Grid>
+            <Grid container spacing={1} className="aboutme_grid_first aboutme_mobile aboutme_actions">
+                <Grid item xs className="aboutme_mobile">
+                    <StyledButton
+                        fullWidth
+                        variant="contained"
+                        color="default"
+                        onClick={() => setEdit(false)}
+                    >
+                        Отмена
+                            </StyledButton>
+                </Grid>
+                <Grid item xs className="aboutme_mobile">
+                    <StyledButton
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        onClick={handleSave}
+                    >Сохранить</StyledButton>
+                </Grid>
+            </Grid>
+        </div>
+    </UserContainer>
+    <input
+            type="file"
+            hidden
+            ref={inputRef}
+            multiple
+            onChange={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+
+                const files = e.target.files;
+                Object.keys(files).forEach(index => {
+                    readFile(files[index]);
+                })
+            }}
+        />
+    </>
 }
 
 const MyAppeals = ({ user, token }) => {
@@ -131,7 +267,7 @@ export const PersonalPage = () => {
                     page={page}
                     index={0}
                 >
-                    <AboutMe user={user}/>
+                    <AboutMe user={user} token={token} />
                 </TabPanel>
                 <TabPanel
                     page={page}

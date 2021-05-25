@@ -9,7 +9,14 @@ import { StyledTab } from '../../containers/StyledTab'
 import { StyledButton } from '../../containers/StyledButton'
 import { VkIcon } from '../../containers/Icons/Vk'
 import { Edit } from '@material-ui/icons'
-export const UserContainer = ({ user, edit, setEdit, inputRef }) => {
+export const UserContainer = ({
+    user,
+    edit,
+    setEdit,
+    inputRef,
+    canEdit,
+    children
+}) => {
     return (
         <div className="aboutme__container">
             <div
@@ -28,13 +35,13 @@ export const UserContainer = ({ user, edit, setEdit, inputRef }) => {
                     alt="aboutme__avatar"
                 />}
             </div>
-            <div className="aboutme__info_container">
+            {!edit ? <div className="aboutme__info_container">
                 <Typography variant="h4" style={{ fontWeight: 700, marginBottom: 24 }}>
                     {user.name}
                     <div
                         className="aboutme_desktop"
                     >
-                        {edit && <IconButton
+                        {(edit || canEdit) && <IconButton
                             onClick={() => setEdit(true)}
                         >
                             <Edit />
@@ -44,7 +51,7 @@ export const UserContainer = ({ user, edit, setEdit, inputRef }) => {
 
                 <div className="aboutme__info_inner">
                     <PersonLocation />
-                    <span>{user.address?.city}</span>
+                    <span>{user.address}</span>
                 </div>
                 <div className="aboutme__info_inner">
                     <PersonEmail />
@@ -58,7 +65,7 @@ export const UserContainer = ({ user, edit, setEdit, inputRef }) => {
                     <VkIcon />
                     <span>{user.vk}</span>
                 </div>
-                {edit && <div className="aboutme__info_inner aboutme_mobile">
+                {(edit || canEdit) && <div className="aboutme__info_inner aboutme_mobile">
                     <StyledButton
                         variant="contained"
                         color="primary"
@@ -69,6 +76,11 @@ export const UserContainer = ({ user, edit, setEdit, inputRef }) => {
                     </StyledButton>
                 </div>}
             </div>
+            :
+            children
+        }
+
+
         </div>
     )
 }
