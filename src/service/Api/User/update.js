@@ -48,4 +48,13 @@ export default async (token, data) => {
             body: JSON.stringify({ token, photo: data.photo })
         })
     }
+    if (data.vk) {
+        let response = await fetch(config.path+"setvk", {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify({ token, vk: data.vk })
+        })
+    }
 }

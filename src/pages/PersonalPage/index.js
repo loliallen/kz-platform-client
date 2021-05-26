@@ -37,13 +37,18 @@ const AboutMe = ({ user, token }) => {
     const [phone, setPhone] = useState("")
     const [photo, setPhoto] = useState(null)
     const [vk, setVk] = useState("")
+    const [vkError, setVkError] = useState("")
 
     const handleSetName = (e) => setName(e.target.value)
     const handleSetSurname = (e) => setSurname(e.target.value)
     const handleSetCity = (e) => setCity(e.target.value)
     const handleSetEmail = (e) => setEmail(e.target.value)
     const handleSetPhone = (e) => setPhone(e.target.value)
-    const handleSetVk = (e) => setVk(e.target.value)
+    const handleSetVk = (e) => {
+        if (vkError)
+            setVkError("")
+        setVk(e.target.value)
+    }
 
 
     const readFile = (file) => {
@@ -59,17 +64,23 @@ const AboutMe = ({ user, token }) => {
     }
 
     const handleSave = () => {
-        if (!!token)
+
+        let re = /vk.com\/*/
+        if (!re.test(vk))
+            setVkError("Не верная ссылка")
+        if (!!token && re.test(vk))
             dispatch(appActions.saveEdits({
                 token: token,
                 data: {
-                    name: name + " " + surname,
-                    address: city === "" ? null : city,
-                    email: email === "" ? null : email,
-                    phone: phone === "" ? null : phone,
+                    name: name + " " + surname === user.name ? null : name + " " + surname,
+                    address: city === user.address ? null : city,
+                    email: email === user.email ? null : email,
+                    phone: phone === user.phone ? null : phone,
                     photo: photo,
+                    vk: vk === user.vk ? null : vk
                 }
             }))
+            setEdit(false)
     }
 
     useEffect(()=>{
@@ -102,7 +113,7 @@ const AboutMe = ({ user, token }) => {
                 <Grid item xs>
                     <TextField
                         variant="outlined"
-                        label="Имя"
+                        label="Фамилия"
                         value={surname}
                         onChange={handleSetSurname}
                     />
@@ -111,7 +122,7 @@ const AboutMe = ({ user, token }) => {
                 <Grid item xs>
                     <TextField
                         variant="outlined"
-                        label="Фамилия"
+                        label="Имя"
                         value={name}
                         onChange={handleSetName}
                     />
@@ -172,6 +183,8 @@ const AboutMe = ({ user, token }) => {
                         label="ВКонтакте"
                         value={vk}
                         onChange={handleSetVk}
+                        error={!!vkError}
+                        helperText={vkError}
                     />
                 </Grid>
                 <Grid item xs />

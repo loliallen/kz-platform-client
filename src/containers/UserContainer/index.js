@@ -63,7 +63,7 @@ export const UserContainer = ({
                 </div>
                 <div className="aboutme__info_inner">
                     <VkIcon />
-                    <span>{user.vk}</span>
+                    <a className="link" href={ user.vk ? `https://${user.vk}` : "#"}>{user.vk}</a>
                 </div>
                 {(edit || canEdit) && <div className="aboutme__info_inner aboutme_mobile">
                     <StyledButton
