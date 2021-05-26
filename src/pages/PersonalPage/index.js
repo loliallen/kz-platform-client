@@ -63,7 +63,7 @@ const AboutMe = ({ user, token }) => {
             dispatch(appActions.saveEdits({
                 token: token,
                 data: {
-                    name: name === "" ? null : name,
+                    name: name + " " + surname,
                     address: city === "" ? null : city,
                     email: email === "" ? null : email,
                     phone: phone === "" ? null : phone,
@@ -102,18 +102,18 @@ const AboutMe = ({ user, token }) => {
                 <Grid item xs>
                     <TextField
                         variant="outlined"
-                        label="Фамилия"
-                        value={name}
-                        onChange={handleSetName}
+                        label="Имя"
+                        value={surname}
+                        onChange={handleSetSurname}
                     />
                 </Grid>
 
                 <Grid item xs>
                     <TextField
                         variant="outlined"
-                        label="Имя"
-                        value={surname}
-                        onChange={handleSetSurname}
+                        label="Фамилия"
+                        value={name}
+                        onChange={handleSetName}
                     />
                 </Grid>
                 <Grid item xs className="aboutme_desktop">
