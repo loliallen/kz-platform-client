@@ -34,8 +34,11 @@ export const AppealContainer = ({
     organId,
     response,
     hide_response,
+    anonim,
+    anonimLabel = "Аноним",
     ...rest
 }) => {
+    console.log(id, "anonim", anonim)
     return (
         <StyledCard elevation={0} {...rest}>
             <StyledCardHeader
@@ -46,7 +49,7 @@ export const AppealContainer = ({
                     />
                 }
                 title={
-                    user?.name || "Аноним"
+                    !user?.name || anonim ? anonimLabel : user?.name
                 }
                 subheader={
                     <>

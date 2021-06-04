@@ -18,13 +18,9 @@
     }
     .news_container > .left {
         flex: 3;
-        width: none;
-
     }
     .news_container > .right {
         flex: 2;
-        width: none;
-
     }
 }
 
@@ -37,12 +33,13 @@
         word-break: break-all;
         justify-content: none;
     }
-    .news_container > .right {
-        flex: 1;
-        max-width: none;
-    }
+    .news_container > .right ,
     .news_container > .left {
         flex: 1;
-        max-width: none;
+        width: 100%;
+        flex-shrink: 0;
+    }
+    .news_container > .left {
+        width: calc(100% - 60px);
     }
 }

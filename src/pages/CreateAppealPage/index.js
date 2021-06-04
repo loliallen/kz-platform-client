@@ -17,6 +17,7 @@ import appealAction from '../../storage/actions/appealAction'
 import Api from '../../service/Api'
 import { StepContainer } from '../../containers/StepContainer'
 import { geocode_key } from '../../utils/mapConfig'
+import { ErrorAlert, WarnAlert } from '../../containers/Alerts'
 
 Geocode.setApiKey(geocode_key)
 Geocode.setLanguage("ru-Ru")
@@ -293,10 +294,10 @@ const Step3 = ({
             <div style={{display: "flex", alignItems: "center"}}>
                 <Checkbox onChange={e => {
                     if (e.target.checked) {
-                        setCategory(null)
-                   }
-                }} id="check-anonim"></Checkbox>
-                <FormLabel for="check-anonim">Автоназначение категории</FormLabel>
+                        setCategory("")
+                    }
+                }} id="check-cat"></Checkbox>
+                <FormLabel htmlFor="check-cat">Автоназначение категории</FormLabel>
             </div>
         </StepContainer>
     </>
@@ -309,7 +310,9 @@ const Step4 = ({
     setAddress,
     fullName,
     city,
-    address
+    address,
+    anonim,
+    setAnonim
 }) => {
     const width = window.innerWidth
     if (index !== step)
@@ -323,6 +326,14 @@ const Step4 = ({
             }}
         >
             <div className="login_container">
+                <div style={{display: "flex", alignItems: "center"}}>
+                    <Checkbox onChange={e => {
+                        setAnonim(!!e.target.checked)
+                    }} id="check-anonim"></Checkbox>
+                    <FormLabel htmlFor="check-anonim">Подать обращение анонимно</FormLabel>
+                </div>
+            </div>
+            {!anonim && <div className="login_container">
                 <TextField
                     label="Фамилия Имя Отчество"
                     variant="outlined"
@@ -330,7 +341,7 @@ const Step4 = ({
                     onChange={e => setFullName(e.target.value)}
                     value={fullName}
                 />
-            </div>
+            </div>}
             <div className="login_container">
                 <TextField
                     label="Город или Область"
@@ -391,9 +402,18 @@ export const CreateAppealPage = () => {
     const [fullName, setFullName] = useState("")
     const [city, setCity] = useState("")
     const [address, setAddress] = useState("")
-    const [anonim, setAnonim] = useState(true)
-    const [valid, setValid] = useState(false)
+    const [anonim, setAnonim] = useState(false)
     const [comment, setComment] = useState("")
+
+
+    const [error, setError] = useState({
+        open: false,
+        message: ""
+    })
+    const [warn, setWarn] = useState({
+        open: false,
+        message: ""
+    })
 
     const [imgs, setImgs] = useState([])
 
@@ -402,7 +422,8 @@ export const CreateAppealPage = () => {
             setFullName(user.name)
             setCity(user.address.city)
             setAddress(user.address.full)
-        }
+        } else
+            setWarn({ open: true, message: "Вы не авторизованы, пожалуйста авторизуйтесь" })
     }, [user])
 
     useEffect(() => {
@@ -436,6 +457,8 @@ export const CreateAppealPage = () => {
     })
 
     const handleSubmit = () => {
+
+
         const data = {
             fullName,
             city,
@@ -443,12 +466,12 @@ export const CreateAppealPage = () => {
             loc,
             photos: imgs,
             imgs,
-            comment
+            comment,
+            token,
+            anonim
         }
         if (!token)
-            data.anonim = true
-        else
-            data.token = token
+            return setError({ open: true, message: "Вы не авторизованны" })
 
         if (category)
             data.category = category
@@ -499,6 +522,8 @@ export const CreateAppealPage = () => {
                         <Step5 step={step} index={2} setComment={setComment} comment={comment} />
                         <Step3 step={step} index={3} category={category} setCategory={setCategory} />
                         <Step4
+                            anonim={anonim}
+                            setAnonim={setAnonim}
                             step={step}
                             index={4}
                             setFullName={setFullName}
@@ -524,6 +549,8 @@ export const CreateAppealPage = () => {
                     final: "Подать обращение"
                 }}
             />
+            <ErrorAlert open={error.open} onClose={()=>setError(p => ({...p, open: false}))} message={error.message}/>
+            <WarnAlert open={warn.open} onClose={()=>setWarn(p => ({...p, open: false}))} message={warn.message}/>
         </StyledDialog>
     )
 }

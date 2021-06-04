@@ -37,7 +37,6 @@ function *CreateWatcher({ payload: data }) {
     try {
         data.latlng = data.loc
         delete data.loc
-        data.anonim = !Boolean(data.token)
         const payload = yield call(Service.Create, data)
         yield put({ type: BaseTypes.SET_LATEST, payload: data })
     } catch {

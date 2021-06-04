@@ -86,12 +86,14 @@ const LatestAppealBlock = (props) => {
     >
         <AppealContainer
             appeal_id="XXXXXX"
-            category={categories.find(c => c.id == latestAppeal.category)?.name || latestAppeal.category}
+            category={{ title: categories.find(c => c.id == latestAppeal.category)?.name}}
             comment={latestAppeal.comment}
             status={0}
             date={Date.now()}
             photos={latestAppeal.photos}
             user={user}
+            anonim={latestAppeal.anonim}
+            anonimLabel={"Вы (анонимно)"}
         />
         <div>
             <div style={{
@@ -111,7 +113,7 @@ const LatestAppealBlock = (props) => {
             <div>
                 <div className="appeal__content__info__inner">
                     <BriefcaseIcon />
-                    <span>{categories.find(c => c.id == latestAppeal.category).name}</span>
+                    <span>{categories.find(c => c.id == latestAppeal.category)?.name}</span>
                 </div>
                 {address && <div className="appeal__content__info__inner">
                     <PersonLocation />
@@ -127,7 +129,7 @@ const CurrentAppealBlock = (props) => {
     const categories = useSelector(s => s.category.list)
     const [address, setAddress] = useState("")
     const [categoryLabel, setCategoryLabel] = useState("")
-    const user = appeal?.author
+    const user = appeal?.user
     useEffect(()=>{
         if (appeal) {
             setAddress(appeal.address)
@@ -155,6 +157,8 @@ const CurrentAppealBlock = (props) => {
             photos={appeal.photos}
             user={user}
             response={appeal.response}
+            anonim={!!appeal.anonim}
+            anonimLabel={props.user?.id == user?.id ? "Вы (анонимно)" : "Аноним"}
         />
         <div>
             <div style={{
@@ -305,6 +309,7 @@ export const AppealsPage = () => {
     const appeals = useSelector(s => s.appeal.list)
     const appeal_counters = useSelector(s => s.appeal.counters)
     const location = useSelector(s => s.app.position)
+    const user = useSelector(s => s.app.user)
     const current = useSelector(s => s.appeal.current)
     const match = useRouteMatch()
 
@@ -326,8 +331,11 @@ export const AppealsPage = () => {
             if(current?.id != match.params.id) {
                 window.scrollTo(0, 0);
                 dispatch(appealAction.set_current(appeals.find(e => e.id == match.params.id)))
+                dispatch(appealAction.set_latest(null))
             }
-        }
+
+        } else if (current && current.id && !match.params.id)
+            dispatch(appealAction.set_current(null))
     }, [appeals, match.params.id, current])
 
     return (
@@ -336,7 +344,7 @@ export const AppealsPage = () => {
                 title="Обращения"
             />
             <LatestAppealBlock />
-            <CurrentAppealBlock />
+            <CurrentAppealBlock user={user}/>
             <div className="appeal_filters__container">
                 <Filters
                     getAppealCounter={getFilterCounter}
