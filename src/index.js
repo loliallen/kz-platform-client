@@ -9,7 +9,6 @@ import { store, saga } from "./storage";
 import { SagaWatcher } from "./storage/saga";
 
 saga.run(SagaWatcher);
-console.log(process.env);
 ReactDOM.render(
     <Provider store={store}>
         <Router>
