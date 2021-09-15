@@ -1,24 +1,23 @@
-import React, { useCallback, useEffect } from 'react'
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core"
-import { HomePage } from '../pages/HomePage'
-import { Redirect, Route, Switch } from 'react-router'
-import { NewsPage } from '../pages/NewsPage'
-import { PersonalPage } from '../pages/PersonalPage'
-import { AppealsPage } from '../pages/AppealsPage'
-import { IdeasPage } from '../pages/IdeasPage'
-import { TendersPage } from '../pages/TendersPage'
-import { TenderCurrentPage } from '../pages/TenderCurrentPage'
-import { Header } from '../containers/Header'
-import { CreateAppealPage } from '../pages/CreateAppealPage'
-import { AuthorizationPage } from '../pages/AuthorizationPage'
-import { useDispatch } from 'react-redux'
-import actions from '../storage/actions'
-import { api_key } from '../utils/mapConfig'
-import { CreateIdeaPage } from '../pages/CreateIdeaPage'
-import { ImageViewPage } from '../pages/ImageViewPage'
-import { LogoutPage } from '../pages/LogoutPage'
-import { ContactsPage } from '../pages/ContactsPage'
-import { UserPage } from '../pages/UserPage'
+import React, { useCallback, useEffect } from "react";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
+import { HomePage } from "../pages/HomePage";
+import { Redirect, Route, Switch } from "react-router";
+import { NewsPage } from "../pages/NewsPage";
+import { PersonalPage } from "../pages/PersonalPage";
+import { AppealsPage } from "../pages/AppealsPage";
+import { IdeasPage } from "../pages/IdeasPage";
+import { TendersPage } from "../pages/TendersPage";
+import { TenderCurrentPage } from "../pages/TenderCurrentPage";
+import { Header } from "../containers/Header";
+import { CreateAppealPage } from "../pages/CreateAppealPage";
+import { AuthorizationPage } from "../pages/AuthorizationPage";
+import { useDispatch } from "react-redux";
+import actions from "../storage/actions";
+import { CreateIdeaPage } from "../pages/CreateIdeaPage";
+import { ImageViewPage } from "../pages/ImageViewPage";
+import { LogoutPage } from "../pages/LogoutPage";
+import { ContactsPage } from "../pages/ContactsPage";
+import { UserPage } from "../pages/UserPage";
 // import Geocode from "react-geocode"
 
 // Geocode.setApiKey("AIzaSyDjU7YWT1VGnfDpyU_87VznB6xGNRWXpJM")
@@ -29,53 +28,66 @@ const theme = createMuiTheme({
     palette: {
         primary: {
             main: "#2F80ED",
-            contrastText: "white"
-        }
+            contrastText: "white",
+        },
     },
     typography: {
-        fontFamily: "Golos"
-    }
-})
-
+        fontFamily: "Golos",
+    },
+});
 
 export const App = () => {
-    const dispatch = useCallback(useDispatch(), [])
+    const dispatch = useCallback(useDispatch(), []);
 
-    useEffect(()=>{
+    useEffect(() => {
         const setPosition = (position) => {
             // yield put(actions.app.setPosition(position))
             // cast a region after position here
-            let lat = position.coords.latitude
-            let lng = position.coords.longitude
+            let lat = position.coords.latitude;
+            let lng = position.coords.longitude;
 
-            dispatch(actions.app.setPosition({lat,lng}))
-        }
+            dispatch(actions.app.setPosition({ lat, lng }));
+        };
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(setPosition);
         }
-        dispatch(actions.app.init())
-    }, [])
+        dispatch(actions.app.init());
+    }, []);
 
     return (
         <MuiThemeProvider theme={theme}>
             <Header />
             <Switch>
-                <Route exact path="/" component={()=><Redirect to="/home" />} />
-                <Route path="/home" component={()=><HomePage/>}/>
-                <Route path="/news" component={()=><NewsPage/>}/>
-                <Route path="/personal" component={()=><PersonalPage/>}/>
-                <Route path="/appeals/:id?" component={()=><AppealsPage/>}/>
-                <Route path="/ideas" component={()=><IdeasPage/>}/>
-                <Route path="/contacts" component={()=><ContactsPage/>}/>
-                <Route exact path="/tenders" component={()=><TendersPage/>}/>
-                <Route path="/tenders/current" component={()=><TenderCurrentPage/>}/>
-                <Route path="/users/:id" component={()=><UserPage />}/>
-                <Route path="/logout" component={()=><LogoutPage />}/>
+                <Route
+                    exact
+                    path="/"
+                    component={() => <Redirect to="/home" />}
+                />
+                <Route path="/home" component={() => <HomePage />} />
+                <Route path="/news" component={() => <NewsPage />} />
+                <Route path="/personal" component={() => <PersonalPage />} />
+                <Route path="/appeals/:id?" component={() => <AppealsPage />} />
+                <Route path="/ideas" component={() => <IdeasPage />} />
+                <Route path="/contacts" component={() => <ContactsPage />} />
+                <Route
+                    exact
+                    path="/tenders"
+                    component={() => <TendersPage />}
+                />
+                <Route
+                    path="/tenders/current"
+                    component={() => <TenderCurrentPage />}
+                />
+                <Route path="/users/:id" component={() => <UserPage />} />
+                <Route path="/logout" component={() => <LogoutPage />} />
             </Switch>
-            <Route path="/*/auth" component={()=><AuthorizationPage />}/>
-            <Route path="/*/appeal/create" component={()=><CreateAppealPage />}/>
-            <Route path="/*/idea/create" component={()=><CreateIdeaPage />}/>
-            <Route path="/*/image/:src" component={()=><ImageViewPage />}/>
+            <Route path="/*/auth" component={() => <AuthorizationPage />} />
+            <Route
+                path="/*/appeal/create"
+                component={() => <CreateAppealPage />}
+            />
+            <Route path="/*/idea/create" component={() => <CreateIdeaPage />} />
+            <Route path="/*/image/:src" component={() => <ImageViewPage />} />
         </MuiThemeProvider>
-    )
-}
+    );
+};
